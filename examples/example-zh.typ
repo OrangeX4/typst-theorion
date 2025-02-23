@@ -16,6 +16,10 @@
 // #set-zero-fill(true)
 // #set-leading-zero(true)
 
+// Other options:
+// #set-result("noanswer")
+// #set-qed-symbol[#math.qed]
+
 = Theorion 环境示例
 
 == 基础定理环境
