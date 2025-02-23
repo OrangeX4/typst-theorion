@@ -1,7 +1,7 @@
 #import "../lib.typ": *
 #import cosmos.fancy: *
 
-#set text(lang: "zh")
+#set text(lang: "zh", region: "cn")
 #set heading(numbering: "1.1")
 #show: show-theorion
 

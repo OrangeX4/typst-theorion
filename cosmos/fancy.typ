@@ -1,8 +1,8 @@
-#import "../utils.typ": *
+#import "../core.typ": *
 #import "../deps.typ": showybox
 
 /// A fancy box design inspired by elegantbook style.
-/// 
+///
 /// - border-color (color): Color of the box border. Default is `orange.darken(0%)`.
 /// - title-color (color): Color of the title background. Default is `orange.darken(0%)`.
 /// - body-color (color): Color of the box background. Default is `orange.lighten(95%)`.
@@ -89,21 +89,21 @@
 #let (axiom-counter, axiom-box, axiom, show-axiom) = make-frame(
   "axiom",
   theorion-i18n-map.at("axiom"),
-  inherited-levels: 2,
+  counter: theorem-counter,
   render: fancy-box,
 )
 
 #let (postulate-counter, postulate-box, postulate, show-postulate) = make-frame(
   "postulate",
   theorion-i18n-map.at("postulate"),
-  inherited-levels: 2,
+  counter: theorem-counter,
   render: fancy-box,
 )
 
 #let (definition-counter, definition-box, definition, show-definition) = make-frame(
   "definition",
   theorion-i18n-map.at("definition"),
-  inherited-levels: 2,
+  counter: theorem-counter,
   render: fancy-box.with(
     border-color: green.darken(20%),
     title-color: green.darken(20%),
@@ -115,7 +115,7 @@
 #let (proposition-counter, proposition-box, proposition, show-proposition) = make-frame(
   "proposition",
   theorion-i18n-map.at("proposition"),
-  inherited-levels: 2,
+  counter: theorem-counter,
   render: fancy-box.with(
     border-color: blue.darken(30%),
     title-color: blue.darken(30%),
@@ -139,3 +139,20 @@
   show: show-proposition
   body
 }
+
+
+/// Set the number of inherited levels for theorem environments
+/// 
+/// - value (integer): Number of levels to inherit
+#let set-inherited-levels(value) = (theorem-counter.set-inherited-levels)(value)
+
+
+/// Set the zero-fill option for theorem environments
+/// 
+/// - value (boolean): Whether to zero-fill the numbering
+#let set-zero-fill(value) = (theorem-counter.set-zero-fill)(value)
+
+/// Set the leading-zero option for theorem environments
+/// 
+/// - value (boolean): Whether to include leading zeros in the numbering
+#let set-leading-zero(value) = (theorem-counter.set-leading-zero)(value)

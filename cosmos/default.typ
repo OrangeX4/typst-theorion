@@ -1,4 +1,4 @@
-#import "../utils.typ": *
+#import "../core.typ": *
 #import "../deps.typ": showybox, octique-inline
 
 #let example(
