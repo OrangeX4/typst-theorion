@@ -1,5 +1,6 @@
 #import "../lib.typ": *
 #import cosmos.fancy: *
+// #import cosmos.rainbow: *
 
 #set page(height: auto)
 #set heading(numbering: "1.1")

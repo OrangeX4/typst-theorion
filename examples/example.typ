@@ -1,5 +1,6 @@
 #import "../lib.typ": *
-// #import cosmos.fancy: *
+#import cosmos.fancy: *
+// #import cosmos.rainbow: *
 
 #set page(height: auto)
 #set heading(numbering: "1.1")
@@ -52,7 +53,7 @@ Let's start with the most fundamental definition.
   There is no largest prime number.
 ] <cor:infinite-prime>
 
-#corollary[
+#lemma[
   There are infinitely many composite numbers.
 ]
 

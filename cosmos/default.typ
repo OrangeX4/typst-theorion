@@ -22,15 +22,6 @@
   body,
 ) = [#emph(theorion-i18n(title)).#sym.space#body]
 
-/// Create a remark environment with italic title
-///
-/// - title (string|dict): Title text or dictionary for i18n. Default is "Remark"
-/// - body (content): Content of the remark
-/// -> content
-#let remark(
-  title: theorion-i18n-map.at("remark"),
-  body,
-) = [#emph(theorion-i18n(title)).#sym.space#body]
 
 /// Create a problem environment with italic title
 ///
@@ -185,4 +176,15 @@
   fill: rgb("#CF222E"),
   title: theorion-i18n-map.at("caution"),
   icon-name: "stop",
+)
+
+/// Create a remark environment
+///
+/// - title (string|dict): Title text or dictionary for i18n. Default is "Remark"
+/// - body (content): Content of the remark
+/// -> content
+#let remark = note-box.with(
+  fill: rgb("#118D8D"),
+  title: theorion-i18n-map.at("remark"),
+  icon-name: "comment",
 )
