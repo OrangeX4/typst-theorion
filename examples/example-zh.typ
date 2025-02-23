@@ -1,11 +1,11 @@
 #import "../lib.typ": *
 #import cosmos.fancy: *
 // #import cosmos.rainbow: *
+#show: show-theorion
 
 #set page(height: auto)
 #set heading(numbering: "1.1")
 #set text(lang: "zh", region: "cn")
-#show: show-theorion
 
 // Change the color scheme (only for `fancy` cosmos):
 // #set-primary-border-color(red)
@@ -22,6 +22,31 @@
 // #set-qed-symbol[#math.qed]
 
 = Theorion 环境示例
+
+== 开箱即用
+
+```typst
+#import "@preview/theorion:0.2.0": *
+#import cosmos.fancy: *
+// #import cosmos.rainbow: *
+#show: show-theorion
+```
+
+== 自定义
+
+```typst
+// 更改配色方案（仅适用于 `fancy` cosmos）
+#set-primary-border-color(red)
+#set-primary-body-color(red.lighten(95%))
+#set-primary-symbol[#sym.suit.diamond.filled]
+// 更改继承级别：
+#set-inherited-levels(1)
+#set-zero-fill(true)
+#set-leading-zero(true)
+// 其他选项:
+#set-result("noanswer")
+#set-qed-symbol[#math.qed]
+```
 
 == 基础定理环境
 

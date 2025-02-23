@@ -1,11 +1,11 @@
 #import "../lib.typ": *
 #import cosmos.fancy: *
 // #import cosmos.rainbow: *
+#show: show-theorion
 
 #set page(height: auto)
 #set heading(numbering: "1.1")
-#set text(lang: "en", region: "us")
-#show: show-theorion
+#set text(lang: "en")
 
 // Change the color scheme (only for `fancy` cosmos):
 // #set-primary-border-color(red)
@@ -22,6 +22,31 @@
 // #set-qed-symbol[#math.qed]
 
 = Theorion Environments
+
+== Quick Start
+
+```typst
+#import "@preview/theorion:0.2.0": *
+#import cosmos.fancy: *
+// #import cosmos.rainbow: *
+#show: show-theorion
+```
+
+== Customization
+
+```typst
+// Change the color scheme (only for `fancy` cosmos)
+#set-primary-border-color(red)
+#set-primary-body-color(red.lighten(95%))
+#set-primary-symbol[#sym.suit.diamond.filled]
+// Change the inherited levels
+#set-inherited-levels(1)
+#set-zero-fill(true)
+#set-leading-zero(true)
+// Other options
+#set-result("noanswer")
+#set-qed-symbol[#math.qed]
+```
 
 == Basic Theorem Environments
 
