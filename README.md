@@ -1,4 +1,4 @@
-# 🌌 Theorion
+# 🌌Theorion
 
 [Theorion](https://github.com/OrangeX4/typst-theorion) (The Orion) is an out-of-the-box, customizable and multilingual **theorem** environment package for [Typst](https://typst.app/docs/).
 
@@ -259,9 +259,27 @@ Let's start with the most fundamental definition.
 ]
 ```
 
-## Other cosmos
+## Other Cosmos
 
-todo.
+### 🌈Rainbow
+
+```typst
+#import "@preview/theorion:0.2.0": *
+#import cosmos.rainbow: *
+#show: show-theorion
+```
+
+![image](https://github.com/user-attachments/assets/2edf36a6-6fe7-45f3-bb1a-d5dc741eb303)
+
+### ☁️Clouds
+
+```typst
+#import "@preview/theorion:0.2.0": *
+#import cosmos.clouds: *
+#show: show-theorion
+```
+
+![image](https://github.com/user-attachments/assets/1d39cf55-4044-4ac2-993d-6196a266d277)
 
 ## Acknowledgements
 
