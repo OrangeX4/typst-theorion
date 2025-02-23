@@ -48,6 +48,14 @@
 // #import cosmos.rainbow: *
 // #import cosmos.clouds: *
 #show: show-theorion
+
+#theorem(title: "Euclid's Theorem")[
+  There are infinitely many prime numbers.
+] <thm:euclid>
+
+#theorem-box(title: "Theorem without numbering")[
+  This theorem is not numbered.
+]
 ```
 
 == Customization

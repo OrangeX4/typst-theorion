@@ -48,6 +48,14 @@
 // #import cosmos.rainbow: *
 // #import cosmos.clouds: *
 #show: show-theorion
+
+#theorem(title: "欧几里得定理")[
+  素数有无穷多个。
+] <thm:euclid>
+
+#theorem-box(title: "无编号定理框")[
+  这个定理没有编号。
+]
 ```
 
 == 自定义
