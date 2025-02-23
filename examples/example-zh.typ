@@ -6,7 +6,7 @@
 #set text(lang: "zh", region: "cn")
 #show: show-theorion
 
-// Change the color scheme:
+// Change the color scheme (only for `fancy` cosmos):
 // #set-primary-border-color(red)
 // #set-primary-body-color(red.lighten(95%))
 // #set-primary-symbol[#sym.suit.diamond.filled]

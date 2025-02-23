@@ -1,12 +1,12 @@
 #import "../lib.typ": *
-#import cosmos.fancy: *
+// #import cosmos.fancy: *
 
 #set page(height: auto)
 #set heading(numbering: "1.1")
 #set text(lang: "en", region: "us")
 #show: show-theorion
 
-// Change the color scheme:
+// Change the color scheme (only for `fancy` cosmos):
 // #set-primary-border-color(red)
 // #set-primary-body-color(red.lighten(95%))
 // #set-primary-symbol[#sym.suit.diamond.filled]
