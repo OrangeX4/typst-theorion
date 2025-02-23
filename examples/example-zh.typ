@@ -1,6 +1,7 @@
 #import "../lib.typ": *
 #import cosmos.fancy: *
 // #import cosmos.rainbow: *
+// #import cosmos.clouds: *
 #show: show-theorion
 
 #set page(height: auto)
@@ -45,6 +46,7 @@
 #import "@preview/theorion:0.2.0": *
 #import cosmos.fancy: *
 // #import cosmos.rainbow: *
+// #import cosmos.clouds: *
 #show: show-theorion
 ```
 
