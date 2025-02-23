@@ -1,9 +1,20 @@
 #import "../lib.typ": *
 #import cosmos.fancy: *
 
-#set text(lang: "zh", region: "cn")
+#set page(height: auto)
 #set heading(numbering: "1.1")
+#set text(lang: "zh", region: "cn")
 #show: show-theorion
+
+// Change the color scheme:
+// #set-primary-border-color(red)
+// #set-primary-body-color(red.lighten(95%))
+// #set-primary-symbol[#sym.suit.diamond.filled]
+
+// Change the inherited levels:
+// #set-inherited-levels(1)
+// #set-zero-fill(true)
+// #set-leading-zero(true)
 
 = Theorion 环境示例
 
@@ -13,15 +24,15 @@
 
 #definition[
   若一个大于1的自然数不能写成两个更小自然数的乘积，则称其为#highlight[_素数_]（或_质数_）。
-] <def_prime>
+] <def:prime>
 
 #example[
-  数 $2$、$3$ 和 $17$ 都是素数。正如 @cor_infinite_prime 所证，这个列表远未完整！
+  数 $2$、$3$ 和 $17$ 都是素数。正如@cor:infinite-prime 所证，这个列表远未完整！详细证明见@thm:euclid。
 ]
 
 #theorem(title: "欧几里得定理")[
   素数有无穷多个。
-] <thm_euclid>
+] <thm:euclid>
 
 #proof[
   反证法：假设 $p_1, p_2, dots, p_n$ 是所有素数的有限列举。
@@ -32,7 +43,7 @@
 
 #corollary[
   不存在最大的素数。
-] <cor_infinite_prime>
+] <cor:infinite-prime>
 
 #corollary[
   合数有无穷多个。
@@ -42,10 +53,10 @@
 
 #theorem(title: "连续性定理")[
   设函数 $f$ 在每一点都可导，则 $f$ 是连续函数。
-] <thm_continuous>
+] <thm:continuous>
 
 #tip-box[
-  这个定理告诉我们可导性蕴含连续性，但反之不成立。比如 $f(x) = |x|$ 在 $x = 0$ 处连续但不可导。
+  @thm:continuous 告诉我们可导性蕴含连续性，但反之不成立。比如 $f(x) = |x|$ 在 $x = 0$ 处连续但不可导。
 ]
 
 == 几何定理
@@ -53,19 +64,19 @@
 #theorem(title: "勾股定理")[
   直角三角形的两条直角边的平方和等于斜边的平方：
   $x^2 + y^2 = z^2$
-] <thm_pythagoras>
+] <thm:pythagoras>
 
 #important-box[
-  勾股定理是平面几何中最基本也是最重要的定理之一，它连接了几何与代数。
+  @thm:pythagoras 是平面几何中最基本也是最重要的定理之一，它连接了几何与代数。
 ]
 
 #corollary[
-  不存在边长为3厘米、4厘米和6厘米的直角三角形。
-]
+  不存在边长为3厘米、4厘米和6厘米的直角三角形。这是@thm:pythagoras 的直接推论。
+] <cor:pythagoras>
 
 #lemma[
   给定两条线段，其长度分别为 $a$ 和 $b$，则存在实数 $r$ 使得 $b = r a$。
-]
+] <lem:proportion>
 
 == 代数结构
 
@@ -75,14 +86,14 @@
   2. $(R, dot)$ 是半群
   3. 分配律成立
   则称 $(R, +, dot)$ 为一个环。
-]
+] <def:ring>
 
 #proposition[
-  每个域都是环，但不是每个环都是域。
-]
+  每个域都是环，但不是每个环都是域。这个概念基于@def:ring。
+] <prop:ring-field>
 
 #example[
-  整数环 $ZZ$ 不是域，因为除了 $\pm 1$，其他元素都没有乘法逆元。
+  参考@def:ring，整数环 $ZZ$ 不是域，因为除了 $plus.minus 1$，其他元素都没有乘法逆元。
 ]
 
 == 分析进阶
@@ -124,7 +135,7 @@
 #solution[
   考虑序列：$n! + 2, n! + 3, ..., n! + n$。
 
-  对于任意 $2 \leq k \leq n$，$n! + k$ 能被 $k$ 整除，因为：
+  对于任意 $2 <= k <= n$，$n! + k$ 能被 $k$ 整除，因为：
   $n! + k = k(n!/k + 1)$
   
   所以这是一个长度为 $n-1$ 的连续合数序列。

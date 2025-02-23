@@ -1,12 +1,18 @@
 #import "i18n.typ": theorion-i18n, theorion-i18n-map
 
+/// A simple wrapper for the `state` function, inspired by React Hook.
+#let use-state(key, init) = {
+  let used-state = state(key, init)
+  return (() => used-state.final(), value => used-state.update(value))
+}
+
 /// Code from: [jbirnick](https://github.com/jbirnick/typst-rich-counters)
 /// Modified by: [OrangeX4](https://github.com/OrangeX4)
 /// License: MIT
 /// I need a patched version of `rich-counter` to support the `zero-fill` and `leading-zero` options. And we can update the arguments by set-inherited-levels, set-inherited-from, set-zero-fill, and set-leading-zero functions.
 
 /// Create a richer counter that can inherit from other counters and display the counter value. Returns a dictionary of functions to interact with the counter like `at`, `get-inherited-levels` and `set-inherited-levels`.
-/// 
+///
 /// - identifier (string): Unique identifier for the counter.
 /// - inherited-levels (integer): Number of heading levels to inherit from. Default is 0, which will inherit from the inherited-from counter if it is a dictionary.
 /// - inherited-from (counter): Counter to inherit from. Default is heading.
@@ -54,9 +60,7 @@
   }
 
   // oop-style state management
-  let richer-inherited-from = state("richer-inherited-from:" + identifier, inherited-from)
-  let get-inherited-from() = richer-inherited-from.final()
-  let set-inherited-from(value) = richer-inherited-from.update(value)
+  let (get-inherited-from, set-inherited-from) = use-state("richer-inherited-from:" + identifier, inherited-from)
   let richer-inherited-levels = state("richer-inherited-levels:" + identifier, inherited-levels)
   let get-inherited-levels() = {
     // small hack to allow for inheritance of richer-counter
@@ -66,12 +70,8 @@
     return richer-inherited-levels.final()
   }
   let set-inherited-levels(value) = richer-inherited-levels.update(value)
-  let richer-zero-fill = state("richer-zero-fill:" + identifier, zero-fill)
-  let get-zero-fill() = richer-zero-fill.final()
-  let set-zero-fill(value) = richer-zero-fill.update(value)
-  let richer-leading-zero = state("richer-leading-zero:" + identifier, leading-zero)
-  let get-leading-zero() = richer-leading-zero.final()
-  let set-leading-zero(value) = richer-leading-zero.update(value)
+  let (get-zero-fill, set-zero-fill) = use-state("richer-zero-fill:" + identifier, zero-fill)
+  let (get-leading-zero, set-leading-zero) = use-state("richer-leading-zero:" + identifier, leading-zero)
 
   // get the parent richer-counter
   let parent-richer-counter() = if type(get-inherited-from()) == dictionary {

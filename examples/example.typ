@@ -1,9 +1,20 @@
 #import "../lib.typ": *
 #import cosmos.fancy: *
 
-#set text(lang: "en", region: "us")
+#set page(height: auto)
 #set heading(numbering: "1.1")
+#set text(lang: "en", region: "us")
 #show: show-theorion
+
+// Change the color scheme:
+// #set-primary-border-color(red)
+// #set-primary-body-color(red.lighten(95%))
+// #set-primary-symbol[#sym.suit.diamond.filled]
+
+// Change the inherited levels:
+// #set-inherited-levels(1)
+// #set-zero-fill(true)
+// #set-leading-zero(true)
 
 = Theorion Environments
 
@@ -14,16 +25,16 @@ Let's start with the most fundamental definition.
 #definition[
   A natural number is called a #highlight[_prime number_] if it is greater than 1 
   and cannot be written as the product of two smaller natural numbers.
-] <def_prime>
+] <def:prime>
 
 #example[
-  The numbers $2$, $3$, and $17$ are prime. As proven in @cor_infinite_prime, 
-  this list is far from complete!
+  The numbers $2$, $3$, and $17$ are prime. As proven in @cor:infinite-prime, 
+  this list is far from complete! See @thm:euclid for the full proof.
 ]
 
 #theorem(title: "Euclid's Theorem")[
   There are infinitely many prime numbers.
-] <thm_euclid>
+] <thm:euclid>
 
 #proof[
   By contradiction: Suppose $p_1, p_2, dots, p_n$ is a finite enumeration of all primes.
@@ -35,7 +46,7 @@ Let's start with the most fundamental definition.
 
 #corollary[
   There is no largest prime number.
-] <cor_infinite_prime>
+] <cor:infinite-prime>
 
 #corollary[
   There are infinitely many composite numbers.
@@ -45,11 +56,11 @@ Let's start with the most fundamental definition.
 
 #theorem(title: "Continuity Theorem")[
   If a function $f$ is differentiable at every point, then $f$ is continuous.
-] <thm_continuous>
+] <thm:continuous>
 
 #tip-box[
-  This theorem tells us that differentiability implies continuity, but not vice versa.
-  For example, $f(x) = |x|$ is continuous but not differentiable at $x = 0$.
+  @thm:continuous tells us that differentiability implies continuity, 
+  but not vice versa. For example, $f(x) = |x|$ is continuous but not differentiable at $x = 0$.
 ]
 
 == Geometric Theorems
@@ -57,21 +68,22 @@ Let's start with the most fundamental definition.
 #theorem(title: "Pythagorean Theorem")[
   In a right triangle, the square of the hypotenuse equals the sum of squares of the other two sides:
   $x^2 + y^2 = z^2$
-] <thm_pythagoras>
+] <thm:pythagoras>
 
 #important-box[
-  The Pythagorean theorem is one of the most fundamental and important theorems in plane geometry,
+  @thm:pythagoras is one of the most fundamental and important theorems in plane geometry,
   bridging geometry and algebra.
 ]
 
 #corollary[
   There exists no right triangle with sides measuring 3cm, 4cm, and 6cm.
-]
+  This directly follows from @thm:pythagoras.
+] <cor:pythagoras>
 
 #lemma[
   Given two line segments of lengths $a$ and $b$, there exists a real number $r$ 
   such that $b = r a$.
-]
+] <lem:proportion>
 
 == Algebraic Structures
 
@@ -81,14 +93,15 @@ Let's start with the most fundamental definition.
   2. $(R, dot)$ is a semigroup
   3. The distributive laws hold
   Then $(R, +, dot)$ is called a ring.
-]
+] <def:ring>
 
 #proposition[
-  Every field is a ring, but not every ring is a field.
-]
+  Every field is a ring, but not every ring is a field. This concept builds upon @def:ring.
+] <prop:ring-field>
 
 #example[
-  The ring of integers $ZZ$ is not a field, as no elements except $\pm 1$ have multiplicative inverses.
+  Consider @def:ring. The ring of integers $ZZ$ is not a field, as no elements except $plus.minus 1$ 
+  have multiplicative inverses.
 ]
 
 == Advanced Analysis
@@ -130,7 +143,7 @@ Let's start with the most fundamental definition.
 #solution[
   Consider the sequence: $n! + 2, n! + 3, ..., n! + n$
 
-  For any $2 \leq k \leq n$, $n! + k$ is divisible by $k$ because:
+  For any $2 <= k <= n$, $n! + k$ is divisible by $k$ because:
   $n! + k = k(n!/k + 1)$
   
   Thus, this forms a sequence of $n-1$ consecutive composite numbers.
