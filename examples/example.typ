@@ -7,19 +7,35 @@
 #set heading(numbering: "1.1")
 #set text(lang: "en")
 
-// Change the color scheme (only for `fancy` cosmos):
+/// 1. Change the color scheme (only for `fancy` cosmos):
 // #set-primary-border-color(red)
 // #set-primary-body-color(red.lighten(95%))
 // #set-primary-symbol[#sym.suit.diamond.filled]
 
-// Change the inherited levels:
+/// 2. Change the inherited levels:
 // #set-inherited-levels(1)
 // #set-zero-fill(true)
 // #set-leading-zero(true)
 
-// Other options:
+/// 3. Other options:
 // #set-result("noanswer")
 // #set-qed-symbol[#math.qed]
+
+/// 4. Custom theorem environment for yourself
+// #let (theorem-counter, theorem-box, theorem, show-theorem) = make-frame(
+//   "theorem",
+//   theorion-i18n-map.at("theorem"),
+//   counter: theorem-counter,  // inherit the counter, `none` by default
+//   inherited-levels: 2,  // useful when you need a new counter
+//   inherited-from: heading,  // heading or another counter
+//   render: (prefix: none, title: "", full-title: auto, body) => [#strong[#full-title.]#sym.space#emph(body)],
+// )
+// #show: show-theorem
+
+/// 5. Just use it.
+// #theorem(title: "Euclid's Theorem")[
+//   There are infinitely many prime numbers.
+// ] <thm:euclid>
 
 = Theorion Environments
 
@@ -35,17 +51,35 @@
 == Customization
 
 ```typst
-// Change the color scheme (only for `fancy` cosmos)
+// 1. Change the color scheme (only for `fancy` cosmos):
 #set-primary-border-color(red)
 #set-primary-body-color(red.lighten(95%))
 #set-primary-symbol[#sym.suit.diamond.filled]
-// Change the inherited levels
+
+// 2. Change the inherited levels:
 #set-inherited-levels(1)
 #set-zero-fill(true)
 #set-leading-zero(true)
-// Other options
+
+// 3. Other options:
 #set-result("noanswer")
 #set-qed-symbol[#math.qed]
+
+// 4. Custom theorem environment for yourself
+#let (theorem-counter, theorem-box, theorem, show-theorem) = make-frame(
+  "theorem",
+  theorion-i18n-map.at("theorem"),
+  counter: theorem-counter,  // inherit the old counter, `none` by default
+  inherited-levels: 2,  // useful when you need a new counter
+  inherited-from: heading,  // heading or just another counter
+  render: (prefix: none, title: "", full-title: auto, body) => [#strong[#full-title.]#sym.space#emph(body)],
+)
+#show: show-theorem
+
+// 5. Just use it.
+#theorem(title: "Euclid's Theorem")[
+  There are infinitely many prime numbers.
+] <thm:euclid>
 ```
 
 == Basic Theorem Environments
@@ -53,12 +87,12 @@
 Let's start with the most fundamental definition.
 
 #definition[
-  A natural number is called a #highlight[_prime number_] if it is greater than 1 
+  A natural number is called a #highlight[_prime number_] if it is greater than 1
   and cannot be written as the product of two smaller natural numbers.
 ] <def:prime>
 
 #example[
-  The numbers $2$, $3$, and $17$ are prime. As proven in @cor:infinite-prime, 
+  The numbers $2$, $3$, and $17$ are prime. As proven in @cor:infinite-prime,
   this list is far from complete! See @thm:euclid for the full proof.
 ]
 
@@ -70,7 +104,7 @@ Let's start with the most fundamental definition.
   By contradiction: Suppose $p_1, p_2, dots, p_n$ is a finite enumeration of all primes.
   Let $P = p_1 p_2 dots p_n$. Since $P + 1$ is not in our list,
   it cannot be prime. Thus, some prime $p_j$ divides $P + 1$.
-  Since $p_j$ also divides $P$, it must divide their difference $(P + 1) - P = 1$, 
+  Since $p_j$ also divides $P$, it must divide their difference $(P + 1) - P = 1$,
   a contradiction.
 ]
 
@@ -89,7 +123,7 @@ Let's start with the most fundamental definition.
 ] <thm:continuous>
 
 #tip-box[
-  @thm:continuous tells us that differentiability implies continuity, 
+  @thm:continuous tells us that differentiability implies continuity,
   but not vice versa. For example, $f(x) = |x|$ is continuous but not differentiable at $x = 0$.
 ]
 
@@ -111,7 +145,7 @@ Let's start with the most fundamental definition.
 ] <cor:pythagoras>
 
 #lemma[
-  Given two line segments of lengths $a$ and $b$, there exists a real number $r$ 
+  Given two line segments of lengths $a$ and $b$, there exists a real number $r$
   such that $b = r a$.
 ] <lem:proportion>
 
@@ -130,7 +164,7 @@ Let's start with the most fundamental definition.
 ] <prop:ring-field>
 
 #example[
-  Consider @def:ring. The ring of integers $ZZ$ is not a field, as no elements except $plus.minus 1$ 
+  Consider @def:ring. The ring of integers $ZZ$ is not a field, as no elements except $plus.minus 1$
   have multiplicative inverses.
 ]
 
@@ -174,8 +208,8 @@ Let's start with the most fundamental definition.
   Consider the sequence: $n! + 2, n! + 3, ..., n! + n$
 
   For any $2 <= k <= n$, $n! + k$ is divisible by $k$ because:
-  $n! + k = k(n!/k + 1)$
-  
+  $n! + k = k(n! / k + 1)$
+
   Thus, this forms a sequence of $n-1$ consecutive composite numbers.
 ]
 
@@ -185,7 +219,7 @@ Let's start with the most fundamental definition.
 ]
 
 #conclusion[
-  Number theory contains many unsolved problems that appear deceptively simple 
+  Number theory contains many unsolved problems that appear deceptively simple
   yet are profoundly complex.
 ]
 

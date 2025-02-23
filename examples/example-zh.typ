@@ -7,19 +7,35 @@
 #set heading(numbering: "1.1")
 #set text(lang: "zh", region: "cn")
 
-// Change the color scheme (only for `fancy` cosmos):
+/// 1. 更改配色方案（仅适用于 `fancy` cosmos）：
 // #set-primary-border-color(red)
 // #set-primary-body-color(red.lighten(95%))
 // #set-primary-symbol[#sym.suit.diamond.filled]
 
-// Change the inherited levels:
+/// 2. 更改继承级别：
 // #set-inherited-levels(1)
 // #set-zero-fill(true)
 // #set-leading-zero(true)
 
-// Other options:
+/// 3. 其他选项：
 // #set-result("noanswer")
 // #set-qed-symbol[#math.qed]
+
+/// 4. 自定义定理环境
+// #let (theorem-counter, theorem-box, theorem, show-theorem) = make-frame(
+//   "theorem",
+//   theorion-i18n-map.at("theorem"),
+//   counter: theorem-counter,  // 继承已有计数器，默认为 none
+//   inherited-levels: 2,  // 需要新计数器时有用
+//   inherited-from: heading,  // 从标题或其他计数器继承
+//   render: (prefix: none, title: "", full-title: auto, body) => [#strong[#full-title.]#sym.space#emph(body)],
+// )
+// #show: show-theorem
+
+/// 5. 开始使用
+// #theorem(title: "欧几里得定理")[
+//   素数有无穷多个。
+// ] <thm:euclid>
 
 = Theorion 环境示例
 
@@ -35,17 +51,35 @@
 == 自定义
 
 ```typst
-// 更改配色方案（仅适用于 `fancy` cosmos）
+// 1. 更改配色方案（仅适用于 `fancy` cosmos）：
 #set-primary-border-color(red)
 #set-primary-body-color(red.lighten(95%))
 #set-primary-symbol[#sym.suit.diamond.filled]
-// 更改继承级别：
+
+// 2. 更改继承级别：
 #set-inherited-levels(1)
 #set-zero-fill(true)
 #set-leading-zero(true)
-// 其他选项:
+
+// 3. 其他选项：
 #set-result("noanswer")
 #set-qed-symbol[#math.qed]
+
+// 4. 自定义定理环境
+#let (theorem-counter, theorem-box, theorem, show-theorem) = make-frame(
+  "theorem",
+  theorion-i18n-map.at("theorem"),
+  counter: theorem-counter,  // inherit the old counter, `none` by default
+  inherited-levels: 2,  // useful when you need a new counter
+  inherited-from: heading,  // heading or just another counter
+  render: (prefix: none, title: "", full-title: auto, body) => [#strong[#full-title.]#sym.space#emph(body)],
+)
+#show: show-theorem
+
+// 5. 开始使用
+#theorem(title: "Euclid's Theorem")[
+  There are infinitely many prime numbers.
+] <thm:euclid>
 ```
 
 == 基础定理环境
