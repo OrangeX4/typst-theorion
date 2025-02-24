@@ -3,7 +3,7 @@
 /// A simple wrapper for the `state` function, inspired by React Hook.
 #let use-state(key, init) = {
   let used-state = state(key, init)
-  return (() => used-state.final(), value => used-state.update(value))
+  return (() => used-state.get(), value => used-state.update(value))
 }
 
 /// Code from: [jbirnick](https://github.com/jbirnick/typst-rich-counters)
@@ -64,10 +64,10 @@
   let richer-inherited-levels = state("richer-inherited-levels:" + identifier, inherited-levels)
   let get-inherited-levels() = {
     // small hack to allow for inheritance of richer-counter
-    if type(get-inherited-from()) == dictionary and richer-inherited-levels.final() == 0 {
+    if type(get-inherited-from()) == dictionary and richer-inherited-levels.get() == 0 {
       return (get-inherited-from().get-inherited-levels)() + 1
     }
-    return richer-inherited-levels.final()
+    return richer-inherited-levels.get()
   }
   let set-inherited-levels(value) = richer-inherited-levels.update(value)
   let (get-zero-fill, set-zero-fill) = use-state("richer-zero-fill:" + identifier, zero-fill)
