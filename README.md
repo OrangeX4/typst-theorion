@@ -40,7 +40,7 @@
 // 4. Custom theorem environment for yourself
 #let (theorem-counter, theorem-box, theorem, show-theorem) = make-frame(
   "theorem",  // identifier
-  "Theorem",  // supplement, string or dictionary `(en: "Theorem")`, or `theorion-i18n-map.at("theorem")` for built-in i18n support
+  "Theorem",  // supplement, string or dictionary like `(en: "Theorem")`, or `theorion-i18n-map.at("theorem")` for built-in i18n support
   counter: theorem-counter,  // inherit the old counter, `none` by default
   inherited-levels: 2,  // useful when you need a new counter
   inherited-from: heading,  // heading or just another counter
