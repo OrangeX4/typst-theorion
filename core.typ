@@ -239,10 +239,21 @@
 }
 
 
+/// Display the numbering of a theorem environment
+///
+/// - el (content): Figure element to display the numbering
+#let display-theorion-number(el) = {
+  assert(type(el) == content and el.func() == figure, message: "The element must be a figure.")
+  // some magic to get the correct numbering
+  std.numbering(el.numbering.with(get-loc: () => el.location()))
+}
+
+
 /// Create a theorem environment based on richer-counter
 ///
 /// - identifier (string): Unique identifier for the counter
 /// - supplement (string|dict): Label text or dictionary of labels for different languages
+/// - kind (string): Kind of the theorem environment. Default is auto, which uses the identifier
 /// - counter (counter): Counter to use. Default is none, which creates a new counter based on the identifier
 /// - inherited-levels (integer): Number of heading levels to inherit from. Default is 0
 /// - inherited-from (counter): Counter to inherit from. Default is heading
@@ -252,6 +263,7 @@
 #let make-frame(
   identifier,
   supplement,
+  kind: auto,
   counter: none,
   inherited-levels: 0,
   inherited-from: heading,
@@ -259,6 +271,7 @@
   render: (prefix: none, title: "", full-title: "", body) => block[*#full-title*: #body],
 ) = {
   let get-numbering = if type(numbering) != function { (..args) => numbering } else { numbering }
+  kind = if kind == auto { identifier } else { kind }
   /// Counter for the frame.
   let frame-counter = if counter != none { counter } else {
     richer-counter(
@@ -270,9 +283,20 @@
   let supplement-i18n = theorion-i18n(supplement)
   /// Frame with the counter.
   let frame(title: "", body) = figure(
-    kind: identifier,
+    kind: kind,
     supplement: supplement-i18n,
-    numbering: (get-loc: here, ..args) => context std.numbering(get-numbering(get-loc()), ..args),
+    caption: title,
+    numbering: (get-loc: here, counter: frame-counter, ..args) => context {
+      let loc = get-loc()
+      // We need to add 1 to the counter value.
+      let counter-value = if type(counter) == dictionary {
+        (counter.at)(loc)
+      } else {
+        counter.at(loc)
+      }
+      counter-value = counter-value.slice(0, -1) + (counter-value.at(-1) + 1,)
+      std.numbering(get-numbering(get-loc()), ..counter-value)
+    },
     {
       (frame-counter.step)()
       let prefix = [#supplement-i18n #context (frame-counter.display)(get-numbering(here()))]
@@ -286,23 +310,41 @@
   )
   /// Show rule for the frame.
   let show-frame(body) = {
-    show figure.where(kind: identifier): set align(left)
-    show figure.where(kind: identifier): set block(breakable: true)
+    // skip the default figure style.
+    show figure.where(kind: kind): set align(left)
+    show figure.where(kind: kind): set block(breakable: true)
+    show figure.where(kind: kind): it => it.body
+    // Custom outline for the theorem environment.
+    show outline.where(target: figure.where(kind: kind)): it => {
+      show outline.entry: entry => {
+        let el = entry.element
+        block(
+          link(
+            el.location(),
+            entry.indented(
+              [#el.supplement #context display-theorion-number(el)],
+              {
+                entry.body()
+                box(width: 1fr, inset: (x: .25em), entry.fill)
+                entry.page()
+              },
+              gap: .5em,
+            ),
+          ),
+        )
+      }
+      it
+    }
+    // Custom reference for the theorem environment.
     show ref: it => {
       let el = it.element
-      if el != none and el.func() == figure and el.kind == identifier {
+      if el != none and el.func() == figure and el.kind == kind {
         link(
-          it.target,
+          el.location(),
           {
-            if it.supplement == auto { supplement-i18n } else { it.supplement }
+            if it.supplement == auto { el.supplement } else { it.supplement }
             " "
-            context {
-              // We need to add 1 to the counter value.
-              let counter-value = (frame-counter.at)(el.location())
-              counter-value = counter-value.slice(0, -1) + (counter-value.at(-1) + 1,)
-              // some magic to get the correct numbering
-              std.numbering(el.numbering.with(get-loc: () => el.location()), ..counter-value)
-            }
+            context display-theorion-number(el)
           },
         )
       } else {

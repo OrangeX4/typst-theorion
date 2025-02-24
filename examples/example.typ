@@ -47,6 +47,9 @@
 // #set heading(numbering: "A.1")
 // #set-theorion-numbering("A.1")
 
+/// 7. Table of contents
+// #outline(title: none, target: figure.where(kind: "theorem"))
+
 = Theorion Environments
 
 == Quick Start
@@ -108,7 +111,14 @@
 #counter(heading).update(0)
 #set heading(numbering: "A.1")
 #set-theorion-numbering("A.1")
+
+// 7. Table of contents
+#outline(title: none, target: figure.where(kind: "theorem"))
 ```
+
+== Table of Theorems
+
+#outline(title: none, target: figure.where(kind: "theorem"))
 
 == Basic Theorem Environments
 

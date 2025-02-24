@@ -33,10 +33,11 @@
 #set-primary-body-color(red.lighten(95%))
 #set-primary-symbol[#sym.suit.diamond.filled]
 
-// 2. Change the inherited levels:
+// 2. Change the counters and numbering:
 #set-inherited-levels(1)
 #set-zero-fill(true)
 #set-leading-zero(true)
+#set-theorion-numbering("1.1")
 
 // 3. Other options:
 #set-result("noanswer")
@@ -44,7 +45,7 @@
 
 // 4. Custom theorem environment for yourself
 #let (theorem-counter, theorem-box, theorem, show-theorem) = make-frame(
-  "theorem",  // identifier
+  "theorem",
   "Theorem",  // supplement, string or dictionary like `(en: "Theorem")`, or `theorion-i18n-map.at("theorem")` for built-in i18n support
   counter: theorem-counter,  // inherit the old counter, `none` by default
   inherited-levels: 2,  // useful when you need a new counter
@@ -57,6 +58,17 @@
 #theorem(title: "Euclid's Theorem")[
   There are infinitely many prime numbers.
 ] <thm:euclid>
+#theorem-box(title: "Theorem without numbering")[
+  This theorem is not numbered.
+]
+
+// 6. Example of appendix
+#counter(heading).update(0)
+#set heading(numbering: "A.1")
+#set-theorion-numbering("A.1")
+
+// 7. Table of contents
+#outline(title: none, target: figure.where(kind: "theorem"))
 ```
 
 ## Example
@@ -72,7 +84,7 @@
 // #import cosmos.clouds: *
 #show: show-theorion
 
-#set page(height: auto, margin: 2em, width: 50em)
+#set page(height: auto)
 #set heading(numbering: "1.1")
 #set text(lang: "en")
 
@@ -81,10 +93,11 @@
 // #set-primary-body-color(red.lighten(95%))
 // #set-primary-symbol[#sym.suit.diamond.filled]
 
-/// 2. Change the inherited levels:
+/// 2. Change the counters and numbering:
 // #set-inherited-levels(1)
 // #set-zero-fill(true)
 // #set-leading-zero(true)
+// #set-theorion-numbering("1.1")
 
 /// 3. Other options:
 // #set-result("noanswer")
@@ -105,8 +118,23 @@
 // #theorem(title: "Euclid's Theorem")[
 //   There are infinitely many prime numbers.
 // ] <thm:euclid>
+// #theorem-box(title: "Theorem without numbering")[
+//   This theorem is not numbered.
+// ]
+
+/// 6. Example of appendix
+// #counter(heading).update(0)
+// #set heading(numbering: "A.1")
+// #set-theorion-numbering("A.1")
+
+/// 7. Table of contents
+// #outline(title: none, target: figure.where(kind: "theorem"))
 
 = Theorion Environments
+
+== Table of Theorems
+
+#outline(title: none, target: figure.where(kind: "theorem"))
 
 == Basic Theorem Environments
 
@@ -151,6 +179,7 @@ Let's start with the most fundamental definition.
 #tip-box[
   @thm:continuous tells us that differentiability implies continuity,
   but not vice versa. For example, $f(x) = |x|$ is continuous but not differentiable at $x = 0$.
+  For a deeper understanding of continuous functions, see @thm:max-value in the appendix.
 ]
 
 == Geometric Theorems
@@ -194,11 +223,18 @@ Let's start with the most fundamental definition.
   have multiplicative inverses.
 ]
 
+/// Appendix
+#counter(heading).update(0)
+#set heading(numbering: "A.1")
+#set-theorion-numbering("A.1")
+
+= Theorion Appendices
+
 == Advanced Analysis
 
 #theorem(title: "Maximum Value Theorem")[
   A continuous function on a closed interval must attain both a maximum and a minimum value.
-]
+] <thm:max-value>
 
 #warning-box[
   Both conditions of this theorem are essential:
@@ -214,11 +250,11 @@ Let's start with the most fundamental definition.
   2. Associativity
   3. Identity element exists
   4. Inverse elements exist
-]
+] <axiom:group>
 
 #postulate(title: "Fundamental Theorem of Algebra")[
   Every non-zero polynomial with complex coefficients has a complex root.
-]
+] <post:fta>
 
 #remark[
   This theorem is also known as Gauss's theorem, as it was first rigorously proved by Gauss.
@@ -251,6 +287,11 @@ Let's start with the most fundamental definition.
 
 == Important Notes
 
+#note-box[
+  Remember that mathematical proofs should be both rigorous and clear.
+  Clarity without rigor is insufficient, and rigor without clarity is ineffective.
+]
+
 #caution-box[
   When dealing with infinite series, always verify convergence before discussing other properties.
 ]
@@ -280,7 +321,7 @@ Let's start with the most fundamental definition.
 
 [Customize from source code](cosmos/simple.typ)
 
-![image](https://github.com/user-attachments/assets/5c9061ab-117a-455c-bb11-4a9fff5edc7a)
+![image](https://github.com/user-attachments/assets/f1876cfb-1bc9-4edb-a19a-a1922a8babc0)
 
 ### 🌈Rainbow
 
@@ -292,7 +333,7 @@ Let's start with the most fundamental definition.
 
 [Customize from source code](cosmos/rainbow.typ)
 
-![image](https://github.com/user-attachments/assets/715749c3-1464-4dd1-be57-111f2fc376ea)
+![image](https://github.com/user-attachments/assets/5e6e29f9-c493-4e21-b14a-347f3ca83b99)
 
 ### ☁️Clouds
 
@@ -304,7 +345,7 @@ Let's start with the most fundamental definition.
 
 [Customize from source code](cosmos/clouds.typ)
 
-![image](https://github.com/user-attachments/assets/486bbaf5-d068-4bd6-8455-028f00cba2c5)
+![image](https://github.com/user-attachments/assets/1f0f280b-94f5-43b7-b685-d2998d867b58)
 
 ### ✨Fancy
 
@@ -316,7 +357,7 @@ Let's start with the most fundamental definition.
 
 [Customize from source code](cosmos/fancy.typ)
 
-![image](https://github.com/user-attachments/assets/742733f1-8d2e-4849-a3b7-d3f2cc743a18)
+![image](https://github.com/user-attachments/assets/a8938339-9510-4371-ae23-7f73a828c17d)
 
 ### Contributing your cosmos
 

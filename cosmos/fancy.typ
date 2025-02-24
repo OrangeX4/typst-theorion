@@ -105,7 +105,7 @@
 
 /// Create corresponding theorem box.
 #let (theorem-counter, theorem-box, theorem, show-theorem) = make-frame(
-  "fancy-theorem",
+  "theorem",
   theorion-i18n-map.at("theorem"),
   inherited-levels: 2,
   render: fancy-box.with(
@@ -116,7 +116,7 @@
 )
 
 #let (lemma-counter, lemma-box, lemma, show-lemma) = make-frame(
-  "fancy-lemma",
+  "lemma",
   theorion-i18n-map.at("lemma"),
   counter: theorem-counter,
   render: fancy-box.with(
@@ -127,7 +127,7 @@
 )
 
 #let (corollary-counter, corollary-box, corollary, show-corollary) = make-frame(
-  "fancy-corollary",
+  "corollary",
   theorion-i18n-map.at("corollary"),
   inherited-from: theorem-counter,
   render: fancy-box.with(
@@ -138,7 +138,7 @@
 )
 
 #let (axiom-counter, axiom-box, axiom, show-axiom) = make-frame(
-  "fancy-axiom",
+  "axiom",
   theorion-i18n-map.at("axiom"),
   counter: theorem-counter,
   render: fancy-box.with(
@@ -149,7 +149,7 @@
 )
 
 #let (postulate-counter, postulate-box, postulate, show-postulate) = make-frame(
-  "fancy-postulate",
+  "postulate",
   theorion-i18n-map.at("postulate"),
   counter: theorem-counter,
   render: fancy-box.with(
@@ -160,7 +160,7 @@
 )
 
 #let (definition-counter, definition-box, definition, show-definition) = make-frame(
-  "fancy-definition",
+  "definition",
   theorion-i18n-map.at("definition"),
   counter: theorem-counter,
   render: fancy-box.with(
@@ -171,7 +171,7 @@
 )
 
 #let (proposition-counter, proposition-box, proposition, show-proposition) = make-frame(
-  "fancy-proposition",
+  "proposition",
   theorion-i18n-map.at("proposition"),
   counter: theorem-counter,
   render: fancy-box.with(

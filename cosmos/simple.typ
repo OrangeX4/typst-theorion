@@ -10,49 +10,49 @@
 
 /// Create corresponding theorem box.
 #let (theorem-counter, theorem-box, theorem, show-theorem) = make-frame(
-  "simple-theorem",
+  "theorem",
   theorion-i18n-map.at("theorem"),
   inherited-levels: 2,
   render: render-fn,
 )
 
 #let (lemma-counter, lemma-box, lemma, show-lemma) = make-frame(
-  "simple-lemma",
+  "lemma",
   theorion-i18n-map.at("lemma"),
   counter: theorem-counter,
   render: render-fn,
 )
 
 #let (corollary-counter, corollary-box, corollary, show-corollary) = make-frame(
-  "simple-corollary",
+  "corollary",
   theorion-i18n-map.at("corollary"),
   inherited-from: theorem-counter,
   render: render-fn,
 )
 
 #let (axiom-counter, axiom-box, axiom, show-axiom) = make-frame(
-  "simple-axiom",
+  "axiom",
   theorion-i18n-map.at("axiom"),
   counter: theorem-counter,
   render: render-fn,
 )
 
 #let (postulate-counter, postulate-box, postulate, show-postulate) = make-frame(
-  "simple-postulate",
+  "postulate",
   theorion-i18n-map.at("postulate"),
   counter: theorem-counter,
   render: render-fn,
 )
 
 #let (definition-counter, definition-box, definition, show-definition) = make-frame(
-  "simple-definition",
+  "definition",
   theorion-i18n-map.at("definition"),
   counter: theorem-counter,
   render: render-fn,
 )
 
 #let (proposition-counter, proposition-box, proposition, show-proposition) = make-frame(
-  "simple-proposition",
+  "proposition",
   theorion-i18n-map.at("proposition"),
   counter: theorem-counter,
   render: render-fn,

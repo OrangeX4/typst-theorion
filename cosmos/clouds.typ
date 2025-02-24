@@ -11,21 +11,21 @@
 
 // Core theorems
 #let (theorem-counter, theorem-box, theorem, show-theorem) = make-frame(
-  "rainbow-theorem",
+  "theorem",
   theorion-i18n-map.at("theorem"),
   inherited-levels: 2,
   render: render-fn.with(fill: red.lighten(85%)),
 )
 
 #let (lemma-counter, lemma-box, lemma, show-lemma) = make-frame(
-  "rainbow-lemma",
+  "lemma",
   theorion-i18n-map.at("lemma"),
   counter: theorem-counter,
   render: render-fn.with(fill: teal.lighten(85%)),
 )
 
 #let (corollary-counter, corollary-box, corollary, show-corollary) = make-frame(
-  "rainbow-corollary",
+  "corollary",
   theorion-i18n-map.at("corollary"),
   counter: theorem-counter,
   render: render-fn.with(fill: navy.lighten(90%)),
@@ -33,21 +33,21 @@
 
 // Definitions and foundations
 #let (definition-counter, definition-box, definition, show-definition) = make-frame(
-  "rainbow-definition",
+  "definition",
   theorion-i18n-map.at("definition"),
   counter: theorem-counter,
   render: render-fn.with(fill: olive.lighten(85%)),
 )
 
 #let (axiom-counter, axiom-box, axiom, show-axiom) = make-frame(
-  "rainbow-axiom",
+  "axiom",
   theorion-i18n-map.at("axiom"),
   counter: theorem-counter,
   render: render-fn.with(fill: green.lighten(85%)),
 )
 
 #let (postulate-counter, postulate-box, postulate, show-postulate) = make-frame(
-  "rainbow-postulate",
+  "postulate",
   theorion-i18n-map.at("postulate"),
   counter: theorem-counter,
   render: render-fn.with(fill: maroon.lighten(85%)),
@@ -55,7 +55,7 @@
 
 // Important results
 #let (proposition-counter, proposition-box, proposition, show-proposition) = make-frame(
-  "rainbow-proposition",
+  "proposition",
   theorion-i18n-map.at("proposition"),
   counter: theorem-counter,
   render: render-fn.with(fill: blue.lighten(85%)),

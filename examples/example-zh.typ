@@ -47,7 +47,15 @@
 // #set heading(numbering: "A.1")
 // #set-theorion-numbering("A.1")
 
+/// 7. 目录
+// #outline(title: none, target: figure.where(kind: "theorem"))
+
+
 = Theorion 环境示例
+
+== 目录
+
+#outline(title: none, target: figure.where(kind: "theorem"))
 
 == 开箱即用
 
@@ -107,6 +115,9 @@
 #counter(heading).update(0)
 #set heading(numbering: "A.1")
 #set-theorion-numbering("A.1")
+
+// 7. 目录
+#outline(title: none, target: figure.where(kind: "theorem"))
 ```
 
 == 基础定理环境
