@@ -3,8 +3,21 @@
 /// A simple wrapper for the `state` function, inspired by React Hook.
 #let use-state(key, init) = {
   let used-state = state(key, init)
-  return (() => used-state.get(), value => used-state.update(value))
+  return (
+    (..args) => {
+      let arg = args.pos().at(0, default: none)
+      if arg == none {
+        used-state.final()
+      } else {
+        used-state.at(arg)
+      }
+    },
+    value => used-state.update(value),
+  )
 }
+
+/// Global theorion numbering
+#let (get-theorion-numbering, set-theorion-numbering) = use-state("theorion-numbering", "1.1")
 
 /// Code from: [jbirnick](https://github.com/jbirnick/typst-rich-counters)
 /// Modified by: [OrangeX4](https://github.com/OrangeX4)
@@ -62,22 +75,28 @@
   // oop-style state management
   let (get-inherited-from, set-inherited-from) = use-state("richer-inherited-from:" + identifier, inherited-from)
   let richer-inherited-levels = state("richer-inherited-levels:" + identifier, inherited-levels)
-  let get-inherited-levels() = {
+  let get-inherited-levels(..args) = {
     // small hack to allow for inheritance of richer-counter
-    if type(get-inherited-from()) == dictionary and richer-inherited-levels.get() == 0 {
+    let arg = args.pos().at(0, default: none)
+    let value = if arg == none {
+      richer-inherited-levels.final()
+    } else {
+      richer-inherited-levels.at(arg)
+    }
+    if type(get-inherited-from()) == dictionary and value == 0 {
       return (get-inherited-from().get-inherited-levels)() + 1
     }
-    return richer-inherited-levels.get()
+    return value
   }
   let set-inherited-levels(value) = richer-inherited-levels.update(value)
   let (get-zero-fill, set-zero-fill) = use-state("richer-zero-fill:" + identifier, zero-fill)
   let (get-leading-zero, set-leading-zero) = use-state("richer-leading-zero:" + identifier, leading-zero)
 
   // get the parent richer-counter
-  let parent-richer-counter() = if type(get-inherited-from()) == dictionary {
-    get-inherited-from()
+  let parent-richer-counter() = if type(get-inherited-from(here())) == dictionary {
+    get-inherited-from(here())
   } else {
-    richer-wrapper(get-inherited-from())
+    richer-wrapper(get-inherited-from(here()))
   }
 
   // `step` method for this richer-counter
@@ -120,13 +139,16 @@
 
   // find last update of this total (!) counter up to a certain level and before a certain location
   let last-update-location(level, before-key) = {
-    let parent-last-update-location = (parent-richer-counter().last-update-location)(get-inherited-levels(), before-key)
+    let parent-last-update-location = (parent-richer-counter().last-update-location)(
+      get-inherited-levels(here()),
+      before-key,
+    )
     let updates = updates-during(parent-last-update-location, before-key)
 
     for update in updates.rev() {
       let kind = update.value.kind
       if kind == "richer-counter:step" {
-        if update.value.value <= level - get-inherited-levels() {
+        if update.value.value <= level - get-inherited-levels(here()) {
           return update.location()
         }
       } else if kind == "richer-counter:update" {
@@ -150,7 +172,7 @@
         while value.len() > level { let _ = value.pop() }
         value.at(level - 1) += 1
       } else if kind == "richer-counter:update" {
-        let inherited-levels = get-inherited-levels()
+        let inherited-levels = get-inherited-levels(here())
         let counter-value = update.value.value
         counter-value = counter-value.slice(calc.min(inherited-levels, counter-value.len()))
         value = if counter-value.len() == 0 {
@@ -168,10 +190,10 @@
   let at(key) = {
     // get inherited numbers
     let num-parent = (parent-richer-counter().at)(key)
-    let inherited-levels = get-inherited-levels()
-    while get-zero-fill() and num-parent.len() < inherited-levels { num-parent.push(0) }
+    let inherited-levels = get-inherited-levels(here())
+    while get-zero-fill(here()) and num-parent.len() < inherited-levels { num-parent.push(0) }
     while num-parent.len() > inherited-levels { let _ = num-parent.pop() }
-    if not get-leading-zero() and num-parent.at(0, default: none) == 0 {
+    if not get-leading-zero(here()) and num-parent.at(0, default: none) == 0 {
       num-parent = num-parent.slice(1)
     }
 
@@ -224,7 +246,7 @@
 /// - counter (counter): Counter to use. Default is none, which creates a new counter based on the identifier
 /// - inherited-levels (integer): Number of heading levels to inherit from. Default is 0
 /// - inherited-from (counter): Counter to inherit from. Default is heading
-/// - numbering (string): Numbering format. Default is "1.1"
+/// - numbering (string): Numbering format. Default is none
 /// - render (function): Custom rendering function
 /// -> (counter, render-fn, frame-fn, show-fn)
 #let make-frame(
@@ -233,9 +255,10 @@
   counter: none,
   inherited-levels: 0,
   inherited-from: heading,
-  numbering: "1.1",
+  numbering: get-theorion-numbering,
   render: (prefix: none, title: "", full-title: "", body) => block[*#full-title*: #body],
 ) = {
+  let get-numbering = if type(numbering) != function { (..args) => numbering } else { numbering }
   /// Counter for the frame.
   let frame-counter = if counter != none { counter } else {
     richer-counter(
@@ -249,10 +272,10 @@
   let frame(title: "", body) = figure(
     kind: identifier,
     supplement: supplement-i18n,
-    numbering: numbering,
+    numbering: (get-loc: here, ..args) => context std.numbering(get-numbering(get-loc()), ..args),
     {
-      context (frame-counter.step)()
-      let prefix = [#supplement-i18n #context (frame-counter.display)(numbering)]
+      (frame-counter.step)()
+      let prefix = [#supplement-i18n #context (frame-counter.display)(get-numbering(here()))]
       render(
         prefix: prefix,
         title: title,
@@ -277,7 +300,8 @@
               // We need to add 1 to the counter value.
               let counter-value = (frame-counter.at)(el.location())
               counter-value = counter-value.slice(0, -1) + (counter-value.at(-1) + 1,)
-              std.numbering(el.numbering, ..counter-value)
+              // some magic to get the correct numbering
+              std.numbering(el.numbering.with(get-loc: () => el.location()), ..counter-value)
             }
           },
         )

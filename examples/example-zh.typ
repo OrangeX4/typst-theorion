@@ -13,10 +13,11 @@
 // #set-primary-body-color(red.lighten(95%))
 // #set-primary-symbol[#sym.suit.diamond.filled]
 
-/// 2. 更改继承级别：
+/// 2. 更改计数器和编号：
 // #set-inherited-levels(1)
 // #set-zero-fill(true)
 // #set-leading-zero(true)
+// #set-theorion-numbering("1.1")
 
 /// 3. 其他选项：
 // #set-result("noanswer")
@@ -40,6 +41,11 @@
 // #theorem-box(title: "无编号定理")[
 //   这个定理没有编号。
 // ]
+
+/// 6. 附录示例
+// #counter(heading).update(0)
+// #set heading(numbering: "A.1")
+// #set-theorion-numbering("A.1")
 
 = Theorion 环境示例
 
@@ -88,6 +94,11 @@
 #theorem-box(title: "无编号定理")[
   这个定理没有编号。
 ]
+
+// 6. 附录示例
+#counter(heading).update(0)
+#set heading(numbering: "A.1")
+#set-theorion-numbering("A.1")
 ```
 
 == 基础定理环境
@@ -168,7 +179,14 @@
   参考@def:ring，整数环 $ZZ$ 不是域，因为除了 $plus.minus 1$，其他元素都没有乘法逆元。
 ]
 
-== 分析进阶
+/// 附录示例
+#counter(heading).update(0)
+#set heading(numbering: "A.1")
+#set-theorion-numbering("A.1")
+
+= Theorion 附录
+
+== 进阶分析
 
 #theorem(title: "最大值定理")[
   闭区间上的连续函数必有最大值和最小值。

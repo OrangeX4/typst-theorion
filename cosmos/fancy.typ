@@ -24,9 +24,9 @@
     thickness: .05em,
     radius: .3em,
     inset: (x: 1.2em, top: .7em, bottom: 1.2em),
-    border-color: get-border-color(),
-    title-color: get-border-color(),
-    body-color: get-body-color(),
+    border-color: get-border-color(here()),
+    title-color: get-border-color(here()),
+    body-color: get-body-color(here()),
     title-inset: (x: 1em, y: .5em),
   ),
   title-style: (
@@ -51,12 +51,12 @@
   },
   {
     body
-    if get-symbol() != none {
+    if get-symbol(here()) != none {
       place(
         right + bottom,
         dy: .8em,
         dx: .9em,
-        text(size: .6em, fill: get-border-color(), get-symbol()),
+        text(size: .6em, fill: get-border-color(here()), get-symbol(here())),
       )
     }
   },

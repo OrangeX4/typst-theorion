@@ -42,7 +42,7 @@
 #let solution(
   title: theorion-i18n-map.at("solution"),
   body,
-) = context if get-result() == "noanswer" { none } else [#emph(theorion-i18n(title)).#sym.space#body]
+) = context if get-result(here()) == "noanswer" { none } else [#emph(theorion-i18n(title)).#sym.space#body]
 
 /// Create a conclusion environment with italic title
 ///
@@ -76,8 +76,8 @@
   title: theorion-i18n-map.at("proof"),
   qed: auto,
   body,
-) = context if get-result() == "noanswer" { none } else {
-  let qed-symbol = if qed == auto { get-qed-symbol() } else { qed }
+) = context if get-result(here()) == "noanswer" { none } else {
+  let qed-symbol = if qed == auto { get-qed-symbol(here()) } else { qed }
   [#emph(theorion-i18n(title)).#sym.space#body#box(width: 0em)#h(1fr)#sym.wj#sym.space.nobreak$#qed-symbol$]
 }
 

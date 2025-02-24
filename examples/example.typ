@@ -13,10 +13,11 @@
 // #set-primary-body-color(red.lighten(95%))
 // #set-primary-symbol[#sym.suit.diamond.filled]
 
-/// 2. Change the inherited levels:
+/// 2. Change the counters and numbering:
 // #set-inherited-levels(1)
 // #set-zero-fill(true)
 // #set-leading-zero(true)
+// #set-theorion-numbering("1.1")
 
 /// 3. Other options:
 // #set-result("noanswer")
@@ -40,6 +41,11 @@
 // #theorem-box(title: "Theorem without numbering")[
 //   This theorem is not numbered.
 // ]
+
+/// 6. Example of appendix
+// #counter(heading).update(0)
+// #set heading(numbering: "A.1")
+// #set-theorion-numbering("A.1")
 
 = Theorion Environments
 
@@ -69,10 +75,11 @@
 #set-primary-body-color(red.lighten(95%))
 #set-primary-symbol[#sym.suit.diamond.filled]
 
-// 2. Change the inherited levels:
+// 2. Change the counters and numbering:
 #set-inherited-levels(1)
 #set-zero-fill(true)
 #set-leading-zero(true)
+#set-theorion-numbering("1.1")
 
 // 3. Other options:
 #set-result("noanswer")
@@ -96,6 +103,11 @@
 #theorem-box(title: "Theorem without numbering")[
   This theorem is not numbered.
 ]
+
+// 6. Example of appendix
+#counter(heading).update(0)
+#set heading(numbering: "A.1")
+#set-theorion-numbering("A.1")
 ```
 
 == Basic Theorem Environments
@@ -141,6 +153,7 @@ Let's start with the most fundamental definition.
 #tip-box[
   @thm:continuous tells us that differentiability implies continuity,
   but not vice versa. For example, $f(x) = |x|$ is continuous but not differentiable at $x = 0$.
+  For a deeper understanding of continuous functions, see @thm:max-value in the appendix.
 ]
 
 == Geometric Theorems
@@ -184,11 +197,18 @@ Let's start with the most fundamental definition.
   have multiplicative inverses.
 ]
 
+/// Appendix
+#counter(heading).update(0)
+#set heading(numbering: "A.1")
+#set-theorion-numbering("A.1")
+
+= Theorion Appendices
+
 == Advanced Analysis
 
 #theorem(title: "Maximum Value Theorem")[
   A continuous function on a closed interval must attain both a maximum and a minimum value.
-]
+] <thm:max-value>
 
 #warning-box[
   Both conditions of this theorem are essential:
@@ -204,11 +224,11 @@ Let's start with the most fundamental definition.
   2. Associativity
   3. Identity element exists
   4. Inverse elements exist
-]
+] <axiom:group>
 
 #postulate(title: "Fundamental Theorem of Algebra")[
   Every non-zero polynomial with complex coefficients has a complex root.
-]
+] <post:fta>
 
 #remark[
   This theorem is also known as Gauss's theorem, as it was first rigorously proved by Gauss.
