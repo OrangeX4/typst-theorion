@@ -257,7 +257,7 @@
 /// - counter (counter): Counter to use. Default is none, which creates a new counter based on the identifier
 /// - inherited-levels (integer): Number of heading levels to inherit from. Default is 0
 /// - inherited-from (counter): Counter to inherit from. Default is heading
-/// - numbering (string): Numbering format. Default is none
+/// - numbering (string): Numbering format. Default is get-theorion-numbering
 /// - render (function): Custom rendering function
 /// -> (counter, render-fn, frame-fn, show-fn)
 #let make-frame(

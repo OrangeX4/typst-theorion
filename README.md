@@ -10,7 +10,7 @@
 ## Quick Start
 
 ```typst
-#import "@preview/theorion:0.2.0": *
+#import "@preview/theorion:0.3.0": *
 #import cosmos.fancy: *
 // #import cosmos.rainbow: *
 // #import cosmos.clouds: *
@@ -78,7 +78,7 @@
 ![example](examples/example.png)
 
 ```typst
-#import "@preview/theorion:0.2.0": *
+#import "@preview/theorion:0.3.0": *
 #import cosmos.fancy: *
 // #import cosmos.rainbow: *
 // #import cosmos.clouds: *
@@ -314,7 +314,7 @@ Let's start with the most fundamental definition.
 ### 📄Simple
 
 ```typst
-#import "@preview/theorion:0.2.0": *
+#import "@preview/theorion:0.3.0": *
 #import cosmos.simple: *
 #show: show-theorion
 ```
@@ -326,7 +326,7 @@ Let's start with the most fundamental definition.
 ### 🌈Rainbow
 
 ```typst
-#import "@preview/theorion:0.2.0": *
+#import "@preview/theorion:0.3.0": *
 #import cosmos.rainbow: *
 #show: show-theorion
 ```
@@ -338,7 +338,7 @@ Let's start with the most fundamental definition.
 ### ☁️Clouds
 
 ```typst
-#import "@preview/theorion:0.2.0": *
+#import "@preview/theorion:0.3.0": *
 #import cosmos.clouds: *
 #show: show-theorion
 ```
@@ -350,7 +350,7 @@ Let's start with the most fundamental definition.
 ### ✨Fancy
 
 ```typst
-#import "@preview/theorion:0.2.0": *
+#import "@preview/theorion:0.3.0": *
 #import cosmos.fancy: *
 #show: show-theorion
 ```
