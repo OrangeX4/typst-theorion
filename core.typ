@@ -152,7 +152,12 @@
       } else if kind == "richer-counter:update" {
         let inherited-levels = get-inherited-levels()
         let counter-value = update.value.value
-        value = counter-value.slice(inherited-levels)
+        counter-value = counter-value.slice(calc.min(inherited-levels, counter-value.len()))
+        value = if counter-value.len() == 0 {
+          (0,)
+        } else {
+          counter-value
+        }
       }
     }
 
