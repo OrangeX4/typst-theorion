@@ -57,6 +57,14 @@
 // #import cosmos.rainbow: *
 // #import cosmos.clouds: *
 #show: show-theorion
+
+#theorem(title: "欧几里得定理")[
+  素数有无穷多个。
+] <thm:euclid>
+
+#theorem-box(title: "无编号定理")[
+  这个定理没有编号。
+]
 ```
 
 == 自定义
@@ -140,6 +148,7 @@
 
 #tip-box[
   @thm:continuous 告诉我们可导性蕴含连续性，但反之不成立。比如 $f(x) = |x|$ 在 $x = 0$ 处连续但不可导。
+  更深入理解连续函数，请参见附录中的@thm:max-value。
 ]
 
 == 几何定理
@@ -190,7 +199,7 @@
 
 #theorem(title: "最大值定理")[
   闭区间上的连续函数必有最大值和最小值。
-]
+] <thm:max-value>
 
 #warning-box[
   这个定理的两个条件缺一不可：
