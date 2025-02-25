@@ -2,6 +2,22 @@
 
 [Theorion](https://github.com/OrangeX4/typst-theorion) (The Orion) is an out-of-the-box, customizable and multilingual **theorem** environment package for [Typst](https://typst.app/docs/).
 
+- **Out-of-the-box styles** 🎨
+- **Built-in multilingual support** 🌐
+- **Highly customizable** ⚙️:
+  - Custom counters and numbering styles
+  - Configurable inheritance levels
+  - Custom theorem environments
+  - Custom rendering functions
+- **Rich theorem environments** 📚: theorem, definition, lemma, corollary, example, proof, and many more presets for note-taking
+- **Theorem restatement** 🔄: `#theorion-restate(filter: it => it.outlined and it.identifier == "theorem")`
+- **Additional features** 📑:
+  - Theorem table of contents
+  - Appendix numbering adjustments
+  - Complete label and reference system
+  - Optional outline and numbering display
+  - [Touying](https://github.com/touying-typ/touying) animation support
+
 [![Typst Universe](https://img.shields.io/badge/dynamic/xml?url=https%3A%2F%2Ftypst.app%2Funiverse%2Fpackage%2Ftheorion&query=%2Fhtml%2Fbody%2Fdiv%2Fmain%2Fdiv%5B2%5D%2Faside%2Fsection%5B2%5D%2Fdl%2Fdd%5B3%5D&logo=typst&label=universe&color=%2339cccc)](https://typst.app/universe/package/theorion)
 ![GitHub](https://img.shields.io/github/license/OrangeX4/typst-theorion)
 ![GitHub Repo stars](https://img.shields.io/github/stars/OrangeX4/typst-theorion)
