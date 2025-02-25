@@ -71,6 +71,20 @@
 #outline(title: none, target: figure.where(kind: "theorem"))
 ```
 
+## Restate Theorems
+
+```typst
+// 1. Restate all theorems
+#theorion-restate(filter: it => it.identifier == "theorem", render: it => it.render)
+// 2. Restate all theorems with custom render function
+#theorion-restate(
+  filter: it => it.identifier == "theorem",
+  render: it => (prefix: none, title: "", full-title: auto, body) => block[#strong[#full-title.]#sym.space#emph(body)],
+)
+// 3. Restate a specific theorem
+#theorion-restate(filter: it => it.label == <thm:euclid>)
+```
+
 ## Example
 
 [Source code](examples/example.typ)
@@ -307,6 +321,18 @@ Let's start with the most fundamental definition.
   - Proved several important theorems
   - Demonstrated different types of mathematical environments
 ]
+
+== Restated Theorems
+
+// 1. Restate all theorems
+#theorion-restate(filter: it => it.identifier == "theorem", render: it => it.render)
+// 2. Restate all theorems with custom render function
+// #theorion-restate(
+//   filter: it => it.identifier == "theorem",
+//   render: it => (prefix: none, title: "", full-title: auto, body) => block[#strong[#full-title.]#sym.space#emph(body)],
+// )
+// 3. Restate a specific theorem
+// #theorion-restate(filter: it => it.label == <thm:euclid>)
 ```
 
 ## All Cosmos

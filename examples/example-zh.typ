@@ -282,3 +282,15 @@
   - 证明了几个重要定理
   - 展示了不同类型的数学环境
 ]
+
+== 重述定理
+
+// 1. 重述所有定理
+#theorion-restate(filter: it => it.identifier == "theorem", render: it => it.render)
+// 2. 重述所有定理（自定义格式）
+// #theorion-restate(
+//   filter: it => it.identifier == "theorem",
+//   render: it => (prefix: none, title: "", full-title: auto, body) => block[#strong[#full-title.]#sym.space#emph(body)],
+// )
+// 3. 重述特定定理
+// #theorion-restate(filter: it => it.label == <thm:euclid>)
