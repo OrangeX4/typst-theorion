@@ -37,7 +37,7 @@
     fr: (fr: "Théorème", ca: "Théorème", ch: "Théorème"),
     es: (es: "Teorema", mx: "Teorema"),
     pt: (pt: "Teorema", br: "Teorema"),
-    ca: "Teorema"
+    ca: "Teorema",
     ja: "定理",
     ko: "정리",
     ru: "Теорема",
@@ -109,7 +109,7 @@
     fr: (fr: "Axiome", ca: "Axiome", ch: "Axiome"),
     es: (es: "Axioma", mx: "Axioma"),
     pt: (pt: "Axioma", br: "Axioma"),
-    ca: "Axioma"
+    ca: "Axioma",
     ja: "公理",
     ko: "공리",
     ru: "Аксиома",
