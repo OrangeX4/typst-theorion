@@ -18,6 +18,7 @@
   prefix: none,
   title: "",
   full-title: auto,
+  breakable: false,
   body,
 ) = context showybox(
   frame: (
@@ -37,7 +38,7 @@
     color: white,
     weight: "semibold",
   ),
-  breakable: true,
+  breakable: breakable,
   title: {
     if full-title == auto {
       if prefix != none {

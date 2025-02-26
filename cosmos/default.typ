@@ -85,7 +85,7 @@
 ///
 /// - body (content): Content of the box
 /// -> content
-#let emph-box(body) = {
+#let emph-box(body, breakable: false) = {
   showybox(
     frame: (
       dash: "dashed",
@@ -93,7 +93,7 @@
       body-color: yellow.lighten(90%),
     ),
     sep: (dash: "dashed"),
-    breakable: true,
+    breakable: breakable,
     body,
   )
 }
@@ -126,23 +126,25 @@
   inset: (left: 1em, top: .5em, bottom: .75em),
   {
     let title-i18n = theorion-i18n(title)
-    stack(
-      spacing: 1.5em,
-      text(
-        fill: fill,
-        weight: "semibold",
-        octique-inline(
-          height: 1.2em,
-          width: 1.2em,
-          color: fill,
-          baseline: .2em,
-          icon-name,
-        )
-          + h(.5em)
-          + title-i18n,
-      ),
-      body,
-    )
+    {
+      block(
+        sticky: true,
+        text(
+          fill: fill,
+          weight: "semibold",
+          octique-inline(
+            height: 1.2em,
+            width: 1.2em,
+            color: fill,
+            baseline: .2em,
+            icon-name,
+          )
+            + h(.5em)
+            + title-i18n,
+        ),
+      )
+      body
+    }
   },
 )
 
