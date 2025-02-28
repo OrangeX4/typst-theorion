@@ -258,9 +258,8 @@
 
 /// Create a theorem environment based on richer-counter
 ///
-/// - identifier (string): Unique identifier for the counter
+/// - identifier (string): Unique identifier for the counter and the kind of the frame
 /// - supplement (string|dict): Label text or dictionary of labels for different languages
-/// - kind (string): Kind of the theorem environment. Default is auto, which uses the identifier
 /// - counter (counter): Counter to use. Default is none, which creates a new counter based on the identifier
 /// - inherited-levels (integer): Number of heading levels to inherit from. Default is 0
 /// - inherited-from (counter): Counter to inherit from. Default is heading
@@ -270,7 +269,6 @@
 #let make-frame(
   identifier,
   supplement,
-  kind: auto,
   counter: none,
   inherited-levels: 0,
   inherited-from: heading,
@@ -278,7 +276,6 @@
   render: (prefix: none, title: "", full-title: "", body) => block[*#full-title*: #body],
 ) = {
   let get-numbering = if type(numbering) != function { (..args) => numbering } else { numbering }
-  let current-kind = if kind == auto { identifier } else { kind }
   /// Counter for the frame.
   let frame-counter = if counter != none { counter } else {
     richer-counter(
@@ -313,7 +310,7 @@
     ..args,
     body,
   ) = figure(
-    kind: current-kind,
+    kind: identifier,
     supplement: supplement-i18n,
     caption: title,
     outlined: outlined,
@@ -323,7 +320,7 @@
           identifier: identifier,
           supplement: supplement,
           supplement-i18n: supplement-i18n,
-          kind: current-kind,
+          kind: identifier,
           counter: frame-counter,
           title: title,
           numbering: numbering,
@@ -357,11 +354,11 @@
   /// Show rule for the frame.
   let show-frame(body) = {
     // skip the default figure style.
-    show figure.where(kind: current-kind): set align(left)
-    show figure.where(kind: current-kind): set block(breakable: true)
-    show figure.where(kind: current-kind): it => it.body
+    show figure.where(kind: identifier): set align(left)
+    show figure.where(kind: identifier): set block(breakable: true)
+    show figure.where(kind: identifier): it => it.body
     // Custom outline for the theorem environment.
-    show outline.where(target: figure.where(kind: current-kind)): it => {
+    show outline.where(target: figure.where(kind: identifier)): it => {
       show outline.entry: entry => {
         let el = entry.element
         block(
@@ -384,7 +381,7 @@
     // Custom reference for the theorem environment.
     show ref: it => {
       let el = it.element
-      if el != none and el.func() == figure and el.kind == kind {
+      if el != none and el.func() == figure and el.kind == identifier {
         link(
           el.location(),
           {
