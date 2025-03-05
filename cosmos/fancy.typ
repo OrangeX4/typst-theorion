@@ -24,7 +24,7 @@
   frame: (
     thickness: .05em,
     radius: .3em,
-    inset: (x: 1.2em, top: .7em, bottom: 1.2em),
+    inset: (x: 1.2em, top: if full-title != "" { .7em } else { 1.2em }, bottom: 1.2em),
     border-color: get-border-color(here()),
     title-color: get-border-color(here()),
     body-color: get-body-color(here()),

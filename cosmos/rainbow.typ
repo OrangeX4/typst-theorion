@@ -11,7 +11,9 @@
   stroke: (left: .25em + fill),
   inset: (left: 1em, y: .75em),
   [
-    #block(sticky: true, strong(text(fill: fill, full-title)))
+    #if full-title != "" {
+      block(sticky: true, strong(text(fill: fill, full-title)))
+    }
     #body
   ]
 )
