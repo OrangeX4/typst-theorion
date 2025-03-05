@@ -116,7 +116,7 @@
   ),
   postulate: (
     en: (us: "Postulate", gb: "Postulate"),
-    zh: (cn: "设准", hk: "設準", tw: "設準"),
+    zh: (cn: "公设", hk: "公設", tw: "公設"),
     de: (de: "Postulat", at: "Postulat", ch: "Postulat"),
     fr: (fr: "Postulat", ca: "Postulat", ch: "Postulat"),
     es: (es: "Postulado", mx: "Postulado"),
