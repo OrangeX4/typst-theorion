@@ -6,7 +6,12 @@
   title: "",
   full-title: auto,
   body,
-) = [#strong[#full-title.]#sym.space#emph(body)]
+) = {
+  if full-title != "" {
+    strong[#full-title.] + sym.space
+  }
+  emph(body)
+}
 
 /// Create corresponding theorem box.
 #let (theorem-counter, theorem-box, theorem, show-theorem) = make-frame(

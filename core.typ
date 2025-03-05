@@ -297,7 +297,7 @@
     std.numbering(get-numbering(get-loc()), ..counter-value)
   }
 
-  /// Usefull functions for the frame.
+  /// Useful functions for the frame.
   let get-prefix(get-loc) = [#supplement-i18n #display-number(get-loc: get-loc)]
   let get-full-title(get-loc, title) = [#get-prefix(get-loc)#{ if title != "" [ (#title)] }]
   /// Frame with the counter.
