@@ -1,15 +1,15 @@
 #import "../core.typ": *
 
-/// A simple render function with a colored left border
+/// A simple render function with a colored start border
 #let render-fn(
   fill: red,
   prefix: none,
   title: "",
   full-title: auto,
   body,
-) = block(
-  stroke: (left: .25em + fill),
-  inset: (left: 1em, y: .75em),
+) = context block(
+  stroke: language-aware-start(.25em + fill),
+  inset: language-aware-start(1em) + (y: .75em),
   [
     #if full-title != "" {
       block(sticky: true, strong(text(fill: fill, full-title)))

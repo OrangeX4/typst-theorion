@@ -32,7 +32,7 @@
   ),
   title-style: (
     boxed-style: (
-      anchor: (x: left, y: horizon),
+      anchor: (x: start, y: horizon),
       radius: 0em,
     ),
     color: white,
@@ -54,7 +54,7 @@
     body
     if get-symbol(here()) != none {
       place(
-        right + bottom,
+        end + bottom,
         dy: .8em,
         dx: .9em,
         text(size: .6em, fill: get-border-color(here()), get-symbol(here())),
