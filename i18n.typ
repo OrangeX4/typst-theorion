@@ -41,6 +41,7 @@
     ja: "定理",
     ko: "정리",
     ru: "Теорема",
+    ar: "مبرهنة",
   ),
   lemma: (
     en: (us: "Lemma", gb: "Lemma"),
@@ -53,6 +54,7 @@
     ja: "補題",
     ko: "보조정리",
     ru: "Лемма",
+    ar: "تمهيدية"
   ),
   corollary: (
     en: (us: "Corollary", gb: "Corollary"),
@@ -65,6 +67,7 @@
     ja: "系",
     ko: "따름정리",
     ru: "Следствие",
+    ar: "نتيجة",
   ),
   note: (
     en: (us: "Note", gb: "Note"),
@@ -77,6 +80,7 @@
     ja: "注意",
     ko: "주의",
     ru: "Примечание",
+    ar: "ملاحظة",
   ),
   warning: (
     en: (us: "Warning", gb: "Warning"),
@@ -89,6 +93,7 @@
     ja: "警告",
     ko: "경고",
     ru: "Предупреждение",
+    ar: "تحذير",
   ),
   definition: (
     en: (us: "Definition", gb: "Definition"),
@@ -101,6 +106,7 @@
     ja: "定義",
     ko: "정의",
     ru: "Определение",
+    ar: "تعريف",
   ),
   axiom: (
     en: (us: "Axiom", gb: "Axiom"),
@@ -113,6 +119,7 @@
     ja: "公理",
     ko: "공리",
     ru: "Аксиома",
+    ar: "مسلمة",
   ),
   postulate: (
     en: (us: "Postulate", gb: "Postulate"),
@@ -125,6 +132,7 @@
     ja: "要請",
     ko: "공준",
     ru: "Постулат",
+    ar: "بديهية",
   ),
   proposition: (
     en: (us: "Proposition", gb: "Proposition"),
@@ -137,6 +145,7 @@
     ja: "命題",
     ko: "명제",
     ru: "Предложение",
+    ar: "مقترح",
   ),
   example: (
     en: (us: "Example", gb: "Example"),
@@ -149,6 +158,7 @@
     ja: "例",
     ko: "예",
     ru: "Пример",
+    ar: "مثال",
   ),
   problem: (
     en: (us: "Problem", gb: "Problem"),
@@ -161,6 +171,7 @@
     ja: "問題",
     ko: "문제",
     ru: "Задача",
+    ar: "مسألة",
   ),
   exercise: (
     en: (us: "Exercise", gb: "Exercise"),
@@ -173,6 +184,7 @@
     ja: "演習",
     ko: "연습",
     ru: "Упражнение",
+    ar: "تمرين",
   ),
   conclusion: (
     en: (us: "Conclusion", gb: "Conclusion"),
@@ -185,6 +197,7 @@
     ja: "結論",
     ko: "결론",
     ru: "Вывод",
+    ar: "استنتاج",
   ),
   assumption: (
     en: (us: "Assumption", gb: "Assumption"),
@@ -197,6 +210,7 @@
     ja: "仮定",
     ko: "가정",
     ru: "Предположение",
+    ar: "فرضية"
   ),
   property: (
     en: (us: "Property", gb: "Property"),
@@ -209,6 +223,7 @@
     ja: "性質",
     ko: "성질",
     ru: "Свойство",
+    ar: "خاصية",
   ),
   remark: (
     en: (us: "Remark", gb: "Remark"),
@@ -221,6 +236,7 @@
     ja: "注意",
     ko: "비고",
     ru: "Замечание",
+    ar: "ملاحظة"
   ),
   solution: (
     en: (us: "Solution", gb: "Solution"),
@@ -233,6 +249,7 @@
     ja: "解",
     ko: "풀이",
     ru: "Решение",
+    ar: "حل"
   ),
   proof: (
     en: (us: "Proof", gb: "Proof"),
@@ -245,6 +262,7 @@
     ja: "証明",
     ko: "증명",
     ru: "Доказательство",
+    ar: "برهان"
   ),
   tip: (
     en: (us: "Tip", gb: "Tip"),
@@ -257,6 +275,7 @@
     ja: "ヒント",
     ko: "팁",
     ru: "Подсказка",
+    ar: "نصيحة"
   ),
   important: (
     en: (us: "Important", gb: "Important"),
@@ -269,6 +288,7 @@
     ja: "重要",
     ko: "중요",
     ru: "Важно",
+    ar: "هام"
   ),
   caution: (
     en: (us: "Caution", gb: "Caution"),
@@ -281,5 +301,6 @@
     ja: "注意",
     ko: "주의",
     ru: "Осторожно",
+    ar: "احتراس"
   ),
 )

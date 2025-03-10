@@ -354,7 +354,7 @@
   /// Show rule for the frame.
   let show-frame(body) = {
     // skip the default figure style.
-    show figure.where(kind: identifier): set align(left)
+    show figure.where(kind: identifier): set align(start)
     show figure.where(kind: identifier): set block(breakable: true)
     show figure.where(kind: identifier): it => it.body
     // Custom outline for the theorem environment.
@@ -421,5 +421,17 @@
         it.body,
       )
     }
+  }
+}
+
+/// Create a dictionary (right/left: value) based on `text.lang`
+///
+/// - value (string): left value for LTR text, right value for RTL text
+/// -> dictionary
+#let language-aware-start(value) = {
+  if text.lang == "ar" {
+    (right: value)
+  } else {
+    (left: value)
   }
 }

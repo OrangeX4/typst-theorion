@@ -98,13 +98,13 @@
   )
 }
 
-/// Create a quote box with left border styling in gray
+/// Create a quote box with start border styling in gray
 ///
 /// - body (content): Content to be quoted
 /// -> content
-#let quote-box(body) = block(
-  stroke: (left: .25em + luma(200)),
-  inset: (left: 1em, y: .75em),
+#let quote-box(body) = context block(
+  stroke: language-aware-start(.25em + luma(200)),
+  inset: language-aware-start(1em) + (y: .75em),
   text(luma(100), body),
 )
 
@@ -121,9 +121,9 @@
   title: theorion-i18n-map.at("note"),
   icon-name: "info",
   body,
-) = block(
-  stroke: (left: .25em + fill),
-  inset: (left: 1em, top: .5em, bottom: .75em),
+) = context block(
+  stroke: language-aware-start(.25em + fill),
+  inset: language-aware-start(1em) + (top: .5em, bottom: .75em),
   {
     let title-i18n = theorion-i18n(title)
     {
