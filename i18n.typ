@@ -42,6 +42,7 @@
     ko: "정리",
     ru: "Теорема",
     ar: "مبرهنة",
+    vi: "Định lý",
   ),
   lemma: (
     en: (us: "Lemma", gb: "Lemma"),
@@ -54,7 +55,8 @@
     ja: "補題",
     ko: "보조정리",
     ru: "Лемма",
-    ar: "تمهيدية"
+    ar: "تمهيدية",
+    vi: "Bổ đề",
   ),
   corollary: (
     en: (us: "Corollary", gb: "Corollary"),
@@ -68,6 +70,7 @@
     ko: "따름정리",
     ru: "Следствие",
     ar: "نتيجة",
+    vi: "Hệ quả",
   ),
   note: (
     en: (us: "Note", gb: "Note"),
@@ -81,6 +84,7 @@
     ko: "주의",
     ru: "Примечание",
     ar: "ملاحظة",
+    vi: "Ghi chú",
   ),
   warning: (
     en: (us: "Warning", gb: "Warning"),
@@ -94,6 +98,7 @@
     ko: "경고",
     ru: "Предупреждение",
     ar: "تحذير",
+    vi: "Cảnh báo",
   ),
   definition: (
     en: (us: "Definition", gb: "Definition"),
@@ -107,6 +112,7 @@
     ko: "정의",
     ru: "Определение",
     ar: "تعريف",
+    vi: "Định nghĩa",
   ),
   axiom: (
     en: (us: "Axiom", gb: "Axiom"),
@@ -120,6 +126,7 @@
     ko: "공리",
     ru: "Аксиома",
     ar: "مسلمة",
+    vi: "Tiên đề",
   ),
   postulate: (
     en: (us: "Postulate", gb: "Postulate"),
@@ -133,6 +140,7 @@
     ko: "공준",
     ru: "Постулат",
     ar: "بديهية",
+    vi: "Định đề",
   ),
   proposition: (
     en: (us: "Proposition", gb: "Proposition"),
@@ -146,6 +154,7 @@
     ko: "명제",
     ru: "Предложение",
     ar: "مقترح",
+    vi: "Mệnh đề",
   ),
   example: (
     en: (us: "Example", gb: "Example"),
@@ -159,6 +168,7 @@
     ko: "예",
     ru: "Пример",
     ar: "مثال",
+    vi: "Ví dụ",
   ),
   problem: (
     en: (us: "Problem", gb: "Problem"),
@@ -172,6 +182,7 @@
     ko: "문제",
     ru: "Задача",
     ar: "مسألة",
+    vi: "Bài toán",
   ),
   exercise: (
     en: (us: "Exercise", gb: "Exercise"),
@@ -185,6 +196,7 @@
     ko: "연습",
     ru: "Упражнение",
     ar: "تمرين",
+    vi: "Bài tập",
   ),
   conclusion: (
     en: (us: "Conclusion", gb: "Conclusion"),
@@ -198,6 +210,7 @@
     ko: "결론",
     ru: "Вывод",
     ar: "استنتاج",
+    vi: "Kết luận",
   ),
   assumption: (
     en: (us: "Assumption", gb: "Assumption"),
@@ -210,7 +223,8 @@
     ja: "仮定",
     ko: "가정",
     ru: "Предположение",
-    ar: "فرضية"
+    ar: "فرضية",
+    vi: "Giả sử",
   ),
   property: (
     en: (us: "Property", gb: "Property"),
@@ -224,6 +238,7 @@
     ko: "성질",
     ru: "Свойство",
     ar: "خاصية",
+    vi: "Tính chất",
   ),
   remark: (
     en: (us: "Remark", gb: "Remark"),
@@ -236,7 +251,8 @@
     ja: "注意",
     ko: "비고",
     ru: "Замечание",
-    ar: "ملاحظة"
+    ar: "ملاحظة",
+    vi: "Nhận xét",
   ),
   solution: (
     en: (us: "Solution", gb: "Solution"),
@@ -249,7 +265,8 @@
     ja: "解",
     ko: "풀이",
     ru: "Решение",
-    ar: "حل"
+    ar: "حل",
+    vi: "Lời giải",
   ),
   proof: (
     en: (us: "Proof", gb: "Proof"),
@@ -262,7 +279,8 @@
     ja: "証明",
     ko: "증명",
     ru: "Доказательство",
-    ar: "برهان"
+    ar: "برهان",
+    vi: "Chứng minh",
   ),
   tip: (
     en: (us: "Tip", gb: "Tip"),
@@ -275,7 +293,8 @@
     ja: "ヒント",
     ko: "팁",
     ru: "Подсказка",
-    ar: "نصيحة"
+    ar: "نصيحة",
+    vi: "Mẹo",
   ),
   important: (
     en: (us: "Important", gb: "Important"),
@@ -288,7 +307,8 @@
     ja: "重要",
     ko: "중요",
     ru: "Важно",
-    ar: "هام"
+    ar: "هام",
+    vi: "Quan trọng",
   ),
   caution: (
     en: (us: "Caution", gb: "Caution"),
@@ -301,6 +321,7 @@
     ja: "注意",
     ko: "주의",
     ru: "Осторожно",
-    ar: "احتراس"
+    ar: "احتراس",
+    vi: "Chú ý",
   ),
 )
