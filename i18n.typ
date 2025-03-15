@@ -33,7 +33,7 @@
   theorem: (
     en: (us: "Theorem", gb: "Theorem"),
     zh: (cn: "定理", hk: "定理", tw: "定理"),
-    de: (de: "Satz", at: "Satz", ch: "Satz"),
+    de: (de: "Theorem", at: "Theorem", ch: "Theorem"),
     fr: (fr: "Théorème", ca: "Théorème", ch: "Théorème"),
     es: (es: "Teorema", mx: "Teorema"),
     pt: (pt: "Teorema", br: "Teorema"),
@@ -75,7 +75,7 @@
   note: (
     en: (us: "Note", gb: "Note"),
     zh: (cn: "注意", hk: "注意", tw: "注意"),
-    de: (de: "Hinweis", at: "Hinweis", ch: "Hinweis"),
+    de: (de: "Anmerkung", at: "Anmerkung", ch: "Anmerkung"),
     fr: (fr: "Note", ca: "Note", ch: "Note"),
     es: (es: "Nota", mx: "Nota"),
     pt: (pt: "Nota", br: "Nota"),
@@ -145,7 +145,7 @@
   proposition: (
     en: (us: "Proposition", gb: "Proposition"),
     zh: (cn: "命题", hk: "命題", tw: "命題"),
-    de: (de: "Satz", at: "Satz", ch: "Satz"),
+    de: (de: "Proposition", at: "Proposition", ch: "Proposition"),
     fr: (fr: "Proposition", ca: "Proposition", ch: "Proposition"),
     es: (es: "Proposición", mx: "Proposición"),
     pt: (pt: "Proposição", br: "Proposição"),
@@ -285,7 +285,7 @@
   tip: (
     en: (us: "Tip", gb: "Tip"),
     zh: (cn: "提示", hk: "提示", tw: "提示"),
-    de: (de: "Tipp", at: "Tipp", ch: "Tipp"),
+    de: (de: "Hinweis", at: "Hinweis", ch: "Hinweis"),
     fr: (fr: "Conseil", ca: "Conseil", ch: "Conseil"),
     es: (es: "Consejo", mx: "Consejo"),
     pt: (pt: "Dica", br: "Dica"),
