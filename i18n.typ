@@ -42,6 +42,7 @@
     ko: "정리",
     ru: "Теорема",
     ar: "مبرهنة",
+    it: "Teorema",
     vi: "Định lý",
   ),
   lemma: (
@@ -56,6 +57,7 @@
     ko: "보조정리",
     ru: "Лемма",
     ar: "تمهيدية",
+    it: "Lemma",
     vi: "Bổ đề",
   ),
   corollary: (
@@ -70,6 +72,7 @@
     ko: "따름정리",
     ru: "Следствие",
     ar: "نتيجة",
+    it: "Corollario",
     vi: "Hệ quả",
   ),
   note: (
@@ -84,6 +87,7 @@
     ko: "주의",
     ru: "Примечание",
     ar: "ملاحظة",
+    it: "Osservazione",
     vi: "Ghi chú",
   ),
   warning: (
@@ -98,6 +102,7 @@
     ko: "경고",
     ru: "Предупреждение",
     ar: "تحذير",
+    it: "Avvertenza",
     vi: "Cảnh báo",
   ),
   definition: (
@@ -112,6 +117,7 @@
     ko: "정의",
     ru: "Определение",
     ar: "تعريف",
+    it: "Definizione",
     vi: "Định nghĩa",
   ),
   axiom: (
@@ -126,6 +132,7 @@
     ko: "공리",
     ru: "Аксиома",
     ar: "مسلمة",
+    it: "Assioma",
     vi: "Tiên đề",
   ),
   postulate: (
@@ -140,6 +147,7 @@
     ko: "공준",
     ru: "Постулат",
     ar: "بديهية",
+    it: "Postulato",
     vi: "Định đề",
   ),
   proposition: (
@@ -154,6 +162,7 @@
     ko: "명제",
     ru: "Предложение",
     ar: "مقترح",
+    it: "Proposizione",
     vi: "Mệnh đề",
   ),
   example: (
@@ -168,6 +177,7 @@
     ko: "예",
     ru: "Пример",
     ar: "مثال",
+    it: "Esempio",
     vi: "Ví dụ",
   ),
   problem: (
@@ -182,6 +192,7 @@
     ko: "문제",
     ru: "Задача",
     ar: "مسألة",
+    it: "Problema",
     vi: "Bài toán",
   ),
   exercise: (
@@ -196,6 +207,7 @@
     ko: "연습",
     ru: "Упражнение",
     ar: "تمرين",
+    it: "Esercizio",
     vi: "Bài tập",
   ),
   conclusion: (
@@ -210,6 +222,7 @@
     ko: "결론",
     ru: "Вывод",
     ar: "استنتاج",
+    it: "Conclusione",
     vi: "Kết luận",
   ),
   assumption: (
@@ -224,6 +237,7 @@
     ko: "가정",
     ru: "Предположение",
     ar: "فرضية",
+    it: "Ipotesi",
     vi: "Giả sử",
   ),
   property: (
@@ -238,6 +252,7 @@
     ko: "성질",
     ru: "Свойство",
     ar: "خاصية",
+    it: "Proprietà",
     vi: "Tính chất",
   ),
   remark: (
@@ -252,6 +267,7 @@
     ko: "비고",
     ru: "Замечание",
     ar: "ملاحظة",
+    it: "Osservazione",
     vi: "Nhận xét",
   ),
   solution: (
@@ -266,6 +282,7 @@
     ko: "풀이",
     ru: "Решение",
     ar: "حل",
+    it: "Soluzione",
     vi: "Lời giải",
   ),
   proof: (
@@ -280,6 +297,7 @@
     ko: "증명",
     ru: "Доказательство",
     ar: "برهان",
+    it: "Dimostrazione",
     vi: "Chứng minh",
   ),
   tip: (
@@ -294,6 +312,7 @@
     ko: "팁",
     ru: "Подсказка",
     ar: "نصيحة",
+    it: "Suggerimento",
     vi: "Mẹo",
   ),
   important: (
@@ -308,6 +327,7 @@
     ko: "중요",
     ru: "Важно",
     ar: "هام",
+    it: "Importante",
     vi: "Quan trọng",
   ),
   caution: (
@@ -322,6 +342,7 @@
     ko: "주의",
     ru: "Осторожно",
     ar: "احتراس",
+    it: "Attenzione",
     vi: "Chú ý",
   ),
 )
