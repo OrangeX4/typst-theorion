@@ -6,8 +6,9 @@
   prefix: none,
   title: "",
   full-title: auto,
+  ..args,
   body,
-) = block(inset: 1em, fill: fill, radius: .4em, width: 100%)[
+) = block(inset: 1em, fill: fill, radius: .4em, width: 100%, ..args)[
   #if full-title != "" {
     strong(full-title) + sym.space
   }

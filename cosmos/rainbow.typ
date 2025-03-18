@@ -6,10 +6,12 @@
   prefix: none,
   title: "",
   full-title: auto,
+  ..args,
   body,
 ) = context block(
   stroke: language-aware-start(.25em + fill),
   inset: language-aware-start(1em) + (y: .75em),
+  ..args,
   [
     #if full-title != "" {
       block(sticky: true, strong(text(fill: fill, full-title)))
