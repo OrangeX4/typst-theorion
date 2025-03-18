@@ -25,6 +25,8 @@
 
 ## Quick Start
 
+Just import and use theorion.
+
 ```typst
 #import "@preview/theorion:0.3.2": *
 #import cosmos.fancy: *
@@ -40,6 +42,8 @@
   This theorem is not numbered.
 ]
 ```
+
+![image](https://github.com/user-attachments/assets/a130e5a5-a368-4ffc-8e8f-55bab85b0224)
 
 ## Customization
 
@@ -367,13 +371,8 @@ Let's start with the most fundamental definition.
 
 ```typst
 /// Custom color
-#let (theorem-counter, theorem-box, theorem, show-theorem) = make-frame(
-  "theorem",
-  theorion-i18n-map.at("theorem"),
-  counter: theorem-counter,
-  render: render-fn.with(fill: blue.darken(10%)),
-)
-#show: show-theorem
+#let theorem = theorem.with(fill: blue.darken(10%))
+#let theorem-box = theorem-box.with(fill: blue.darken(10%))
 ```
 
 ![image](https://github.com/user-attachments/assets/5e6e29f9-c493-4e21-b14a-347f3ca83b99)
@@ -390,13 +389,12 @@ Let's start with the most fundamental definition.
 
 ```typst
 /// Custom color
-#let (theorem-counter, theorem-box, theorem, show-theorem) = make-frame(
-  "theorem",
-  theorion-i18n-map.at("theorem"),
-  counter: theorem-counter,
-  render: render-fn.with(fill: blue.lighten(85%)),
-)
-#show: show-theorem
+#let theorem = theorem.with(fill: blue.lighten(85%))
+#let theorem-box = theorem-box.with(fill: blue.lighten(85%))
+
+/// Custom block style
+#let theorem = theorem.with(radius: 0pt)
+#let theorem-box = theorem-box.with(radius: 0pt)
 ```
 
 ![image](https://github.com/user-attachments/assets/1f0f280b-94f5-43b7-b685-d2998d867b58)
