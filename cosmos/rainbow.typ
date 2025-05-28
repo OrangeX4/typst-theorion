@@ -11,6 +11,7 @@
 ) = context block(
   stroke: language-aware-start(.25em + fill),
   inset: language-aware-start(1em) + (y: .75em),
+  width: 100%,
   ..args,
   [
     #if full-title != "" {

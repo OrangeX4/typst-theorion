@@ -102,9 +102,10 @@
 ///
 /// - body (content): Content to be quoted
 /// -> content
-#let quote-box(body) = context block(
+#let quote-box(..args, body) = context block(
   stroke: language-aware-start(.25em + luma(200)),
   inset: language-aware-start(1em) + (y: .75em),
+  ..args,
   text(luma(100), body),
 )
 
@@ -120,10 +121,13 @@
   fill: rgb("#0969DA"),
   title: theorion-i18n-map.at("note"),
   icon-name: "info",
+  ..args,
   body,
 ) = context block(
   stroke: language-aware-start(.25em + fill),
   inset: language-aware-start(1em) + (top: .5em, bottom: .75em),
+  width: 100%,
+  ..args,
   {
     let title-i18n = theorion-i18n(title)
     {
