@@ -12,13 +12,14 @@
 /// - body (content): Content of the box.
 /// -> content
 #let fancy-box(
-  get-border-color: () => orange.darken(0%),
-  get-body-color: () => orange.lighten(95%),
-  get-symbol: () => sym.suit.heart.stroked,
+  get-border-color: loc => orange.darken(0%),
+  get-body-color: loc => orange.lighten(95%),
+  get-symbol: loc => sym.suit.heart.stroked,
   prefix: none,
   title: "",
   full-title: auto,
   breakable: false,
+  ..args,
   body,
 ) = context showybox(
   frame: (
@@ -50,6 +51,7 @@
       full-title
     }
   },
+  ..args,
   {
     body
     if get-symbol(here()) != none {
