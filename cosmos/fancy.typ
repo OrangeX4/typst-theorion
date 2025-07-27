@@ -3,9 +3,9 @@
 
 /// A fancy box design inspired by elegantbook style.
 ///
-/// - border-color (color): Color of the box border. Default is `orange.darken(0%)`.
-/// - body-color (color): Color of the box background. Default is `orange.lighten(95%)`.
-/// - symbol (symbol): Symbol to display at bottom right. Default is `sym.suit.heart.stroked`.
+/// - get-border-color (function): Color of the box border. Default is `loc => orange.darken(0%)`.
+/// - get-body-color (function): Color of the box background. Default is `loc => orange.lighten(95%)`.
+/// - get-symbol (function): Symbol to display at bottom right. Default is `loc => sym.suit.heart.stroked`.
 /// - prefix (content): Prefix text before the title. Default is `none`.
 /// - title (string): Title of the box. Default is empty string.
 /// - full-title (auto|content): Complete title including prefix. Default is `auto`.

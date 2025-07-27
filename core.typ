@@ -124,9 +124,9 @@
 
   // find updates of own partial (!) counter in certain range
   let updates-during(after-key, before-key) = {
-    let query-for = selector(label("richer-counter:step:" + identifier)).or(
-      selector(label("richer-counter:update:" + identifier)),
-    )
+    let query-for = selector(label("richer-counter:step:" + identifier)).or(selector(label(
+      "richer-counter:update:" + identifier,
+    )))
 
     if after-key == none and before-key == none {
       return query(query-for)
@@ -251,7 +251,17 @@
     return ""
   } else {
     assert(type(el.numbering) == function, message: "The numbering must be a function with get-loc.")
-    std.numbering(el.numbering.with(get-loc: () => el.location()))
+    let res = (el.numbering)(get-loc: () => el.location())
+    if type(res) == dictionary {
+      assert(
+        "kind" in res and "value" in res and res.at("kind") == "static",
+        message: "The numbering function must return a dictionary with kind 'static'.",
+      )
+      return res.at("value")
+    } else {
+      assert(type(res) == function, message: str(type(res)))
+      std.numbering(res)
+    }
   }
 }
 
@@ -259,7 +269,7 @@
 /// Create a theorem environment based on richer-counter
 ///
 /// - identifier (string): Unique identifier for the counter and the kind of the frame
-/// - supplement (string|dict): Label text or dictionary of labels for different languages
+/// - supplement-map (string|dict): Label text or dictionary of labels for different languages
 /// - counter (counter): Counter to use. Default is none, which creates a new counter based on the identifier
 /// - inherited-levels (integer): Number of heading levels to inherit from. Default is 0
 /// - inherited-from (counter): Counter to inherit from. Default is heading
@@ -268,7 +278,7 @@
 /// -> (counter, render-fn, frame-fn, show-fn)
 #let make-frame(
   identifier,
-  supplement,
+  supplement-map,
   counter: none,
   inherited-levels: 0,
   inherited-from: heading,
@@ -284,8 +294,8 @@
       inherited-from: inherited-from,
     )
   }
-  let supplement-i18n = theorion-i18n(supplement)
-  let display-number(get-loc: here, counter: frame-counter, ..args) = context {
+  let supplement-i18n = theorion-i18n(supplement-map)
+  let display-number(get-loc: here) = (counter: frame-counter, ..args) => context {
     let loc = get-loc()
     // We need to add 1 to the counter value.
     let counter-value = if type(counter) == dictionary {
@@ -298,27 +308,33 @@
   }
 
   /// Useful functions for the frame.
-  let get-prefix(get-loc) = [#supplement-i18n #display-number(get-loc: get-loc)]
-  let get-full-title(get-loc, title) = [#get-prefix(get-loc)#{ if title != "" [ (#title)] }]
+  let get-prefix(get-loc, number: auto, supplement: auto) = [#if supplement == auto { supplement-i18n } else {
+      supplement
+    } #if number == auto { display-number(get-loc: get-loc)() } else { number }]
+  let get-full-title(prefix, title) = [#prefix#{ if title != "" [ (#title)] }]
   /// Frame with the counter.
   let frame(
     title: "",
     outlined: true,
     numbering: display-number,
+    number: auto,
+    supplement: auto,
     get-prefix: get-prefix,
     get-full-title: get-full-title,
     ..args,
     body,
   ) = figure(
     kind: identifier,
-    supplement: supplement-i18n,
+    supplement: if supplement == auto { supplement-i18n } else { supplement },
     caption: title,
     outlined: outlined,
-    numbering: numbering,
+    numbering: if number == auto { numbering } else { (..args) => (kind: "static", value: number) },
     {
       [#metadata((
           identifier: identifier,
+          number: number,
           supplement: supplement,
+          supplement-map: supplement-map,
           supplement-i18n: supplement-i18n,
           kind: identifier,
           counter: frame-counter,
@@ -331,15 +347,16 @@
           args: args,
           body: body,
         )) <theorion-frame-metadata>]
+      let prefix = get-prefix(here, number: number, supplement: supplement)
       render(
-        prefix: get-prefix(here),
+        prefix: prefix,
         title: title,
-        full-title: get-full-title(here, title),
+        full-title: get-full-title(prefix, title),
         ..args,
         body,
       )
       // Update the counter.
-      if numbering != none {
+      if numbering != none and number == auto {
         (frame-counter.step)()
       }
     },
@@ -348,8 +365,8 @@
   let frame-box = frame.with(
     numbering: none,
     outlined: false,
-    get-prefix: get-loc => none,
-    get-full-title: (get-loc, title) => title,
+    get-prefix: (get-loc, number: auto, supplement: auto) => none,
+    get-full-title: (prefix, title) => title,
   )
   /// Show rule for the frame.
   let show-frame(body) = {
@@ -361,20 +378,15 @@
     show outline.where(target: figure.where(kind: identifier)): it => {
       show outline.entry: entry => {
         let el = entry.element
-        block(
-          link(
-            el.location(),
-            entry.indented(
-              [#el.supplement #context theorion-display-number(el)],
-              {
-                entry.body()
-                box(width: 1fr, inset: (x: .25em), entry.fill)
-                entry.page()
-              },
-              gap: .5em,
-            ),
-          ),
-        )
+        block(link(el.location(), entry.indented(
+          [#el.supplement #context theorion-display-number(el)],
+          {
+            entry.body()
+            box(width: 1fr, inset: (x: .25em), entry.fill)
+            entry.page()
+          },
+          gap: .5em,
+        )))
       }
       it
     }
@@ -382,14 +394,11 @@
     show ref: it => {
       let el = it.element
       if el != none and el.func() == figure and el.kind == identifier {
-        link(
-          el.location(),
-          {
-            if it.supplement == auto { el.supplement } else { it.supplement }
-            " "
-            context theorion-display-number(el)
-          },
-        )
+        link(el.location(), {
+          if it.supplement == auto { el.supplement } else { it.supplement }
+          " "
+          context theorion-display-number(el)
+        })
       } else {
         it
       }
@@ -414,10 +423,11 @@
     it.el = figure-el
     it.label = if figure-el.has("label") { figure-el.label } else { none }
     if filter(it) {
+      let prefix = (it.get-prefix)(get-loc, number: it.number, supplement: it.supplement)
       (render(it))(
-        prefix: (it.get-prefix)(get-loc),
+        prefix: prefix,
         title: it.title,
-        full-title: (it.get-full-title)(get-loc, it.title),
+        full-title: (it.get-full-title)(prefix, it.title),
         it.body,
       )
     }

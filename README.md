@@ -84,6 +84,11 @@ Just import and use theorion.
 
 // 6. Table of contents
 #outline(title: none, target: figure.where(kind: "theorem"))
+
+// 7. Specify a number or supplement
+#theorem(title: "Euclid's Theorem", number: "233", supplement: [Theorion])[
+  There are infinitely many prime numbers.
+] <thm:euclid>
 ```
 
 ## Restate Theorems
@@ -422,6 +427,12 @@ Let's start with the most fundamental definition.
 
 Welcome to [open a pull request](htps://github.com/OrangeX4/typst-theorion/pulls) and contribute your beautiful cosmos to Theorion!
 
+## Changelog
+
+### 0.4.0
+
+- `number` and `supplement` arguments to manually specify the number of a theorem/definition/...
+- (Small breaking change) refactor `get-prefix(get-loc)` to `get-prefix(get-loc, number: auto, supplement: auto)` and refactor `get-full-title(get-loc, title)` to `get-full-title(prefix, title)`.
 
 ## Acknowledgements
 
