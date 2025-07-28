@@ -28,7 +28,7 @@
 Just import and use theorion.
 
 ```typst
-#import "@preview/theorion:0.3.3": *
+#import "@preview/theorion:0.4.0": *
 #import cosmos.fancy: *
 // #import cosmos.rainbow: *
 // #import cosmos.clouds: *
@@ -114,7 +114,7 @@ Just import and use theorion.
 ![example](examples/example.png)
 
 ```typst
-#import "@preview/theorion:0.3.3": *
+#import "@preview/theorion:0.4.0": *
 #import cosmos.fancy: *
 // #import cosmos.rainbow: *
 // #import cosmos.clouds: *
@@ -357,7 +357,7 @@ Let's start with the most fundamental definition.
 ### 📄Simple
 
 ```typst
-#import "@preview/theorion:0.3.3": *
+#import "@preview/theorion:0.4.0": *
 #import cosmos.simple: *
 #show: show-theorion
 ```
@@ -369,7 +369,7 @@ Let's start with the most fundamental definition.
 ### 🌈Rainbow
 
 ```typst
-#import "@preview/theorion:0.3.3": *
+#import "@preview/theorion:0.4.0": *
 #import cosmos.rainbow: *
 #show: show-theorion
 ```
@@ -387,7 +387,7 @@ Let's start with the most fundamental definition.
 ### ☁️Clouds
 
 ```typst
-#import "@preview/theorion:0.3.3": *
+#import "@preview/theorion:0.4.0": *
 #import cosmos.clouds: *
 #show: show-theorion
 ```
@@ -409,7 +409,7 @@ Let's start with the most fundamental definition.
 ### ✨Fancy
 
 ```typst
-#import "@preview/theorion:0.3.3": *
+#import "@preview/theorion:0.4.0": *
 #import cosmos.fancy: *
 #show: show-theorion
 ```
@@ -439,9 +439,14 @@ Theorion provides experimental support for HTML rendering, allowing you to embed
 
 ### 0.4.0
 
-- **Highlight: Experimental HTML Support**
-- `number` and `supplement` arguments to manually specify the number of a theorem/definition/...
-- (Small breaking change) refactor `get-prefix(get-loc)` to `get-prefix(get-loc, number: auto, supplement: auto)` and refactor `get-full-title(get-loc, title)` to `get-full-title(prefix, title)`.
+- **feat: (Highlight): Experimental HTML Support**
+- feat: `number` and `supplement` arguments to manually specify the number of a theorem/definition/...
+- refactor: (Small breaking change) refactor `get-prefix(get-loc)` to `get-prefix(get-loc, number: auto, supplement: auto)` and refactor `get-full-title(get-loc, title)` to `get-full-title(prefix, title)`.
+- feat: add Dutch translation
+- feat: add direct label filter for theorion-restate
+- fix: 100% width to center equations
+- fix(fancy): feat some bugs for fancy cosmos
+
 
 ## Acknowledgements
 

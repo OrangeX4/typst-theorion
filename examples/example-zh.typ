@@ -55,7 +55,7 @@
 == 开箱即用
 
 ```typst
-#import "@preview/theorion:0.3.3": *
+#import "@preview/theorion:0.4.0": *
 #import cosmos.fancy: *
 // #import cosmos.rainbow: *
 // #import cosmos.clouds: *
