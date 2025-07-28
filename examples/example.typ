@@ -124,6 +124,18 @@ Let's start with the most fundamental definition.
   this list is far from complete! See @thm:euclid for the full proof.
 ]
 
+#assumption[
+  For all $n in NN$, assume $n$ is even if $n = 2k$ for some $k in NN$.
+]
+
+#property[
+  The sum of two even numbers is always even.
+]
+
+#conjecture(title: "Twin Prime Conjecture")[
+  There are infinitely many primes $p$ such that $p+2$ is also prime.
+]
+
 #theorem(title: "Euclid's Theorem")[
   There are infinitely many prime numbers.
 ] <thm:euclid>

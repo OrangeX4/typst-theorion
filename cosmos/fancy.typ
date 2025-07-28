@@ -172,6 +172,39 @@
   ),
 )
 
+#let (assumption-counter, assumption-box, assumption, show-assumption) = make-frame(
+  "assumption",
+  theorion-i18n-map.at("assumption"),
+  counter: theorem-counter,
+  render: fancy-box.with(
+    get-border-color: get-secondary-border-color,
+    get-body-color: get-secondary-body-color,
+    get-symbol: get-secondary-symbol,
+  ),
+)
+
+#let (property-counter, property-box, property, show-property) = make-frame(
+  "property",
+  theorion-i18n-map.at("property"),
+  counter: theorem-counter,
+  render: fancy-box.with(
+    get-border-color: get-tertiary-border-color,
+    get-body-color: get-tertiary-body-color,
+    get-symbol: get-tertiary-symbol,
+  ),
+)
+
+#let (conjecture-counter, conjecture-box, conjecture, show-conjecture) = make-frame(
+  "conjecture",
+  theorion-i18n-map.at("conjecture"),
+  counter: theorem-counter,
+  render: fancy-box.with(
+    get-border-color: get-secondary-border-color,
+    get-body-color: get-secondary-body-color,
+    get-symbol: get-secondary-symbol,
+  ),
+)
+
 /// Collection of show rules for all theorem environments
 /// Applies all theorion-related show rules to the document
 ///
@@ -185,6 +218,9 @@
   show: show-postulate
   show: show-definition
   show: show-proposition
+  show: show-assumption
+  show: show-property
+  show: show-conjecture
   body
 }
 

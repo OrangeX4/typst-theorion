@@ -123,6 +123,18 @@
   数 $2$、$3$ 和 $17$ 都是素数。正如@cor:infinite-prime 所证，这个列表远未完整！详细证明见@thm:euclid。
 ]
 
+#assumption[
+  对任意 $n in NN$，若存在 $k in NN$ 使 $n = 2k$，则称 $n$ 为偶数。
+]
+
+#property[
+  两个偶数之和仍为偶数。
+]
+
+#conjecture(title: "孪生素数猜想")[
+  存在无穷多对素数 $p$ 使得 $p+2$ 也是素数。
+]
+
 #theorem(title: "欧几里得定理")[
   素数有无穷多个。
 ] <thm:euclid>

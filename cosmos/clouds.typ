@@ -90,6 +90,27 @@
   render: render-fn.with(fill: blue.lighten(85%)),
 )
 
+#let (assumption-counter, assumption-box, assumption, show-assumption) = make-frame(
+  "assumption",
+  theorion-i18n-map.at("assumption"),
+  counter: theorem-counter,
+  render: render-fn.with(fill: purple.lighten(85%)),
+)
+
+#let (property-counter, property-box, property, show-property) = make-frame(
+  "property",
+  theorion-i18n-map.at("property"),
+  counter: theorem-counter,
+  render: render-fn.with(fill: eastern.lighten(85%)),
+)
+
+#let (conjecture-counter, conjecture-box, conjecture, show-conjecture) = make-frame(
+  "conjecture",
+  theorion-i18n-map.at("conjecture"),
+  counter: theorem-counter,
+  render: render-fn.with(fill: navy.lighten(85%)),
+)
+
 /// Collection of show rules for all theorem environments
 /// Applies all theorion-related show rules to the document
 ///
@@ -103,6 +124,9 @@
   show: show-postulate
   show: show-definition
   show: show-proposition
+  show: show-assumption
+  show: show-property
+  show: show-conjecture
   body
 }
 
