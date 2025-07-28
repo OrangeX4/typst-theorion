@@ -293,3 +293,5 @@ Let's start with the most fundamental definition.
 // )
 // 3. Restate a specific theorem
 // #theorion-restate(filter: it => it.label == <thm:euclid>)
+// or we can use
+// #theorion-restate(filter: <thm:euclid>)

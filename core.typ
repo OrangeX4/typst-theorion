@@ -422,6 +422,11 @@
     it.get-loc = get-loc
     it.el = figure-el
     it.label = if figure-el.has("label") { figure-el.label } else { none }
+    let filter = if type(filter) == label {
+      it => it.label == filter
+    } else {
+      filter
+    }
     if filter(it) {
       let prefix = (it.get-prefix)(get-loc, number: it.number, supplement: it.supplement)
       (render(it))(
