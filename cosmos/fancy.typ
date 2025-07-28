@@ -19,77 +19,65 @@
   title: "",
   full-title: auto,
   breakable: false,
+  html-width: 720pt,
   ..args,
   body,
-) = context showybox(
-  frame: (
-    thickness: .05em,
-    radius: .3em,
-    inset: (x: 1.2em, top: if full-title != "" { .7em } else { 1.2em }, bottom: 1.2em),
-    border-color: get-border-color(here()),
-    title-color: get-border-color(here()),
-    body-color: get-body-color(here()),
-    title-inset: (x: 1em, y: .5em),
-  ),
-  title-style: (
-    boxed-style: (
-      anchor: (x: start, y: horizon),
-      radius: 0em,
+) = context {
+  // Main rendering
+  let rendered = showybox(
+    frame: (
+      thickness: .05em,
+      radius: .3em,
+      inset: (x: 1.2em, top: if full-title != "" { .7em } else { 1.2em }, bottom: 1.2em),
+      border-color: get-border-color(here()),
+      title-color: get-border-color(here()),
+      body-color: get-body-color(here()),
+      title-inset: (x: 1em, y: .5em),
     ),
-    color: white,
-    weight: "semibold",
-  ),
-  breakable: breakable,
-  title: {
-    if full-title == auto {
-      if prefix != none {
-        [#prefix (#title)]
+    title-style: (
+      boxed-style: (
+        anchor: (x: start, y: horizon),
+        radius: 0em,
+      ),
+      color: white,
+      weight: "semibold",
+    ),
+    breakable: breakable,
+    title: {
+      if full-title == auto {
+        if prefix != none {
+          [#prefix (#title)]
+        } else {
+          title
+        }
       } else {
-        title
+        full-title
       }
-    } else {
-      full-title
-    }
-  },
-  ..args,
-  {
-    body
-    if get-symbol(here()) != none {
-      place(
-        end + bottom,
-        dy: .8em,
-        dx: .9em,
-        text(size: .6em, fill: get-border-color(here()), get-symbol(here())),
-      )
-    }
-  },
-)
+    },
+    ..args,
+    {
+      body
+      if get-symbol(here()) != none {
+        place(end + bottom, dy: .8em, dx: .9em, text(size: .6em, fill: get-border-color(here()), get-symbol(here())))
+      }
+    },
+  )
+  if "html" in dictionary(std) and target() == "html" {
+    html.elem("div", attrs: (style: "margin-bottom: .5em;"), html.frame(block(width: html-width, rendered)))
+  } else {
+    rendered
+  }
+}
 
 /// Register global colors.
-#let (get-primary-border-color, set-primary-border-color) = use-state(
-  "fancy-primary-border-color",
-  green.darken(30%),
-)
-#let (get-primary-body-color, set-primary-body-color) = use-state(
-  "fancy-primary-body-color",
-  green.lighten(95%),
-)
-#let (get-secondary-border-color, set-secondary-border-color) = use-state(
-  "fancy-secondary-border-color",
-  orange.darken(0%),
-)
-#let (get-secondary-body-color, set-secondary-body-color) = use-state(
-  "fancy-secondary-body-color",
-  orange.lighten(95%),
-)
-#let (get-tertiary-border-color, set-tertiary-border-color) = use-state(
-  "fancy-tertiary-border-color",
-  blue.darken(30%),
-)
-#let (get-tertiary-body-color, set-tertiary-body-color) = use-state(
-  "fancy-tertiary-body-color",
-  blue.lighten(95%),
-)
+#let (get-primary-border-color, set-primary-border-color) = use-state("fancy-primary-border-color", green.darken(30%))
+#let (get-primary-body-color, set-primary-body-color) = use-state("fancy-primary-body-color", green.lighten(95%))
+#let (get-secondary-border-color, set-secondary-border-color) = use-state("fancy-secondary-border-color", orange.darken(
+  0%,
+))
+#let (get-secondary-body-color, set-secondary-body-color) = use-state("fancy-secondary-body-color", orange.lighten(95%))
+#let (get-tertiary-border-color, set-tertiary-border-color) = use-state("fancy-tertiary-border-color", blue.darken(30%))
+#let (get-tertiary-body-color, set-tertiary-body-color) = use-state("fancy-tertiary-body-color", blue.lighten(95%))
 
 /// Register global symbols.
 #let (get-primary-symbol, set-primary-symbol) = use-state(

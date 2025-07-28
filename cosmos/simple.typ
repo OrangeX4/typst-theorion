@@ -11,6 +11,7 @@
     strong[#full-title.] + sym.space
   }
   emph(body)
+  parbreak()
 }
 
 /// Create corresponding theorem box.

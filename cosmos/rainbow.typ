@@ -8,18 +8,41 @@
   full-title: auto,
   ..args,
   body,
-) = context block(
-  stroke: language-aware-start(.25em + fill),
-  inset: language-aware-start(1em) + (y: .75em),
-  width: 100%,
-  ..args,
-  [
-    #if full-title != "" {
-      block(sticky: true, strong(text(fill: fill, full-title)))
-    }
-    #body
-  ]
-)
+) = context {
+  // HTML rendering
+  if "html" in dictionary(std) and target() == "html" {
+    html.elem("div", attrs: (
+      style: "border-inline-start: .25em solid "
+        + fill.to-hex()
+        + "; padding: .1em 1em; width: 100%; box-sizing: border-box; margin-bottom: .5em;",
+    ))[
+      #if full-title != "" {
+        html.elem(
+          "p",
+          attrs: (
+            style: "margin-top: .5em; font-weight: bold; color: " + fill.to-hex() + ";",
+          ),
+          full-title,
+        )
+      }
+      #body
+    ]
+  } else {
+    // Main rendering
+    block(
+      stroke: language-aware-start(.25em + fill),
+      inset: language-aware-start(1em) + (y: .75em),
+      width: 100%,
+      ..args,
+      [
+        #if full-title != "" {
+          block(sticky: true, strong(text(fill: fill, full-title)))
+        }
+        #body
+      ],
+    )
+  }
+}
 
 // Core theorems
 #let (theorem-counter, theorem-box, theorem, show-theorem) = make-frame(

@@ -1,5 +1,5 @@
 #import "../core.typ": *
-#import "../deps.typ": showybox, octique-inline
+#import "../deps.typ": octique-inline, showybox
 
 /// Global result configuration to control visibility of proofs and solutions
 /// Modified by `#set-result("noanswer")`
@@ -86,7 +86,8 @@
 /// - body (content): Content of the box
 /// -> content
 #let emph-box(body, breakable: false) = {
-  showybox(
+  // Main rendering
+  let rendered = showybox(
     frame: (
       dash: "dashed",
       border-color: yellow.darken(30%),
@@ -96,18 +97,46 @@
     breakable: breakable,
     body,
   )
+  if "html" in dictionary(std) {
+    // HTML rendering
+    context if target() == "html" {
+      html.elem(
+        "div",
+        attrs: (
+          style: "background: #FFFDEB; border: .1em dashed #E3C000; border-radius: .4em; padding: .25em 1em; width: 100%; box-sizing: border-box; margin: .5em 0em;",
+        ),
+        body,
+      )
+    } else {
+      rendered
+    }
+  } else {
+    rendered
+  }
 }
 
 /// Create a quote box with start border styling in gray
 ///
 /// - body (content): Content to be quoted
 /// -> content
-#let quote-box(..args, body) = context block(
-  stroke: language-aware-start(.25em + luma(200)),
-  inset: language-aware-start(1em) + (y: .75em),
-  ..args,
-  text(luma(100), body),
-)
+#let quote-box(..args, body) = context {
+  // HTML rendering
+  if "html" in dictionary(std) and target() == "html" {
+    html.elem(
+      "div",
+      attrs: (
+        style: "border-inline-start: .25em solid #C8C8C8; padding: .1em 1em; width: 100%; box-sizing: border-box; margin-bottom: .5em; color: #646464;",
+      ),
+      body,
+    )
+  } else {
+    // Main rendering
+    block(stroke: language-aware-start(.25em + luma(200)), inset: language-aware-start(1em) + (y: .75em), ..args, text(
+      luma(100),
+      body,
+    ))
+  }
+}
 
 /// Create a note box with customizable styling and icon
 /// Base template for tip-box, important-box, warning-box, and caution-box
@@ -123,17 +152,52 @@
   icon-name: "info",
   ..args,
   body,
-) = context block(
-  stroke: language-aware-start(.25em + fill),
-  inset: language-aware-start(1em) + (top: .5em, bottom: .75em),
-  width: 100%,
-  ..args,
-  {
-    let title-i18n = theorion-i18n(title)
-    {
-      block(
-        sticky: true,
-        text(
+) = context {
+  let title-i18n = theorion-i18n(title)
+  // HTML rendering
+  if "html" in dictionary(std) and target() == "html" {
+    html.elem(
+      "div",
+      attrs: (
+        style: "border-inline-start: .25em solid "
+          + fill.to-hex()
+          + "; padding: .1em 1em; width: 100%; box-sizing: border-box; margin-bottom: .5em;",
+      ),
+      {
+        html.elem(
+          "p",
+          attrs: (
+            style: "margin-top: .5em; font-weight: bold; color: "
+              + fill.to-hex()
+              + "; display: flex; align-items: center;",
+          ),
+          html.elem(
+            "span",
+            attrs: (
+              style: "display: inline-flex; align-items: center; justify-content: center; width: 1em; height: 1em; vertical-align: middle; margin: 0em .5em 0em 0em;",
+            ),
+            html.frame(octique-inline(
+              height: 1.2em,
+              width: 1.2em,
+              color: fill,
+              baseline: .2em,
+              icon-name,
+            )),
+          )
+            + title-i18n,
+        )
+        body
+      },
+    )
+  } else {
+    // Main rendering
+    block(
+      stroke: language-aware-start(.25em + fill),
+      inset: language-aware-start(1em) + (top: .5em, bottom: .75em),
+      width: 100%,
+      ..args,
+      {
+        block(sticky: true, text(
           fill: fill,
           weight: "semibold",
           octique-inline(
@@ -145,12 +209,12 @@
           )
             + h(.5em)
             + title-i18n,
-        ),
-      )
-      body
-    }
-  },
-)
+        ))
+        body
+      },
+    )
+  }
+}
 
 /// Create a tip box with green styling and light bulb icon
 /// Useful for helpful suggestions and tips

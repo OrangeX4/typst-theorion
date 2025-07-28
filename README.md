@@ -429,10 +429,17 @@ Let's start with the most fundamental definition.
 
 Welcome to [open a pull request](htps://github.com/OrangeX4/typst-theorion/pulls) and contribute your beautiful cosmos to Theorion!
 
+## Experimental HTML Support
+
+Theorion provides experimental support for HTML rendering, allowing you to embed HTML elements within Typst documents. This feature is still under active development, and the external API is not exposed at this time. It is subject to change without notice and may have compatibility issues.
+
+![HTML Example](./examples/html.png)
+
 ## Changelog
 
 ### 0.4.0
 
+- **Highlight: Experimental HTML Support**
 - `number` and `supplement` arguments to manually specify the number of a theorem/definition/...
 - (Small breaking change) refactor `get-prefix(get-loc)` to `get-prefix(get-loc, number: auto, supplement: auto)` and refactor `get-full-title(get-loc, title)` to `get-full-title(prefix, title)`.
 

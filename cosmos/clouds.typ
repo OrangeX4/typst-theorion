@@ -8,12 +8,35 @@
   full-title: auto,
   ..args,
   body,
-) = block(inset: 1em, fill: fill, radius: .4em, width: 100%, ..args)[
-  #if full-title != "" {
-    strong(full-title) + sym.space
+) = {
+  // Main rendering
+  let rendered = block(inset: 1em, fill: fill, radius: .4em, width: 100%, ..args)[
+    #if full-title != "" {
+      strong(full-title) + sym.space
+    }
+    #body
+  ]
+  if "html" in dictionary(std) {
+    // HTML rendering
+    context if target() == "html" {
+      html.elem("div", attrs: (
+        style: "background: "
+          + fill.to-hex()
+          + "; border-radius: .4em; padding: 1em; width: 100%; box-sizing: border-box; margin-bottom: .5em;",
+      ))[
+        #if full-title != "" {
+          strong(full-title) + sym.space.nobreak + sym.space.nobreak
+        }
+        #body
+      ]
+    } else {
+      rendered
+    }
+  } else {
+    rendered
   }
-  #body
-]
+}
+
 
 // Core theorems
 #let (theorem-counter, theorem-box, theorem, show-theorem) = make-frame(
