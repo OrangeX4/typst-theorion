@@ -9,11 +9,12 @@
 
 - **Out-of-the-box styles** 🎨
 - **Built-in multilingual support** 🌐
+- **Experimental HTML Support** 📑
 - **Highly customizable** ⚙️:
-  - Custom counters and numbering styles
-  - Configurable inheritance levels
+  - Custom separate counters and numbering styles
+  - Configurable inheritance levels from headings or math equation
   - Custom theorem environments
-  - Custom rendering functions
+  - Custom separate rendering functions
 - **Rich theorem environments** 📚: theorem, definition, lemma, corollary, example, proof, and many more presets for note-taking
 - **Theorem restatement** 🔄: `#theorion-restate(filter: it => it.outlined and it.identifier == "theorem")`
 - **Additional features** 📑:
