@@ -375,18 +375,22 @@
     show figure.where(kind: identifier): set block(breakable: true)
     show figure.where(kind: identifier): it => it.body
     // Custom outline for the theorem environment.
-    show outline.where(target: figure.where(kind: identifier)): it => {
+    show outline: it => {
       show outline.entry: entry => {
         let el = entry.element
-        block(link(el.location(), entry.indented(
-          [#el.supplement #context theorion-display-number(el)],
-          {
-            entry.body()
-            box(width: 1fr, inset: (x: .25em), entry.fill)
-            entry.page()
-          },
-          gap: .5em,
-        )))
+        if el.func() == figure and el.kind == identifier {
+          block(link(el.location(), entry.indented(
+            [#el.supplement #context theorion-display-number(el)],
+            {
+              entry.body()
+              box(width: 1fr, inset: (x: .25em), entry.fill)
+              entry.page()
+            },
+            gap: .5em,
+          )))
+        } else {
+          entry
+        }
       }
       it
     }
