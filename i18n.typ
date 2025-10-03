@@ -18,8 +18,9 @@
       if type(map.at(text.lang)) != dictionary {
         value = map.at(text.lang)
       } else {
-        if text.region != none and text.region in map.at(text.lang) {
-          value = map.at(text.lang).at(text.region)
+        let tr = lower(text.region)
+        if tr != none and tr in map.at(text.lang) {
+          value = map.at(text.lang).at(tr)
         } else {
           value = map.at(text.lang).values().at(0, default: value)
         }
