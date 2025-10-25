@@ -295,7 +295,7 @@
     )
   }
   let supplement-i18n = theorion-i18n(supplement-map)
-  let display-number(get-loc: here) = (counter: frame-counter, ..args) => context {
+  let display-number(get-loc: here, .._args) = (counter: frame-counter, ..args) => context {
     let loc = get-loc()
     // We need to add 1 to the counter value.
     let counter-value = if type(counter) == dictionary {
