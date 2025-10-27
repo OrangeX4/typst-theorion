@@ -1,4 +1,4 @@
-# 🌌Theorion
+# 🌌 Theorion
 
 [![Typst Universe](https://img.shields.io/badge/dynamic/xml?url=https%3A%2F%2Ftypst.app%2Funiverse%2Fpackage%2Ftheorion&query=%2Fhtml%2Fbody%2Fdiv%2Fmain%2Fdiv%5B2%5D%2Faside%2Fsection%5B2%5D%2Fdl%2Fdd%5B3%5D&logo=typst&label=universe&color=%2339cccc)](https://typst.app/universe/package/theorion)
 ![GitHub](https://img.shields.io/github/license/OrangeX4/typst-theorion)
@@ -44,7 +44,7 @@ Just import and use theorion.
 ]
 ```
 
-![image](https://github.com/user-attachments/assets/a130e5a5-a368-4ffc-8e8f-55bab85b0224)
+![image](./examples/simple.png)
 
 ## Customization
 
@@ -355,7 +355,7 @@ Let's start with the most fundamental definition.
 
 ## All Cosmos
 
-### 📄Simple
+### 📄 Simple
 
 ```typst
 #import "@preview/theorion:0.4.1": *
@@ -367,7 +367,7 @@ Let's start with the most fundamental definition.
 
 ![image](https://github.com/user-attachments/assets/f1876cfb-1bc9-4edb-a19a-a1922a8babc0)
 
-### 🌈Rainbow
+### 🌈 Rainbow
 
 ```typst
 #import "@preview/theorion:0.4.1": *
@@ -385,7 +385,7 @@ Let's start with the most fundamental definition.
 
 ![image](https://github.com/user-attachments/assets/5e6e29f9-c493-4e21-b14a-347f3ca83b99)
 
-### ☁️Clouds
+### ☁️ Clouds
 
 ```typst
 #import "@preview/theorion:0.4.1": *
@@ -407,7 +407,7 @@ Let's start with the most fundamental definition.
 
 ![image](https://github.com/user-attachments/assets/1f0f280b-94f5-43b7-b685-d2998d867b58)
 
-### ✨Fancy
+### ✨ Fancy
 
 ```typst
 #import "@preview/theorion:0.4.1": *
