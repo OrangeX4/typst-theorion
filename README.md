@@ -29,7 +29,7 @@
 Just import and use theorion.
 
 ```typst
-#import "@preview/theorion:0.4.0": *
+#import "@preview/theorion:0.4.1": *
 #import cosmos.fancy: *
 // #import cosmos.rainbow: *
 // #import cosmos.clouds: *
@@ -115,7 +115,7 @@ Just import and use theorion.
 ![example](examples/example.png)
 
 ```typst
-#import "@preview/theorion:0.4.0": *
+#import "@preview/theorion:0.4.1": *
 #import cosmos.fancy: *
 // #import cosmos.rainbow: *
 // #import cosmos.clouds: *
@@ -358,7 +358,7 @@ Let's start with the most fundamental definition.
 ### 📄Simple
 
 ```typst
-#import "@preview/theorion:0.4.0": *
+#import "@preview/theorion:0.4.1": *
 #import cosmos.simple: *
 #show: show-theorion
 ```
@@ -370,7 +370,7 @@ Let's start with the most fundamental definition.
 ### 🌈Rainbow
 
 ```typst
-#import "@preview/theorion:0.4.0": *
+#import "@preview/theorion:0.4.1": *
 #import cosmos.rainbow: *
 #show: show-theorion
 ```
@@ -388,7 +388,7 @@ Let's start with the most fundamental definition.
 ### ☁️Clouds
 
 ```typst
-#import "@preview/theorion:0.4.0": *
+#import "@preview/theorion:0.4.1": *
 #import cosmos.clouds: *
 #show: show-theorion
 ```
@@ -410,7 +410,7 @@ Let's start with the most fundamental definition.
 ### ✨Fancy
 
 ```typst
-#import "@preview/theorion:0.4.0": *
+#import "@preview/theorion:0.4.1": *
 #import cosmos.fancy: *
 #show: show-theorion
 ```
@@ -437,6 +437,16 @@ Theorion provides experimental support for HTML rendering, allowing you to embed
 ![HTML Example](./examples/html.png)
 
 ## Changelog
+
+### 0.4.1
+
+- **URGENT FIX: fix display-number and support typst 0.14**
+- feat(i18n): add polish translation [#21](https://github.com/OrangeX4/typst-theorion/pull/21)
+- fix: add lower fn to fix upper-case text region [#22](https://github.com/OrangeX4/typst-theorion/pull/22)
+- fix: bump octique version to 0.1.1
+- fix: allow multiple outline targets [#19](https://github.com/OrangeX4/typst-theorion/pull/19)
+
+
 
 ### 0.4.0
 
