@@ -1,5 +1,5 @@
 #import "/lib.typ": *
-#import cosmos.fancy: *
+// #import cosmos.fancy: *
 // #import cosmos.rainbow: *
 // #import cosmos.clouds: *
 #show: show-theorion
@@ -7,6 +7,11 @@
 #set page(height: auto)
 #set heading(numbering: "1.1")
 #set text(lang: "en")
+#set par(
+  first-line-indent: 1em,
+  spacing: 0.65em,
+  justify: true,
+)
 
 /// 1. Change the counters and numbering:
 // #set-inherited-levels(1)

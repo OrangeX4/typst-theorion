@@ -7,6 +7,11 @@
 #set page(height: auto)
 #set heading(numbering: "1.1")
 #set text(lang: "zh", region: "cn")
+#set par(
+  first-line-indent: (amount: 2em, all: true),
+  spacing: 0.65em,
+  justify: true,
+)
 
 /// 1. 更改计数器和编号：
 // #set-inherited-levels(1)

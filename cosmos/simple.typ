@@ -5,13 +5,17 @@
   prefix: none,
   title: "",
   full-title: auto,
+  above: 1.2em,
+  below: 1.2em,
+  ..args,
   body,
 ) = {
-  if full-title != "" {
-    strong[#full-title.] + sym.space
-  }
-  emph(body)
-  parbreak()
+  block(above: above, below: below, ..args, {
+    if full-title != "" {
+      strong[#full-title.] + sym.space
+    }
+    emph(body)
+  })
 }
 
 /// Create corresponding theorem box.

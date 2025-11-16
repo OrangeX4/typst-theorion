@@ -1,5 +1,11 @@
 #import "i18n.typ": theorion-i18n, theorion-i18n-map
 
+#let _fakepar = context {
+  let b = par(box())
+  b
+  v(-measure(b + b).height)
+}
+
 /// A simple wrapper for the `state` function, inspired by React Hook.
 #let use-state(key, init) = {
   let used-state = state(key, init)
@@ -274,6 +280,7 @@
 /// - inherited-levels (integer): Number of heading levels to inherit from. Default is 0
 /// - inherited-from (counter): Counter to inherit from. Default is heading
 /// - numbering (string): Numbering format. Default is get-theorion-numbering
+/// - fakepar (boolean): Whether to add a fake paragraph after the frame to avoid extra indentation. Default is true
 /// - render (function): Custom rendering function
 /// -> (counter, render-fn, frame-fn, show-fn)
 #let make-frame(
@@ -283,6 +290,7 @@
   inherited-levels: 0,
   inherited-from: heading,
   numbering: get-theorion-numbering,
+  fakepar: true,
   render: (prefix: none, title: "", full-title: "", body) => block[*#full-title*: #body],
 ) = {
   let get-numbering = if type(numbering) != function { (..args) => numbering } else { numbering }
@@ -331,22 +339,22 @@
     numbering: if number == auto { numbering } else { (..args) => (kind: "static", value: number) },
     {
       [#metadata((
-          identifier: identifier,
-          number: number,
-          supplement: supplement,
-          supplement-map: supplement-map,
-          supplement-i18n: supplement-i18n,
-          kind: identifier,
-          counter: frame-counter,
-          title: title,
-          numbering: numbering,
-          outlined: outlined,
-          get-prefix: get-prefix,
-          get-full-title: get-full-title,
-          render: render,
-          args: args,
-          body: body,
-        )) <theorion-frame-metadata>]
+        identifier: identifier,
+        number: number,
+        supplement: supplement,
+        supplement-map: supplement-map,
+        supplement-i18n: supplement-i18n,
+        kind: identifier,
+        counter: frame-counter,
+        title: title,
+        numbering: numbering,
+        outlined: outlined,
+        get-prefix: get-prefix,
+        get-full-title: get-full-title,
+        render: render,
+        args: args,
+        body: body,
+      )) <theorion-frame-metadata>]
       let prefix = get-prefix(here, number: number, supplement: supplement)
       render(
         prefix: prefix,
@@ -359,6 +367,7 @@
       if numbering != none and number == auto {
         (frame-counter.step)()
       }
+      if fakepar { _fakepar }
     },
   )
   /// Frame without the counter.
