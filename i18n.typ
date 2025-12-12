@@ -46,6 +46,7 @@
     it: "Teorema",
     vi: "Định lý",
     pl: "Twierdzenie",
+    sv: "Sats", // Teorem
   ),
   lemma: (
     en: (us: "Lemma", gb: "Lemma"),
@@ -63,6 +64,7 @@
     it: "Lemma",
     vi: "Bổ đề",
     pl: "Lemat",
+    sv: "Lemma",
   ),
   corollary: (
     en: (us: "Corollary", gb: "Corollary"),
@@ -80,6 +82,7 @@
     it: "Corollario",
     vi: "Hệ quả",
     pl: "Wniosek",
+    sv: "Följdsats", // Korollarium
   ),
   note: (
     en: (us: "Note", gb: "Note"),
@@ -97,6 +100,7 @@
     it: "Osservazione",
     vi: "Ghi chú",
     pl: "Dopisek",
+    sv: "Anmärkning", // Not
   ),
   warning: (
     en: (us: "Warning", gb: "Warning"),
@@ -114,6 +118,7 @@
     it: "Avvertenza",
     vi: "Cảnh báo",
     pl: "Uwaga",
+    sv: "Varning",
   ),
   definition: (
     en: (us: "Definition", gb: "Definition"),
@@ -131,6 +136,7 @@
     it: "Definizione",
     vi: "Định nghĩa",
     pl: "Definicja",
+    sv: "Definition",
   ),
   axiom: (
     en: (us: "Axiom", gb: "Axiom"),
@@ -148,6 +154,7 @@
     it: "Assioma",
     vi: "Tiên đề",
     pl: "Aksjomat",
+    sv: "Axiom",
   ),
   postulate: (
     en: (us: "Postulate", gb: "Postulate"),
@@ -165,6 +172,7 @@
     it: "Postulato",
     vi: "Định đề",
     pl: "Postulat",
+    sv: "Postulat",
   ),
   proposition: (
     en: (us: "Proposition", gb: "Proposition"),
@@ -182,6 +190,7 @@
     it: "Proposizione",
     vi: "Mệnh đề",
     pl: "Propozycja",
+    sv: "Proposition", // Påstående
   ),
   example: (
     en: (us: "Example", gb: "Example"),
@@ -199,6 +208,7 @@
     it: "Esempio",
     vi: "Ví dụ",
     pl: "Przyklad",
+    sv: "Exempel",
   ),
   problem: (
     en: (us: "Problem", gb: "Problem"),
@@ -216,6 +226,7 @@
     it: "Problema",
     vi: "Bài toán",
     pl: "Zadanie",
+    sv: "Problem",
   ),
   exercise: (
     en: (us: "Exercise", gb: "Exercise"),
@@ -233,6 +244,7 @@
     it: "Esercizio",
     vi: "Bài tập",
     pl: "Ćwiczenie",
+    sv: "Övning",
   ),
   conclusion: (
     en: (us: "Conclusion", gb: "Conclusion"),
@@ -250,6 +262,7 @@
     it: "Conclusione",
     vi: "Kết luận",
     pl: "Wniosek",
+    sv: "Slutsats",
   ),
   assumption: (
     en: (us: "Assumption", gb: "Assumption"),
@@ -267,6 +280,7 @@
     it: "Ipotesi",
     vi: "Giả sử",
     pl: "Założenie",
+    sv: "Antagande",
   ),
   property: (
     en: (us: "Property", gb: "Property"),
@@ -284,6 +298,7 @@
     it: "Proprietà",
     vi: "Tính chất",
     pl: "Własność",
+    sv: "Egenskap",
   ),
   remark: (
     en: (us: "Remark", gb: "Remark"),
@@ -301,6 +316,7 @@
     it: "Osservazione",
     vi: "Nhận xét",
     pl: "Obserwacja",
+    sv: "Anmärkning", // Kommentar
   ),
   solution: (
     en: (us: "Solution", gb: "Solution"),
@@ -318,6 +334,7 @@
     it: "Soluzione",
     vi: "Lời giải",
     pl: "Rozwiązanie",
+    sv: "Lösning",
   ),
   proof: (
     en: (us: "Proof", gb: "Proof"),
@@ -335,6 +352,7 @@
     it: "Dimostrazione",
     vi: "Chứng minh",
     pl: "Dowód",
+    sv: "Bevis",
   ),
   tip: (
     en: (us: "Tip", gb: "Tip"),
@@ -352,6 +370,7 @@
     it: "Suggerimento",
     vi: "Mẹo",
     pl: "Wskazówka",
+    sv: "Tips",
   ),
   important: (
     en: (us: "Important", gb: "Important"),
@@ -369,6 +388,7 @@
     it: "Importante",
     vi: "Quan trọng",
     pl: "Ważne",
+    sv: "Viktigt",
   ),
   conjecture: (
     en: (us: "Conjecture", gb: "Conjecture"),
@@ -381,11 +401,12 @@
     ja: "予想",
     ko: "추측",
     nl: "Conjectuur",
-    ru: "Гипотеза",
+    ru: "Гипotеза",
     ar: "تخمين",
     it: "Congettura",
     vi: "Giả thuyết",
     pl: "Przypuszczenie",
+    sv: "Förmodan", // Konjektur
   ),
   caution: (
     en: (us: "Caution", gb: "Caution"),
@@ -403,5 +424,6 @@
     it: "Attenzione",
     vi: "Chú ý",
     pl: "Uwaga",
+    sv: "Försiktigt", // Varning, Försiktighet
   ),
 )
