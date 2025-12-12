@@ -401,7 +401,7 @@
     ja: "予想",
     ko: "추측",
     nl: "Conjectuur",
-    ru: "Гипoтеза",
+    ru: "Гипотеза",
     ar: "تخمين",
     it: "Congettura",
     vi: "Giả thuyết",
