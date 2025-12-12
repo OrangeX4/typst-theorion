@@ -64,7 +64,7 @@
     it: "Lemma",
     vi: "Bổ đề",
     pl: "Lemat",
-    sv: "Lemma",
+    sv: "Lemma", // Hjälpsats
   ),
   corollary: (
     en: (us: "Corollary", gb: "Corollary"),
