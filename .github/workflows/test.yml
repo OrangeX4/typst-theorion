@@ -1,0 +1,40 @@
+name: Test
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Install cargo-binstall
+        uses: taiki-e/install-action@v2
+        with:
+          tool: cargo-binstall
+
+      - name: Install tytanic
+        run: cargo binstall tytanic@0.3.3 -y
+
+      - name: Setup Typst
+        uses: typst-community/setup-typst@v4
+
+      - name: Run test suite
+        run: tt run
+
+      - name: Archive diffs
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: artifacts
+          path: |
+            tests/**/diff/*.png
+            tests/**/out/*.png
+            tests/**/ref/*.png
+          retention-days: 5

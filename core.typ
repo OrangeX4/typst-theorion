@@ -405,8 +405,11 @@
       let el = it.element
       if el != none and el.func() == figure and el.kind == identifier {
         link(el.location(), {
-          if it.supplement == auto { el.supplement } else { it.supplement }
-          " "
+          let supplement = if it.supplement == auto { el.supplement } else { it.supplement }
+          if supplement != none {
+            supplement
+            " "
+          }
           context theorion-display-number(el)
         })
       } else {
