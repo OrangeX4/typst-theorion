@@ -7,6 +7,7 @@
 #set page(height: auto)
 #set heading(numbering: "1.1")
 #set text(lang: "en")
+#set par(first-line-indent: 1em, justify: true)
 
 /// 1. Change the counters and numbering:
 // #set-inherited-levels(1)
@@ -15,6 +16,7 @@
 // #set-theorion-numbering("1.1")
 
 /// 2. Other options:
+// #set-indent-mode(auto)  // auto (default), none, length or dictionary
 // #set-result("noanswer")
 // #set-qed-symbol[#math.qed]
 
@@ -297,7 +299,10 @@ Let's start with the most fundamental definition.
 == Restated Theorems
 
 // 1. Restate all theorems
-#theorion-restate(filter: it => it.outlined and it.identifier == "theorem", render: it => it.render)
+#theorion-restate(
+  filter: it => it.outlined and it.identifier == "theorem",
+  render: it => it.render,
+)
 // 2. Restate all theorems with custom render function
 // #theorion-restate(
 //   filter: it => it.outlined and it.identifier == "theorem",

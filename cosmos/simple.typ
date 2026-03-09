@@ -1,120 +1,128 @@
 #import "../core.typ": *
 
-/// Plain-style render function (LaTeX \theoremstyle{plain}):
-/// bold title, italic body. Used for theorem, lemma, corollary, proposition, conjecture.
-#let render-fn-plain(
+/// Render function for theorem environments (similar to amsthm)
+#let render-fn(
   prefix: none,
   title: "",
   full-title: auto,
+  style: "plain",
   body,
-) = block(above: 1.2em, below: 1.2em, {
-  if full-title != "" {
-    strong[#full-title.] + sym.space
+) = context box(width: 100%, inset: (x: 0em, top: 0em, bottom: .5em), indent-repairer({
+  if style == "definition" {
+    // Definition-style render function (LaTeX \theoremstyle{definition}):
+    // bold title, upright body. Used for definition, axiom, postulate, assumption, property.
+    if full-title != "" {
+      strong[#full-title.] + sym.space
+    }
+    body
+  } else if style == "remark" {
+    // Remark-style render function (LaTeX \theoremstyle{remark}):
+    // italic title (not bold), upright body. Used for remark, note, example.
+    if full-title != "" {
+      emph[#full-title.] + sym.space
+    }
+    body
+  } else {
+    // Plain-style render function (LaTeX \theoremstyle{plain}):
+    // bold title, italic body. Used for theorem, lemma, corollary, proposition, conjecture.
+    // Fallback to plain style if an unknown style is provided
+    if full-title != "" {
+      strong[#full-title.] + sym.space
+    }
+    emph(body)
   }
-  emph(body)
-})
-
-/// Definition-style render function (LaTeX \theoremstyle{definition}):
-/// bold title, upright body. Used for definition, axiom, postulate, assumption, property.
-#let render-fn-definition(
-  prefix: none,
-  title: "",
-  full-title: auto,
-  body,
-) = block(above: 1.2em, below: 1.2em, {
-  if full-title != "" {
-    strong[#full-title.] + sym.space
-  }
-  body
-})
-
-/// Remark-style render function (LaTeX \theoremstyle{remark}):
-/// italic title (not bold), upright body. Used for remark, note, example.
-#let render-fn-remark(
-  prefix: none,
-  title: "",
-  full-title: auto,
-  body,
-) = block(above: 1.2em, below: 1.2em, {
-  if full-title != "" {
-    emph[#full-title.] + sym.space
-  }
-  body
-})
-
-// Keep render-fn as alias for plain style for backward compatibility
-#let render-fn = render-fn-plain
+}))
 
 // Core theorems: plain style (italic body) - LaTeX \theoremstyle{plain}
 #let (theorem-counter, theorem-box, theorem, show-theorem) = make-frame(
   "theorem",
   theorion-i18n-map.at("theorem"),
   inherited-levels: 2,
-  render: render-fn-plain,
+  render: render-fn,
 )
 
 #let (lemma-counter, lemma-box, lemma, show-lemma) = make-frame(
   "lemma",
   theorion-i18n-map.at("lemma"),
   counter: theorem-counter,
-  render: render-fn-plain,
+  render: render-fn,
 )
 
 #let (corollary-counter, corollary-box, corollary, show-corollary) = make-frame(
   "corollary",
   theorion-i18n-map.at("corollary"),
   inherited-from: theorem-counter,
-  render: render-fn-plain,
+  render: render-fn,
 )
 
-#let (proposition-counter, proposition-box, proposition, show-proposition) = make-frame(
+#let (
+  proposition-counter,
+  proposition-box,
+  proposition,
+  show-proposition,
+) = make-frame(
   "proposition",
   theorion-i18n-map.at("proposition"),
   counter: theorem-counter,
-  render: render-fn-plain,
+  render: render-fn,
 )
 
-#let (conjecture-counter, conjecture-box, conjecture, show-conjecture) = make-frame(
+#let (
+  conjecture-counter,
+  conjecture-box,
+  conjecture,
+  show-conjecture,
+) = make-frame(
   "conjecture",
   theorion-i18n-map.at("conjecture"),
   counter: theorem-counter,
-  render: render-fn-plain,
+  render: render-fn,
 )
 
 // Definitions and foundations: definition style (upright body) - LaTeX \theoremstyle{definition}
-#let (definition-counter, definition-box, definition, show-definition) = make-frame(
+#let (
+  definition-counter,
+  definition-box,
+  definition,
+  show-definition,
+) = make-frame(
   "definition",
   theorion-i18n-map.at("definition"),
   counter: theorem-counter,
-  render: render-fn-definition,
+  render: render-fn.with(style: "definition"),
 )
 
 #let (axiom-counter, axiom-box, axiom, show-axiom) = make-frame(
   "axiom",
   theorion-i18n-map.at("axiom"),
   counter: theorem-counter,
-  render: render-fn-definition,
+  render: render-fn.with(style: "definition"),
 )
 
 #let (postulate-counter, postulate-box, postulate, show-postulate) = make-frame(
   "postulate",
   theorion-i18n-map.at("postulate"),
   counter: theorem-counter,
-  render: render-fn-definition,
+  render: render-fn.with(style: "definition"),
 )
 
-#let (assumption-counter, assumption-box, assumption, show-assumption) = make-frame(
+#let (
+  assumption-counter,
+  assumption-box,
+  assumption,
+  show-assumption,
+) = make-frame(
   "assumption",
   theorion-i18n-map.at("assumption"),
   counter: theorem-counter,
-  render: render-fn-definition,
+  render: render-fn.with(style: "definition"),
 )
 
 #let (property-counter, property-box, property, show-property) = make-frame(
   "property",
   theorion-i18n-map.at("property"),
   counter: theorem-counter,
-  render: render-fn-definition,
+  render: render-fn.with(style: "definition"),
 )
 
 /// Collection of show rules for all theorem environments

@@ -38,7 +38,7 @@
         #if full-title != "" {
           block(sticky: true, strong(text(fill: fill, full-title)))
         }
-        #body
+        #indent-repairer(body)
       ],
     )
   }

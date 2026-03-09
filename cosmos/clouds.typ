@@ -8,17 +8,24 @@
   full-title: auto,
   ..args,
   body,
-) = {
+) = context {
   // Main rendering
-  let rendered = block(inset: 1em, fill: fill, radius: .4em, width: 100%, ..args)[
-    #if full-title != "" {
-      strong(full-title) + sym.space
-    }
-    #body
-  ]
+  let rendered = block(
+    inset: 1em,
+    fill: fill,
+    radius: .4em,
+    width: 100%,
+    ..args,
+    indent-repairer[
+      #if full-title != "" {
+        strong(full-title) + sym.space
+      }
+      #body
+    ],
+  )
   if "html" in dictionary(std) {
     // HTML rendering
-    context if target() == "html" {
+    if target() == "html" {
       html.elem("div", attrs: (
         style: "background: "
           + fill.to-hex()
@@ -61,7 +68,12 @@
 )
 
 // Definitions and foundations
-#let (definition-counter, definition-box, definition, show-definition) = make-frame(
+#let (
+  definition-counter,
+  definition-box,
+  definition,
+  show-definition,
+) = make-frame(
   "definition",
   theorion-i18n-map.at("definition"),
   counter: theorem-counter,
@@ -83,14 +95,24 @@
 )
 
 // Important results
-#let (proposition-counter, proposition-box, proposition, show-proposition) = make-frame(
+#let (
+  proposition-counter,
+  proposition-box,
+  proposition,
+  show-proposition,
+) = make-frame(
   "proposition",
   theorion-i18n-map.at("proposition"),
   counter: theorem-counter,
   render: render-fn.with(fill: blue.lighten(85%)),
 )
 
-#let (assumption-counter, assumption-box, assumption, show-assumption) = make-frame(
+#let (
+  assumption-counter,
+  assumption-box,
+  assumption,
+  show-assumption,
+) = make-frame(
   "assumption",
   theorion-i18n-map.at("assumption"),
   counter: theorem-counter,
@@ -104,7 +126,12 @@
   render: render-fn.with(fill: eastern.lighten(85%)),
 )
 
-#let (conjecture-counter, conjecture-box, conjecture, show-conjecture) = make-frame(
+#let (
+  conjecture-counter,
+  conjecture-box,
+  conjecture,
+  show-conjecture,
+) = make-frame(
   "conjecture",
   theorion-i18n-map.at("conjecture"),
   counter: theorem-counter,

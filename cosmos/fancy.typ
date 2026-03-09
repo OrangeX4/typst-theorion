@@ -2,14 +2,32 @@
 #import "../deps.typ": showybox
 
 /// Register global colors.
-#let (get-primary-border-color, set-primary-border-color) = use-state("fancy-primary-border-color", green.darken(30%))
-#let (get-primary-body-color, set-primary-body-color) = use-state("fancy-primary-body-color", green.lighten(95%))
-#let (get-secondary-border-color, set-secondary-border-color) = use-state("fancy-secondary-border-color", orange.darken(
-  0%,
-))
-#let (get-secondary-body-color, set-secondary-body-color) = use-state("fancy-secondary-body-color", orange.lighten(95%))
-#let (get-tertiary-border-color, set-tertiary-border-color) = use-state("fancy-tertiary-border-color", blue.darken(30%))
-#let (get-tertiary-body-color, set-tertiary-body-color) = use-state("fancy-tertiary-body-color", blue.lighten(95%))
+#let (get-primary-border-color, set-primary-border-color) = use-state(
+  "fancy-primary-border-color",
+  green.darken(30%),
+)
+#let (get-primary-body-color, set-primary-body-color) = use-state(
+  "fancy-primary-body-color",
+  green.lighten(95%),
+)
+#let (get-secondary-border-color, set-secondary-border-color) = use-state(
+  "fancy-secondary-border-color",
+  orange.darken(
+    0%,
+  ),
+)
+#let (get-secondary-body-color, set-secondary-body-color) = use-state(
+  "fancy-secondary-body-color",
+  orange.lighten(95%),
+)
+#let (get-tertiary-border-color, set-tertiary-border-color) = use-state(
+  "fancy-tertiary-border-color",
+  blue.darken(30%),
+)
+#let (get-tertiary-body-color, set-tertiary-body-color) = use-state(
+  "fancy-tertiary-body-color",
+  blue.lighten(95%),
+)
 
 /// Register global symbols.
 #let (get-primary-symbol, set-primary-symbol) = use-state(
@@ -53,13 +71,19 @@
   ..args,
   body,
 ) = context {
-  let radius = if get-radius == auto { get-fancy-radius(here()) } else { get-radius(here()) }
+  let radius = if get-radius == auto { get-fancy-radius(here()) } else {
+    get-radius(here())
+  }
   // Main rendering
   let rendered = showybox(
     frame: (
       thickness: .05em,
       radius: radius,
-      inset: (x: 1.2em, top: if full-title != "" { .7em } else { 1.2em }, bottom: 1.2em),
+      inset: (
+        x: 1.2em,
+        top: if full-title != "" { .7em } else { 1.2em },
+        bottom: 1.2em,
+      ),
       border-color: get-border-color(here()),
       title-color: get-border-color(here()),
       body-color: get-body-color(here()),
@@ -87,14 +111,21 @@
     },
     ..args,
     {
-      body
+      indent-repairer(body)
       if get-symbol(here()) != none {
-        place(end + bottom, dy: .8em, dx: .9em, text(size: .6em, fill: get-border-color(here()), get-symbol(here())))
+        place(end + bottom, dy: .8em, dx: .9em, text(
+          size: .6em,
+          fill: get-border-color(here()),
+          get-symbol(here()),
+        ))
       }
     },
   )
   if "html" in dictionary(std) and target() == "html" {
-    html.elem("div", attrs: (style: "margin-bottom: .5em;"), html.frame(block(width: html-width, rendered)))
+    html.elem("div", attrs: (style: "margin-bottom: .5em;"), html.frame(block(
+      width: html-width,
+      rendered,
+    )))
   } else {
     rendered
   }
@@ -157,7 +188,12 @@
   ),
 )
 
-#let (definition-counter, definition-box, definition, show-definition) = make-frame(
+#let (
+  definition-counter,
+  definition-box,
+  definition,
+  show-definition,
+) = make-frame(
   "definition",
   theorion-i18n-map.at("definition"),
   counter: theorem-counter,
@@ -168,7 +204,12 @@
   ),
 )
 
-#let (proposition-counter, proposition-box, proposition, show-proposition) = make-frame(
+#let (
+  proposition-counter,
+  proposition-box,
+  proposition,
+  show-proposition,
+) = make-frame(
   "proposition",
   theorion-i18n-map.at("proposition"),
   counter: theorem-counter,
@@ -179,7 +220,12 @@
   ),
 )
 
-#let (assumption-counter, assumption-box, assumption, show-assumption) = make-frame(
+#let (
+  assumption-counter,
+  assumption-box,
+  assumption,
+  show-assumption,
+) = make-frame(
   "assumption",
   theorion-i18n-map.at("assumption"),
   counter: theorem-counter,
@@ -201,7 +247,12 @@
   ),
 )
 
-#let (conjecture-counter, conjecture-box, conjecture, show-conjecture) = make-frame(
+#let (
+  conjecture-counter,
+  conjecture-box,
+  conjecture,
+  show-conjecture,
+) = make-frame(
   "conjecture",
   theorion-i18n-map.at("conjecture"),
   counter: theorem-counter,

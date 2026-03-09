@@ -7,6 +7,7 @@
 #set page(height: auto)
 #set heading(numbering: "1.1")
 #set text(lang: "zh", region: "cn")
+#set par(first-line-indent: (amount: 2em, all: true), justify: true)
 
 /// 1. 更改计数器和编号：
 // #set-inherited-levels(1)
@@ -15,6 +16,7 @@
 // #set-theorion-numbering("1.1")
 
 /// 2. 其他选项：
+// #set-indent-mode(auto)  // auto (default), none, length or dictionary
 // #set-result("noanswer")
 // #set-qed-symbol[#math.qed]
 
@@ -250,7 +252,7 @@
 
   对于任意 $2 <= k <= n$，$n! + k$ 能被 $k$ 整除，因为：
   $n! + k = k(n!/k + 1)$
-  
+
   所以这是一个长度为 $n-1$ 的连续合数序列。
 ]
 
@@ -289,7 +291,10 @@
 == 重述定理
 
 // 1. 重述所有定理
-#theorion-restate(filter: it => it.outlined and it.identifier == "theorem", render: it => it.render)
+#theorion-restate(
+  filter: it => it.outlined and it.identifier == "theorem",
+  render: it => it.render,
+)
 // 2. 重述所有定理（自定义格式）
 // #theorion-restate(
 //   filter: it => it.outlined and it.identifier == "theorem",

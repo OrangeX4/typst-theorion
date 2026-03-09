@@ -21,6 +21,13 @@
 /// Global theorion numbering
 #let (get-theorion-numbering, set-theorion-numbering) = use-state("theorion-numbering", "1.1")
 
+/// Global indent mode, available values: auto (default), none, length or dictionary
+/// - auto: remove first paragraph indent automatically
+/// - none: do nothing to the paragraph indent
+/// - length: set the first paragraph indent to the given length
+/// - dictionary: set the first paragraph indent based on the given dictionary, like (amount: 2em, all: true)
+#let (get-indent-mode, set-indent-mode) = use-state("theorion-indent-mode", auto)
+
 /// Code from: [jbirnick](https://github.com/jbirnick/typst-rich-counters)
 /// Modified by: [OrangeX4](https://github.com/OrangeX4)
 /// License: MIT
@@ -373,13 +380,7 @@
     // skip the default figure style.
     show figure.where(kind: identifier): set align(start)
     show figure.where(kind: identifier): set block(breakable: true)
-    // Reset first-line-indent inside theorem environments (like LaTeX amsthm).
-    // This prevents theorem titles and body from being indented when
-    // #set par(first-line-indent: ...) is used in the document.
-    show figure.where(kind: identifier): it => {
-      set par(first-line-indent: 0em)
-      it.body
-    }
+    show figure.where(kind: identifier): it => it.body
     // Custom outline for the theorem environment.
     show outline: it => {
       show outline.entry: entry => {
@@ -461,5 +462,45 @@
     (right: value)
   } else {
     (left: value)
+  }
+}
+
+
+/// Repair the indentation of the first paragraph. Default behavior is to remove the indent of the first paragraph, which is set by `#set-indent-mode(auto)`.
+/// 
+/// If you use `#set-indent-mode(none)`, the paragraphs will keep their default indentation and the repairer will do nothing.
+/// 
+/// If you use `#set-indent-mode(length)` or `#set-indent-mode(dictionary)`, the paragraphs will be indented with the specified length or the amount in the dictionary. The dictionary should have the format (amount: length, all: boolean).
+#let indent-repairer(cont) = {
+  let _negative-indent-if-indent-all = context {
+    if par.first-line-indent.all {
+      h(-par.first-line-indent.amount)
+    }
+  }
+
+  let _fakepar = context {
+    let b = par(box())
+    b
+    v(-measure(b + b).height)
+  }
+
+  let indent-mode = get-indent-mode()
+
+  // Apply negative indent to the first line of the theorem body if first-line-indent is set and remove-first-par-indent is true
+  if indent-mode == auto {
+    _negative-indent-if-indent-all
+  }
+
+  // Main content
+  if indent-mode != auto and indent-mode != none {
+    set par(first-line-indent: indent-mode)
+    cont
+  } else {
+    cont
+  }
+
+  // if remove-first-par-indent is true, add a fake paragraph with negative vertical space to counteract the first-line indent of the first paragraph in the theorem body
+  if indent-mode == auto {
+    _fakepar
   }
 }

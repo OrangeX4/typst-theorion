@@ -2,7 +2,7 @@
 /// Users can create numbered remark-style environments using make-frame
 /// with render-fn-remark from simple cosmos.
 #import "/lib.typ": show-theorion, make-frame, theorion-i18n-map
-#import "/cosmos/simple.typ": theorem, theorem-counter, render-fn-remark
+#import "/cosmos/simple.typ": theorem, theorem-counter, render-fn
 
 #set page(width: 300pt, height: auto, margin: (x: 15pt, y: 15pt))
 #set heading(numbering: "1.")
@@ -12,7 +12,7 @@
   "remark",
   theorion-i18n-map.at("remark"),
   counter: theorem-counter,  // shares counter with theorem
-  render: render-fn-remark,  // italic title, upright body
+  render: render-fn.with(style: "remark"),  // italic title, upright body
 )
 
 #show: show-theorion
