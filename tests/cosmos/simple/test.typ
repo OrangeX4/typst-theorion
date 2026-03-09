@@ -1,8 +1,7 @@
 /// Test: simple cosmos style with LaTeX-aligned body styles
 /// - Plain style (italic body): theorem, lemma, corollary, proposition, conjecture
 /// - Definition style (upright body): definition, axiom, postulate, assumption, property
-#import "/lib.typ": show-theorion
-#import "/cosmos/simple.typ": *
+#import "/lib.typ": *
 
 #set page(width: 350pt, height: auto, margin: (x: 15pt, y: 15pt))
 #set heading(numbering: "1.1")

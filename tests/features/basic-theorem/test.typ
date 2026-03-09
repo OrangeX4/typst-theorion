@@ -1,7 +1,5 @@
 /// Test: basic theorem environments work correctly
-#import "/lib.typ": show-theorion, theorion-restate
-#import "/cosmos/simple.typ": *
-#import "/cosmos/default.typ": proof, example
+#import "/lib.typ": *
 
 #set page(width: 300pt, height: auto, margin: (x: 15pt, y: 15pt))
 #set heading(numbering: "1.")

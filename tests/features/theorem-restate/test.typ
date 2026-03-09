@@ -1,6 +1,5 @@
 /// Test: theorem restate functionality
-#import "/lib.typ": show-theorion, theorion-restate
-#import "/cosmos/simple.typ": *
+#import "/lib.typ": *
 
 #set page(width: 300pt, height: auto, margin: (x: 15pt, y: 15pt))
 #set heading(numbering: "1.")

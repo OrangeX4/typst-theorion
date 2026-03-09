@@ -1,6 +1,5 @@
 /// Test: Issue #29 - ref with supplement=none should not add extra space
-#import "/lib.typ": show-theorion
-#import "/cosmos/simple.typ": *
+#import "/lib.typ": *
 
 #set page(width: 300pt, height: auto, margin: (x: 15pt, y: 15pt))
 #set heading(numbering: "1")

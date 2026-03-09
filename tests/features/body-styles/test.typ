@@ -5,8 +5,7 @@
 ///   Used for: definition, axiom, postulate, assumption, property
 /// - Remark style (LaTeX \theoremstyle{remark}): italic title + period + space + UPRIGHT body
 ///   Available as render-fn-remark for custom environments
-#import "/lib.typ": show-theorion
-#import "/cosmos/simple.typ": *
+#import "/lib.typ": *
 
 #set page(width: 350pt, height: auto, margin: (x: 15pt, y: 15pt))
 #set heading(numbering: "1.")

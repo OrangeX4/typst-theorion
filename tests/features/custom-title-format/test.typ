@@ -1,8 +1,7 @@
 /// Test: custom title format using get-full-title parameter (issue #28 workaround)
 /// Users can customize the title format like "Theorem 1.1: My Theorem" instead of
 /// the default "Theorem 1.1 (My Theorem)"
-#import "/lib.typ": show-theorion
-#import "/cosmos/simple.typ": *
+#import "/lib.typ": *
 
 #set page(width: 300pt, height: auto, margin: (x: 15pt, y: 15pt))
 #set heading(numbering: "1.")

@@ -20,7 +20,7 @@
 
 = Numbered Remarks
 
-#theorem()[
+#theorem[
   There are infinitely many prime numbers.
 ]
 
@@ -29,7 +29,7 @@
   The body is upright, but the title "Remark 1.2" is italic.
 ]
 
-#theorem()[
+#theorem[
   Second theorem in section 1.
 ]
 
