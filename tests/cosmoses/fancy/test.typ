@@ -22,3 +22,14 @@
 #set-primary-body-color(purple.lighten(90%))
 
 #definition(title: "Colored Definition")[A definition with custom purple color.]
+
+= Zero Radius (Issue #13)
+
+// set-fancy-radius allows customizing the border radius
+#set-fancy-radius(0em)
+
+#theorem(title: "Square Corners")[This theorem has square corners (radius = 0).]
+
+#set-fancy-radius(.3em)
+
+#theorem(title: "Rounded Corners")[This theorem has rounded corners (default radius).]

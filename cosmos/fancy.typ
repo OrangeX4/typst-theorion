@@ -1,11 +1,40 @@
 #import "../core.typ": *
 #import "../deps.typ": showybox
 
+/// Register global colors.
+#let (get-primary-border-color, set-primary-border-color) = use-state("fancy-primary-border-color", green.darken(30%))
+#let (get-primary-body-color, set-primary-body-color) = use-state("fancy-primary-body-color", green.lighten(95%))
+#let (get-secondary-border-color, set-secondary-border-color) = use-state("fancy-secondary-border-color", orange.darken(
+  0%,
+))
+#let (get-secondary-body-color, set-secondary-body-color) = use-state("fancy-secondary-body-color", orange.lighten(95%))
+#let (get-tertiary-border-color, set-tertiary-border-color) = use-state("fancy-tertiary-border-color", blue.darken(30%))
+#let (get-tertiary-body-color, set-tertiary-body-color) = use-state("fancy-tertiary-body-color", blue.lighten(95%))
+
+/// Register global symbols.
+#let (get-primary-symbol, set-primary-symbol) = use-state(
+  "fancy-primary-symbol",
+  sym.suit.club.filled,
+)
+#let (get-secondary-symbol, set-secondary-symbol) = use-state(
+  "fancy-secondary-symbol",
+  sym.suit.heart.stroked,
+)
+#let (get-tertiary-symbol, set-tertiary-symbol) = use-state(
+  "fancy-tertiary-symbol",
+  sym.suit.spade.filled,
+)
+
+/// Register global radius for the fancy box border.
+/// Use #set-fancy-radius(0em) to remove the border radius (square corners).
+#let (get-fancy-radius, set-fancy-radius) = use-state("fancy-radius", .3em)
+
 /// A fancy box design inspired by elegantbook style.
 ///
 /// - get-border-color (function): Color of the box border. Default is `loc => orange.darken(0%)`.
 /// - get-body-color (function): Color of the box background. Default is `loc => orange.lighten(95%)`.
 /// - get-symbol (function): Symbol to display at bottom right. Default is `loc => sym.suit.heart.stroked`.
+/// - get-radius (function): Border radius of the box. Default reads from global #set-fancy-radius state.
 /// - prefix (content): Prefix text before the title. Default is `none`.
 /// - title (string): Title of the box. Default is empty string.
 /// - full-title (auto|content): Complete title including prefix. Default is `auto`.
@@ -15,6 +44,7 @@
   get-border-color: loc => orange.darken(0%),
   get-body-color: loc => orange.lighten(95%),
   get-symbol: loc => sym.suit.heart.stroked,
+  get-radius: auto,
   prefix: none,
   title: "",
   full-title: auto,
@@ -23,11 +53,12 @@
   ..args,
   body,
 ) = context {
+  let radius = if get-radius == auto { get-fancy-radius(here()) } else { get-radius(here()) }
   // Main rendering
   let rendered = showybox(
     frame: (
       thickness: .05em,
-      radius: .3em,
+      radius: radius,
       inset: (x: 1.2em, top: if full-title != "" { .7em } else { 1.2em }, bottom: 1.2em),
       border-color: get-border-color(here()),
       title-color: get-border-color(here()),
@@ -68,30 +99,6 @@
     rendered
   }
 }
-
-/// Register global colors.
-#let (get-primary-border-color, set-primary-border-color) = use-state("fancy-primary-border-color", green.darken(30%))
-#let (get-primary-body-color, set-primary-body-color) = use-state("fancy-primary-body-color", green.lighten(95%))
-#let (get-secondary-border-color, set-secondary-border-color) = use-state("fancy-secondary-border-color", orange.darken(
-  0%,
-))
-#let (get-secondary-body-color, set-secondary-body-color) = use-state("fancy-secondary-body-color", orange.lighten(95%))
-#let (get-tertiary-border-color, set-tertiary-border-color) = use-state("fancy-tertiary-border-color", blue.darken(30%))
-#let (get-tertiary-body-color, set-tertiary-body-color) = use-state("fancy-tertiary-body-color", blue.lighten(95%))
-
-/// Register global symbols.
-#let (get-primary-symbol, set-primary-symbol) = use-state(
-  "fancy-primary-symbol",
-  sym.suit.club.filled,
-)
-#let (get-secondary-symbol, set-secondary-symbol) = use-state(
-  "fancy-secondary-symbol",
-  sym.suit.heart.stroked,
-)
-#let (get-tertiary-symbol, set-tertiary-symbol) = use-state(
-  "fancy-tertiary-symbol",
-  sym.suit.spade.filled,
-)
 
 
 /// Create corresponding theorem box.
