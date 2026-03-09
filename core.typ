@@ -373,7 +373,13 @@
     // skip the default figure style.
     show figure.where(kind: identifier): set align(start)
     show figure.where(kind: identifier): set block(breakable: true)
-    show figure.where(kind: identifier): it => it.body
+    // Reset first-line-indent inside theorem environments (like LaTeX amsthm).
+    // This prevents theorem titles and body from being indented when
+    // #set par(first-line-indent: ...) is used in the document.
+    show figure.where(kind: identifier): it => {
+      set par(first-line-indent: 0em)
+      it.body
+    }
     // Custom outline for the theorem environment.
     show outline: it => {
       show outline.entry: entry => {

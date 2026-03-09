@@ -6,13 +6,12 @@
   title: "",
   full-title: auto,
   body,
-) = {
+) = block(above: 1.2em, below: 1.2em, {
   if full-title != "" {
     strong[#full-title.] + sym.space
   }
   emph(body)
-  parbreak()
-}
+})
 
 /// Create corresponding theorem box.
 #let (theorem-counter, theorem-box, theorem, show-theorem) = make-frame(
