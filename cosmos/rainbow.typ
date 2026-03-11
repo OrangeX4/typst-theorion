@@ -138,15 +138,15 @@
 
 /// Set the number of inherited levels for theorem environments
 ///
-/// - value (integer): Number of levels to inherit
+/// - value (int): Number of levels to inherit
 #let set-inherited-levels(value) = (theorem-counter.set-inherited-levels)(value)
 
 /// Set the zero-fill option for theorem environments
 ///
-/// - value (boolean): Whether to zero-fill the numbering
+/// - value (bool): Whether to zero-fill the numbering
 #let set-zero-fill(value) = (theorem-counter.set-zero-fill)(value)
 
 /// Set the leading-zero option for theorem environments
 ///
-/// - value (boolean): Whether to include leading zeros in the numbering
+/// - value (bool): Whether to include leading zeros in the numbering
 #let set-leading-zero(value) = (theorem-counter.set-leading-zero)(value)

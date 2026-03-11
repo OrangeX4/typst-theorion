@@ -54,8 +54,8 @@
 /// - get-symbol (function): Symbol to display at bottom right. Default is `loc => sym.suit.heart.stroked`.
 /// - get-radius (function): Border radius of the box. Default reads from global #set-fancy-radius state.
 /// - prefix (content): Prefix text before the title. Default is `none`.
-/// - title (string): Title of the box. Default is empty string.
-/// - full-title (auto|content): Complete title including prefix. Default is `auto`.
+/// - title (str): Title of the box. Default is empty string.
+/// - full-title (auto, content): Complete title including prefix. Default is `auto`.
 /// - body (content): Content of the box.
 /// -> content
 #let fancy-box(
@@ -285,16 +285,16 @@
 
 /// Set the number of inherited levels for theorem environments
 ///
-/// - value (integer): Number of levels to inherit
+/// - value (int): Number of levels to inherit
 #let set-inherited-levels(value) = (theorem-counter.set-inherited-levels)(value)
 
 
 /// Set the zero-fill option for theorem environments
 ///
-/// - value (boolean): Whether to zero-fill the numbering
+/// - value (bool): Whether to zero-fill the numbering
 #let set-zero-fill(value) = (theorem-counter.set-zero-fill)(value)
 
 /// Set the leading-zero option for theorem environments
 ///
-/// - value (boolean): Whether to include leading zeros in the numbering
+/// - value (bool): Whether to include leading zeros in the numbering
 #let set-leading-zero(value) = (theorem-counter.set-leading-zero)(value)

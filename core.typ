@@ -35,11 +35,11 @@
 
 /// Create a richer counter that can inherit from other counters and display the counter value. Returns a dictionary of functions to interact with the counter like `at`, `get-inherited-levels` and `set-inherited-levels`.
 ///
-/// - identifier (string): Unique identifier for the counter.
-/// - inherited-levels (integer): Number of heading levels to inherit from. Default is 0, which will inherit from the inherited-from counter if it is a dictionary.
+/// - identifier (str): Unique identifier for the counter.
+/// - inherited-levels (int): Number of heading levels to inherit from. Default is 0, which will inherit from the inherited-from counter if it is a dictionary.
 /// - inherited-from (counter): Counter to inherit from. Default is heading.
-/// - zero-fill (boolean): Whether to zero-fill the numbering. Default is false.
-/// - leading-zero (boolean): Whether to remove the leading zero. Default is false.
+/// - zero-fill (bool): Whether to zero-fill the numbering. Default is false.
+/// - leading-zero (bool): Whether to remove the leading zero. Default is false.
 #let richer-counter(
   identifier: none,
   inherited-levels: 0,
@@ -275,12 +275,12 @@
 
 /// Create a theorem environment based on richer-counter
 ///
-/// - identifier (string): Unique identifier for the counter and the kind of the frame
-/// - supplement-map (string|dict): Label text or dictionary of labels for different languages
+/// - identifier (str): Unique identifier for the counter and the kind of the frame
+/// - supplement-map (str, dictionary): Label text or dictionary of labels for different languages
 /// - counter (counter): Counter to use. Default is none, which creates a new counter based on the identifier
-/// - inherited-levels (integer): Number of heading levels to inherit from. Default is 0
+/// - inherited-levels (int): Number of heading levels to inherit from. Default is 0
 /// - inherited-from (counter): Counter to inherit from. Default is heading
-/// - numbering (string): Numbering format. Default is get-theorion-numbering
+/// - numbering (str): Numbering format. Default is get-theorion-numbering
 /// - render (function): Custom rendering function
 /// -> (counter, render-fn, frame-fn, show-fn)
 #let make-frame(
@@ -455,7 +455,7 @@
 
 /// Create a dictionary (right/left: value) based on `text.lang`
 ///
-/// - value (string): left value for LTR text, right value for RTL text
+/// - value (str): left value for LTR text, right value for RTL text
 /// -> dictionary
 #let language-aware-start(value) = {
   if text.lang == "ar" {
