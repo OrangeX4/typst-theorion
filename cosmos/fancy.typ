@@ -26,6 +26,14 @@
   "fancy-tertiary-body-color",
   blue.lighten(95%),
 )
+#let (get-quaternary-border-color, set-quaternary-border-color) = use-state(
+  "fancy-quaternary-border-color",
+  purple.darken(30%),
+)
+#let (get-quaternary-body-color, set-quaternary-body-color) = use-state(
+  "fancy-quaternary-body-color",
+  purple.lighten(95%),
+)
 
 /// Register global symbols.
 #let (get-primary-symbol, set-primary-symbol) = use-state(
@@ -39,6 +47,10 @@
 #let (get-tertiary-symbol, set-tertiary-symbol) = use-state(
   "fancy-tertiary-symbol",
   sym.suit.spade.filled,
+)
+#let (get-quaternary-symbol, set-quaternary-symbol) = use-state(
+  "fancy-quaternary-symbol",
+  sym.suit.diamond.stroked,
 )
 
 /// Register global radius for the fancy box border.
@@ -267,9 +279,9 @@
   theorion-i18n-map.at("remark"),
   counter: theorem-counter,
   render: fancy-box.with(
-    get-border-color: get-tertiary-border-color,
-    get-body-color: get-tertiary-body-color,
-    get-symbol: get-tertiary-symbol,
+    get-border-color: get-quaternary-border-color,
+    get-body-color: get-quaternary-body-color,
+    get-symbol: get-quaternary-symbol,
   ),
 )
 
@@ -278,9 +290,9 @@
   theorion-i18n-map.at("note"),
   counter: theorem-counter,
   render: fancy-box.with(
-    get-border-color: get-tertiary-border-color,
-    get-body-color: get-tertiary-body-color,
-    get-symbol: get-tertiary-symbol,
+    get-border-color: get-quaternary-border-color,
+    get-body-color: get-quaternary-body-color,
+    get-symbol: get-quaternary-symbol,
   ),
 )
 
@@ -289,9 +301,9 @@
   theorion-i18n-map.at("example"),
   counter: theorem-counter,
   render: fancy-box.with(
-    get-border-color: get-secondary-border-color,
-    get-body-color: get-secondary-body-color,
-    get-symbol: get-secondary-symbol,
+    get-border-color: get-quaternary-border-color,
+    get-body-color: get-quaternary-body-color,
+    get-symbol: get-quaternary-symbol,
   ),
 )
 
@@ -300,9 +312,9 @@
   theorion-i18n-map.at("exercise"),
   counter: theorem-counter,
   render: fancy-box.with(
-    get-border-color: get-secondary-border-color,
-    get-body-color: get-secondary-body-color,
-    get-symbol: get-secondary-symbol,
+    get-border-color: get-quaternary-border-color,
+    get-body-color: get-quaternary-body-color,
+    get-symbol: get-quaternary-symbol,
   ),
 )
 
@@ -311,9 +323,9 @@
   theorion-i18n-map.at("problem"),
   counter: theorem-counter,
   render: fancy-box.with(
-    get-border-color: get-secondary-border-color,
-    get-body-color: get-secondary-body-color,
-    get-symbol: get-secondary-symbol,
+    get-border-color: get-quaternary-border-color,
+    get-body-color: get-quaternary-body-color,
+    get-symbol: get-quaternary-symbol,
   ),
 )
 
