@@ -15,3 +15,13 @@
 #corollary[A corollary in navy.]
 #proposition[A proposition in blue.]
 #axiom(title: "Axiom")[An axiom in green.]
+
+= New Environments
+
+#example[An example in olive cloud box.]
+#note[A note in navy cloud box.]
+#remark[A remark in fuchsia cloud box.]
+#problem[A problem in eastern cloud box.]
+#solution[A solution (unnumbered, eastern cloud).]
+#exercise[An exercise in orange cloud box.]
+#conclusion[A conclusion in purple cloud box.]

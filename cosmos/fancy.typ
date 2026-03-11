@@ -1,5 +1,6 @@
 #import "../core.typ": *
 #import "../deps.typ": showybox
+#import "default.typ": get-result
 
 /// Register global colors.
 #let (get-primary-border-color, set-primary-border-color) = use-state(
@@ -263,6 +264,92 @@
   ),
 )
 
+
+#let (remark-counter, remark-box, remark, show-remark) = make-frame(
+  "remark",
+  theorion-i18n-map.at("remark"),
+  counter: theorem-counter,
+  render: fancy-box.with(
+    get-border-color: get-tertiary-border-color,
+    get-body-color: get-tertiary-body-color,
+    get-symbol: get-tertiary-symbol,
+  ),
+)
+
+#let (note-counter, note-box, note, show-note) = make-frame(
+  "note",
+  theorion-i18n-map.at("note"),
+  counter: theorem-counter,
+  render: fancy-box.with(
+    get-border-color: get-tertiary-border-color,
+    get-body-color: get-tertiary-body-color,
+    get-symbol: get-tertiary-symbol,
+  ),
+)
+
+#let (example-counter, example-box, example, show-example) = make-frame(
+  "example",
+  theorion-i18n-map.at("example"),
+  counter: theorem-counter,
+  render: fancy-box.with(
+    get-border-color: get-secondary-border-color,
+    get-body-color: get-secondary-body-color,
+    get-symbol: get-secondary-symbol,
+  ),
+)
+
+#let (conclusion-counter, conclusion-box, conclusion, show-conclusion) = make-frame(
+  "conclusion",
+  theorion-i18n-map.at("conclusion"),
+  counter: theorem-counter,
+  render: fancy-box.with(
+    get-border-color: get-primary-border-color,
+    get-body-color: get-primary-body-color,
+    get-symbol: get-primary-symbol,
+  ),
+)
+
+#let (exercise-counter, exercise-box, exercise, show-exercise) = make-frame(
+  "exercise",
+  theorion-i18n-map.at("exercise"),
+  counter: theorem-counter,
+  render: fancy-box.with(
+    get-border-color: get-secondary-border-color,
+    get-body-color: get-secondary-body-color,
+    get-symbol: get-secondary-symbol,
+  ),
+)
+
+#let (problem-counter, problem-box, problem, show-problem) = make-frame(
+  "problem",
+  theorion-i18n-map.at("problem"),
+  counter: theorem-counter,
+  render: fancy-box.with(
+    get-border-color: get-secondary-border-color,
+    get-body-color: get-secondary-body-color,
+    get-symbol: get-secondary-symbol,
+  ),
+)
+
+/// Create a solution environment with fancy box styling
+/// Can be hidden using `#set-result("noanswer")`
+///
+/// - title (str, dictionary): Title text or dictionary for i18n. Default is "Solution"
+/// - body (content): Content of the solution
+/// -> content
+#let solution(
+  title: theorion-i18n-map.at("solution"),
+  body,
+) = context if get-result(here()) == "noanswer" { none } else {
+  fancy-box(
+    get-border-color: get-secondary-border-color,
+    get-body-color: get-secondary-body-color,
+    get-symbol: get-secondary-symbol,
+    title: theorion-i18n(title),
+    body,
+  )
+}
+
 /// Collection of show rules for all theorem environments
 /// Applies all theorion-related show rules to the document
 ///
@@ -279,6 +366,12 @@
   show: show-assumption
   show: show-property
   show: show-conjecture
+  show: show-remark
+  show: show-note
+  show: show-example
+  show: show-conclusion
+  show: show-exercise
+  show: show-problem
   body
 }
 

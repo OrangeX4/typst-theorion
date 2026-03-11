@@ -12,57 +12,6 @@
 /// Default is `sym.square`
 #let (get-qed-symbol, set-qed-symbol) = use-state("theorion-qed-symbol", sym.square)
 
-/// Create an example environment with italic title
-///
-/// - title (str, dictionary): Title text or dictionary for i18n. Default is "Example"
-/// - body (content): Content of the example
-/// -> content
-#let example(
-  title: theorion-i18n-map.at("example"),
-  body,
-) = [#emph(theorion-i18n(title)).#sym.space#body]
-
-
-/// Create a problem environment with italic title
-///
-/// - title (str, dictionary): Title text or dictionary for i18n. Default is "Problem"
-/// - body (content): Content of the problem
-/// -> content
-#let problem(
-  title: theorion-i18n-map.at("problem"),
-  body,
-) = [#emph(theorion-i18n(title)).#sym.space#body]
-
-/// Create a solution environment with italic title
-/// Can be hidden using #set-result("noanswer")
-///
-/// - title (str, dictionary): Title text or dictionary for i18n. Default is "Solution"
-/// - body (content): Content of the solution
-/// -> content
-#let solution(
-  title: theorion-i18n-map.at("solution"),
-  body,
-) = context if get-result(here()) == "noanswer" { none } else [#emph(theorion-i18n(title)).#sym.space#body]
-
-/// Create a conclusion environment with italic title
-///
-/// - title (str, dictionary): Title text or dictionary for i18n. Default is "Conclusion"
-/// - body (content): Content of the conclusion
-/// -> content
-#let conclusion(
-  title: theorion-i18n-map.at("conclusion"),
-  body,
-) = [#emph(theorion-i18n(title)).#sym.space#body]
-
-/// Create an exercise environment with italic title
-///
-/// - title (str, dictionary): Title text or dictionary for i18n. Default is "Exercise"
-/// - body (content): Content of the exercise
-/// -> content
-#let exercise(
-  title: theorion-i18n-map.at("exercise"),
-  body,
-) = [#emph(theorion-i18n(title)).#sym.space#body]
 
 /// Create a proof environment with italic title and QED symbol
 /// Can be hidden using `#set-result("noanswer")`

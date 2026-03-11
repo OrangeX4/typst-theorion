@@ -16,6 +16,16 @@
 #proposition(title: "Proposition")[A proposition in fancy blue box.]
 #axiom(title: "Axiom")[An axiom.]
 
+= New Environments
+
+#example(title: "Example")[An example in fancy orange box.]
+#note[A note in fancy blue box.]
+#remark[A remark in fancy blue box.]
+#problem[A problem in fancy orange box.]
+#solution[A solution in fancy orange box (unnumbered).]
+#exercise[An exercise in fancy orange box.]
+#conclusion[A conclusion in fancy green box.]
+
 = Custom Colors
 
 #set-primary-border-color(purple.darken(30%))
