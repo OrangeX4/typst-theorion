@@ -244,7 +244,7 @@ Let's start with the most fundamental definition.
   Every non-zero polynomial with complex coefficients has a complex root.
 ] <post:fta>
 
-#remark[
+#remark-block[
   This theorem is also known as Gauss's theorem, as it was first rigorously proved by Gauss.
 ]
 

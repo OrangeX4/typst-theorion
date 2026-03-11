@@ -253,7 +253,7 @@
 /// - title (str, dictionary): Title text or dictionary for i18n. Default is "Remark"
 /// - body (content): Content of the remark
 /// -> content
-#let remark = note-block.with(
+#let remark-block = note-block.with(
   fill: rgb("#118D8D"),
   title: theorion-i18n-map.at("remark"),
   icon-name: "comment",
