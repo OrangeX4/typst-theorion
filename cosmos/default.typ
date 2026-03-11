@@ -10,8 +10,13 @@
 /// Global QED symbol configuration
 /// Modified by `#set-qed-symbol(sym.square.stroked)`
 /// Default is `sym.square`
-#let (get-qed-symbol, set-qed-symbol) = use-state("theorion-qed-symbol", sym.square)
+#let (get-qed-symbol, set-qed-symbol) = use-state(
+  "theorion-qed-symbol",
+  sym.square,
+)
 
+/// Code from: https://github.com/nleanba/typst-theoretic
+/// Thanks for @nleanba
 /// Internal state: stack of pending QED symbols for nested proofs.
 /// Each entry is either a content/symbol to display, or `none` if already placed.
 #let _theorion-qed-stack = state("theorion-qed-stack", ())
@@ -48,7 +53,11 @@
         candidate = _body.children.last()
       }
     }
-    if candidate.func() == math.equation and candidate.block and math.equation.numbering == none {
+    if (
+      candidate.func() == math.equation
+        and candidate.block
+        and math.equation.numbering == none
+    ) {
       // Block equation at end: use equation numbering slot for QED.
       // math.equation.numbering returns the current styled value (from set rules),
       // so this correctly skips when global equation numbering is active.
@@ -72,7 +81,11 @@
       }
     }
   } else {
-    if _body.func() == math.equation and _body.block and math.equation.numbering == none {
+    if (
+      _body.func() == math.equation
+        and _body.block
+        and math.equation.numbering == none
+    ) {
       // Same equation treatment as above (single-element body case)
       _body = {
         // Use ".." to capture and ignore the variadic equation-number arguments
@@ -117,33 +130,34 @@
   })
 }
 
-/// Create a solution environment with italic title
-/// Can be hidden using #set-result("noanswer")
+/// Environment QED symbol like proof or solution
 ///
-/// - title (str, dictionary): Title text or dictionary for i18n. Default is "Solution"
-/// - body (content): Content of the solution
+/// - qed (none, auto, symbol, content): Symbol to use for end of environment. Default is none
+/// - render-fn (function): Function to render the environment. Default is `body => [#emph(theorion-i18n(title)).#sym.space#body]`
+/// - body (content): Content of the environment
 /// -> content
-#let solution(
-  title: theorion-i18n-map.at("solution"),
+#let environment-with-qed(
+  qed: auto,
+  render-fn: (title, body) => [#emph(theorion-i18n(title)).#sym.space#body],
+  title,
   body,
-) = context if get-result(here()) == "noanswer" { none } else [#emph(theorion-i18n(title)).#sym.space#body]
-
-/// Create a conclusion environment with italic title
-///
-/// - title (str, dictionary): Title text or dictionary for i18n. Default is "Conclusion"
-/// - body (content): Content of the conclusion
-/// -> content
-#let conclusion(
-  title: theorion-i18n-map.at("conclusion"),
-  body,
-) = [#emph(theorion-i18n(title)).#sym.space#body]
+) = {
+  let qed-symbol = if qed == auto { get-qed-symbol(here()) } else { qed }
+  // Push qed-symbol onto the stack before the body renders, so #qedhere can read it
+  let push-qed = _theorion-qed-stack.update(old => (..old, qed-symbol))
+  if qed-symbol != none {
+    render-fn(title)[#push-qed#_append-qed(body, qed-symbol)]
+  } else {
+    render-fn(title, body)
+  }
+}
 
 /// Create a proof environment with italic title and QED symbol
 /// Can be hidden using `#set-result("noanswer")`
 /// Uses global QED symbol set by `#set-qed-symbol()`
 ///
 /// - title (str, dictionary): Title text or dictionary for i18n. Default is "Proof"
-/// - qed (auto, symbol, content): Symbol to use for end of proof. Default is from global setting
+/// - qed (none, auto, symbol, content): Symbol to use for end of proof. Default is from global setting
 /// - body (content): Content of the proof
 /// -> content
 #let proof(
@@ -151,10 +165,39 @@
   qed: auto,
   body,
 ) = context if get-result(here()) == "noanswer" { none } else {
-  let qed-symbol = if qed == auto { get-qed-symbol(here()) } else { qed }
-  // Push qed-symbol onto the stack before the body renders, so #qedhere can read it
-  let push-qed = _theorion-qed-stack.update(old => (..old, qed-symbol))
-  [#emph(theorion-i18n(title)).#sym.space#push-qed#_append-qed(body, qed-symbol)]
+  environment-with-qed(qed: qed, title, body)
+}
+
+/// Create a solution environment with italic title and optional QED symbol
+/// Can be hidden using `#set-result("noanswer")`
+/// Uses global QED symbol set by `#set-qed-symbol()`
+///
+/// - title (str, dictionary): Title text or dictionary for i18n. Default is "solution"
+/// - qed (none, auto, symbol, content): Symbol to use for end of solution. Default is none
+/// - body (content): Content of the solution
+/// -> content
+#let solution(
+  title: theorion-i18n-map.at("solution"),
+  qed: none,
+  body,
+) = context if get-result(here()) == "noanswer" { none } else {
+  environment-with-qed(qed: qed, title, body)
+}
+
+/// Create a conclusion environment with italic title and optional QED symbol
+/// Can be hidden using `#set-result("noanswer")`
+/// Uses global QED symbol set by `#set-qed-symbol()`
+///
+/// - title (str, dictionary): Title text or dictionary for i18n. Default is "conclusion"
+/// - qed (none, auto, symbol, content): Symbol to use for end of conclusion. Default is none
+/// - body (content): Content of the conclusion
+/// -> content
+#let conclusion(
+  title: theorion-i18n-map.at("conclusion"),
+  qed: none,
+  body,
+) = context if get-result(here()) == "noanswer" { none } else {
+  environment-with-qed(qed: qed, title, body)
 }
 
 /// Create an emphasized block with yellow styling and dashed border

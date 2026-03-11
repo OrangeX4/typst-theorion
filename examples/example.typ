@@ -254,7 +254,7 @@ Let's start with the most fundamental definition.
   Prove: For any integer $n > 1$, there exists a sequence of $n$ consecutive composite numbers.
 ]
 
-#solution[
+#solution(qed: auto)[
   Consider the sequence: $n! + 2, n! + 3, ..., n! + n$
 
   For any $2 <= k <= n$, $n! + k$ is divisible by $k$ because:

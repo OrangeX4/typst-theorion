@@ -482,3 +482,4 @@ Theorion provides experimental support for HTML rendering, allowing you to embed
 - Thanks [s15n](https://github.com/s15n) for [typst-thmbox](https://github.com/s15n/typst-thmbox)
 - Thanks [0x6b](https://github.com/0x6b) for [octique](https://github.com/0x6b/typst-octique)
 - Thanks [Pablo González Calderón](https://github.com/Pablo-Gonzalez-Calderon) for [showybox](https://github.com/Pablo-Gonzalez-Calderon/showybox-package)
+- Thanks [nleanba](https://github.com/nleanba) for [theoretic](https://github.com/nleanba/typst-theoretic)
