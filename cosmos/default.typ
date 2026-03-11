@@ -12,6 +12,111 @@
 /// Default is `sym.square`
 #let (get-qed-symbol, set-qed-symbol) = use-state("theorion-qed-symbol", sym.square)
 
+/// Internal state: stack of pending QED symbols for nested proofs.
+/// Each entry is either a content/symbol to display, or `none` if already placed.
+#let _theorion-qed-stack = state("theorion-qed-stack", ())
+
+/// Internal helper: format a QED symbol right-aligned at the end of a line.
+#let _fmt-qed-inline(qed-symbol) = {
+  h(1fr)
+  box()
+  h(1fr)
+  sym.wj
+  box(math.equation(qed-symbol, block: false))
+  linebreak()
+}
+
+/// Recursively append the QED symbol to the end of body content.
+/// Handles block equations (places QED as equation number), list/enum items
+/// (recurses into last item), and regular content (appends inline).
+#let _append-qed(body, qed-symbol) = {
+  // fmt-qed checks whether the QED has already been placed via #qedhere
+  let fmt-qed() = context {
+    let stack = _theorion-qed-stack.get()
+    if stack.len() > 0 and stack.last() != none {
+      _fmt-qed-inline(qed-symbol)
+    }
+  }
+
+  let _body = body
+  if _body.has("children") and _body.children.len() > 0 {
+    let candidate = _body.children.last()
+    // Skip trailing space/empty content
+    if candidate == [ ] {
+      _body = body.children.slice(0, -1).join()
+      if _body.has("children") {
+        candidate = _body.children.last()
+      }
+    }
+    if candidate.func() == math.equation and candidate.block and math.equation.numbering == none {
+      // Block equation at end: use equation numbering slot for QED.
+      // math.equation.numbering returns the current styled value (from set rules),
+      // so this correctly skips when global equation numbering is active.
+      _body = {
+        _body.children.slice(0, -1).join()
+        // Use ".." to capture and ignore the variadic equation-number arguments
+        set math.equation(numbering: (..) => fmt-qed(), number-align: bottom)
+        candidate
+        counter(math.equation).update(i => i - 1)
+      }
+    } else if candidate.func() == list.item or candidate.func() == enum.item {
+      // List/enum: recurse into last item
+      _body = {
+        _body.children.slice(0, -1).join()
+        candidate.func()(_append-qed(candidate.body, qed-symbol))
+      }
+    } else {
+      _body = {
+        _body
+        fmt-qed()
+      }
+    }
+  } else {
+    if _body.func() == math.equation and _body.block and math.equation.numbering == none {
+      // Same equation treatment as above (single-element body case)
+      _body = {
+        // Use ".." to capture and ignore the variadic equation-number arguments
+        set math.equation(numbering: (..) => fmt-qed(), number-align: bottom)
+        _body
+        counter(math.equation).update(i => i - 1)
+      }
+    } else if _body.func() == list.item or _body.func() == enum.item {
+      _body = _body.func()(_append-qed(_body.body, qed-symbol))
+    } else {
+      _body = {
+        _body
+        fmt-qed()
+      }
+    }
+  }
+
+  // Pop the QED stack entry when body finishes rendering
+  _body
+  _theorion-qed-stack.update(old => {
+    if old.len() > 0 { old.slice(0, -1) } else { old }
+  })
+}
+
+/// Place the QED symbol at this position manually.
+/// Use inside proof environments when the QED should appear at a specific location
+/// (e.g., inside a list item or before additional remarks) rather than at the end.
+///
+/// -> content
+#let qedhere = context {
+  let stack = _theorion-qed-stack.get()
+  if stack.len() > 0 and stack.last() != none {
+    let qed-symbol = stack.last()
+    _fmt-qed-inline(qed-symbol)
+  }
+  _theorion-qed-stack.update(old => {
+    if old.len() > 0 {
+      (..old.slice(0, -1), none) // Mark as placed to prevent double placement
+    } else {
+      old
+    }
+  })
+}
+
 /// Create an example environment with italic title
 ///
 /// - title (str, dictionary): Title text or dictionary for i18n. Default is "Example"
@@ -78,7 +183,9 @@
   body,
 ) = context if get-result(here()) == "noanswer" { none } else {
   let qed-symbol = if qed == auto { get-qed-symbol(here()) } else { qed }
-  [#emph(theorion-i18n(title)).#sym.space#body#box(width: 0em)#h(1fr)#sym.wj#sym.space.nobreak$#qed-symbol$]
+  // Push qed-symbol onto the stack before the body renders, so #qedhere can read it
+  let push-qed = _theorion-qed-stack.update(old => (..old, qed-symbol))
+  [#emph(theorion-i18n(title)).#sym.space#push-qed#_append-qed(body, qed-symbol)]
 }
 
 /// Create an emphasized block with yellow styling and dashed border
