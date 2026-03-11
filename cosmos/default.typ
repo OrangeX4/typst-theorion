@@ -15,33 +15,149 @@
   sym.square,
 )
 
-/// Create a solution environment with italic title
-/// Can be hidden using #set-result("noanswer")
-///
-/// - title (str, dictionary): Title text or dictionary for i18n. Default is "Solution"
-/// - body (content): Content of the solution
-/// -> content
-#let solution(
-  title: theorion-i18n-map.at("solution"),
-  body,
-) = context if get-result(here()) == "noanswer" { none } else [#emph(theorion-i18n(title)).#sym.space#body]
+/// Code from: https://github.com/nleanba/typst-theoretic
+/// Thanks for @nleanba
+/// Internal state: stack of pending QED symbols for nested proofs.
+/// Each entry is either a content/symbol to display, or `none` if already placed.
+#let _theorion-qed-stack = state("theorion-qed-stack", ())
 
-/// Create a conclusion environment with italic title
+/// Internal helper: format a QED symbol right-aligned at the end of a line.
+#let _fmt-qed-inline(qed-symbol) = {
+  h(1fr)
+  box()
+  h(1fr)
+  sym.wj
+  box(math.equation(qed-symbol, block: false))
+  linebreak()
+}
+
+/// Recursively append the QED symbol to the end of body content.
+/// Handles block equations (places QED as equation number), list/enum items
+/// (recurses into last item), and regular content (appends inline).
+#let _append-qed(body, qed-symbol) = {
+  // fmt-qed checks whether the QED has already been placed via #qedhere
+  let fmt-qed() = context {
+    let stack = _theorion-qed-stack.get()
+    if stack.len() > 0 and stack.last() != none {
+      _fmt-qed-inline(qed-symbol)
+    }
+  }
+
+  let _body = body
+  if _body.has("children") and _body.children.len() > 0 {
+    let candidate = _body.children.last()
+    // Skip trailing space/empty content
+    if candidate == [ ] {
+      _body = body.children.slice(0, -1).join()
+      if _body.has("children") {
+        candidate = _body.children.last()
+      }
+    }
+    if (
+      candidate.func() == math.equation
+        and candidate.block
+        and math.equation.numbering == none
+    ) {
+      // Block equation at end: use equation numbering slot for QED.
+      // math.equation.numbering returns the current styled value (from set rules),
+      // so this correctly skips when global equation numbering is active.
+      _body = {
+        _body.children.slice(0, -1).join()
+        // Use ".." to capture and ignore the variadic equation-number arguments
+        set math.equation(numbering: (..) => fmt-qed(), number-align: bottom)
+        candidate
+        counter(math.equation).update(i => i - 1)
+      }
+    } else if candidate.func() == list.item or candidate.func() == enum.item {
+      // List/enum: recurse into last item
+      _body = {
+        _body.children.slice(0, -1).join()
+        candidate.func()(_append-qed(candidate.body, qed-symbol))
+      }
+    } else {
+      _body = {
+        _body
+        fmt-qed()
+      }
+    }
+  } else {
+    if (
+      _body.func() == math.equation
+        and _body.block
+        and math.equation.numbering == none
+    ) {
+      // Same equation treatment as above (single-element body case)
+      _body = {
+        // Use ".." to capture and ignore the variadic equation-number arguments
+        set math.equation(numbering: (..) => fmt-qed(), number-align: bottom)
+        _body
+        counter(math.equation).update(i => i - 1)
+      }
+    } else if _body.func() == list.item or _body.func() == enum.item {
+      _body = _body.func()(_append-qed(_body.body, qed-symbol))
+    } else {
+      _body = {
+        _body
+        fmt-qed()
+      }
+    }
+  }
+
+  // Pop the QED stack entry when body finishes rendering
+  _body
+  _theorion-qed-stack.update(old => {
+    if old.len() > 0 { old.slice(0, -1) } else { old }
+  })
+}
+
+/// Place the QED symbol at this position manually.
+/// Use inside proof environments when the QED should appear at a specific location
+/// (e.g., inside a list item or before additional remarks) rather than at the end.
 ///
-/// - title (str, dictionary): Title text or dictionary for i18n. Default is "Conclusion"
-/// - body (content): Content of the conclusion
 /// -> content
-#let conclusion(
-  title: theorion-i18n-map.at("conclusion"),
+#let qedhere = context {
+  let stack = _theorion-qed-stack.get()
+  if stack.len() > 0 and stack.last() != none {
+    let qed-symbol = stack.last()
+    _fmt-qed-inline(qed-symbol)
+  }
+  _theorion-qed-stack.update(old => {
+    if old.len() > 0 {
+      (..old.slice(0, -1), none) // Mark as placed to prevent double placement
+    } else {
+      old
+    }
+  })
+}
+
+/// Environment QED symbol like proof or solution
+///
+/// - qed (none, auto, symbol, content): Symbol to use for end of environment. Default is none
+/// - render-fn (function): Function to render the environment. Default is `body => [#emph(theorion-i18n(title)).#sym.space#body]`
+/// - body (content): Content of the environment
+/// -> content
+#let environment-with-qed(
+  qed: auto,
+  render-fn: (title, body) => [#emph(theorion-i18n(title)).#sym.space#body],
+  title,
   body,
-) = [#emph(theorion-i18n(title)).#sym.space#body]
+) = {
+  let qed-symbol = if qed == auto { get-qed-symbol(here()) } else { qed }
+  // Push qed-symbol onto the stack before the body renders, so #qedhere can read it
+  let push-qed = _theorion-qed-stack.update(old => (..old, qed-symbol))
+  if qed-symbol != none {
+    render-fn(title)[#push-qed#_append-qed(body, qed-symbol)]
+  } else {
+    render-fn(title, body)
+  }
+}
 
 /// Create a proof environment with italic title and QED symbol
 /// Can be hidden using `#set-result("noanswer")`
 /// Uses global QED symbol set by `#set-qed-symbol()`
 ///
 /// - title (str, dictionary): Title text or dictionary for i18n. Default is "Proof"
-/// - qed (auto, symbol, content): Symbol to use for end of proof. Default is from global setting
+/// - qed (none, auto, symbol, content): Symbol to use for end of proof. Default is from global setting
 /// - body (content): Content of the proof
 /// -> content
 #let proof(
@@ -49,8 +165,39 @@
   qed: auto,
   body,
 ) = context if get-result(here()) == "noanswer" { none } else {
-  let qed-symbol = if qed == auto { get-qed-symbol(here()) } else { qed }
-  [#emph(theorion-i18n(title)).#sym.space#body#box(width: 0em)#h(1fr)#sym.wj#sym.space.nobreak$#qed-symbol$]
+  environment-with-qed(qed: qed, title, body)
+}
+
+/// Create a solution environment with italic title and optional QED symbol
+/// Can be hidden using `#set-result("noanswer")`
+/// Uses global QED symbol set by `#set-qed-symbol()`
+///
+/// - title (str, dictionary): Title text or dictionary for i18n. Default is "solution"
+/// - qed (none, auto, symbol, content): Symbol to use for end of solution. Default is none
+/// - body (content): Content of the solution
+/// -> content
+#let solution(
+  title: theorion-i18n-map.at("solution"),
+  qed: none,
+  body,
+) = context if get-result(here()) == "noanswer" { none } else {
+  environment-with-qed(qed: qed, title, body)
+}
+
+/// Create a conclusion environment with italic title and optional QED symbol
+/// Can be hidden using `#set-result("noanswer")`
+/// Uses global QED symbol set by `#set-qed-symbol()`
+///
+/// - title (str, dictionary): Title text or dictionary for i18n. Default is "conclusion"
+/// - qed (none, auto, symbol, content): Symbol to use for end of conclusion. Default is none
+/// - body (content): Content of the conclusion
+/// -> content
+#let conclusion(
+  title: theorion-i18n-map.at("conclusion"),
+  qed: none,
+  body,
+) = context if get-result(here()) == "noanswer" { none } else {
+  environment-with-qed(qed: qed, title, body)
 }
 
 /// Create an emphasized block with yellow styling and dashed border

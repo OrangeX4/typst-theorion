@@ -59,6 +59,17 @@ Just import and use theorion.
 #set-result("noanswer")
 #set-qed-symbol[#math.qed]
 
+// Use #qedhere to place the QED symbol at a specific position in a proof
+// (e.g., when the proof ends with a block equation or inside a list)
+#proof[
+  The result follows from:
+  $ x + y = z $  // QED appears at the right of this equation automatically
+]
+#proof[
+  Consider two cases.
+  - Case 1: #qedhere  // manual placement: QED appears here, not at end
+]
+
 // 3. Custom theorem environment for yourself
 #let (theorem-counter, theorem-box, theorem, show-theorem) = make-frame(
   "theorem",
@@ -438,6 +449,11 @@ Theorion provides experimental support for HTML rendering, allowing you to embed
 
 ## Changelog
 
+### 0.4.2
+
+- **feat: improved QED placement** — `proof` now correctly places the QED symbol at the bottom-right of block equations when the proof ends with a math equation
+- **feat: `#qedhere`** — new function to manually place the QED symbol at a specific position (useful when proof ends with a list item or when early termination is desired)
+
 ### 0.4.1
 
 - **URGENT FIX: fix display-number and support typst 0.14**
@@ -466,3 +482,4 @@ Theorion provides experimental support for HTML rendering, allowing you to embed
 - Thanks [s15n](https://github.com/s15n) for [typst-thmbox](https://github.com/s15n/typst-thmbox)
 - Thanks [0x6b](https://github.com/0x6b) for [octique](https://github.com/0x6b/typst-octique)
 - Thanks [Pablo González Calderón](https://github.com/Pablo-Gonzalez-Calderon) for [showybox](https://github.com/Pablo-Gonzalez-Calderon/showybox-package)
+- Thanks [nleanba](https://github.com/nleanba) for [theoretic](https://github.com/nleanba/typst-theoretic)
