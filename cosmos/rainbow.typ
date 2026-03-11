@@ -1,5 +1,4 @@
 #import "../core.typ": *
-#import "default.typ": get-result
 
 /// A simple render function with a colored start border
 #let render-fn(

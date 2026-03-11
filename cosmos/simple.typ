@@ -1,5 +1,4 @@
 #import "../core.typ": *
-#import "default.typ": get-qed-symbol, get-result
 
 /// Render function for theorem environments (similar to amsthm)
 #let render-fn(

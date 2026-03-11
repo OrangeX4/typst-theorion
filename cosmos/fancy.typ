@@ -1,6 +1,5 @@
 #import "../core.typ": *
 #import "../deps.typ": showybox
-#import "default.typ": get-result
 
 /// Register global colors.
 #let (get-primary-border-color, set-primary-border-color) = use-state(
