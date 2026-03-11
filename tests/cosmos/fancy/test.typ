@@ -1,6 +1,6 @@
 /// Test: fancy cosmos style (elegantbook-inspired)
-#import "/lib.typ": show-theorion
-#import "/cosmos/fancy.typ": *
+#import "/lib.typ": *
+#import cosmos.fancy: *
 
 #set page(width: 350pt, height: auto, margin: (x: 15pt, y: 15pt))
 #set heading(numbering: "1.1")

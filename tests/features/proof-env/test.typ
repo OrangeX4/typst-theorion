@@ -1,7 +1,6 @@
 /// Test: proof environment with QED symbol
-#import "/lib.typ": show-theorion, set-qed-symbol, set-result
-#import "/cosmos/simple.typ": solution, problem, show-problem
-#import "/cosmos/default.typ": proof
+#import "/lib.typ": *
+#import cosmos.simple: *
 
 #set page(width: 300pt, height: auto, margin: (x: 15pt, y: 15pt))
 #show: show-theorion

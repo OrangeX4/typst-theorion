@@ -21,7 +21,9 @@
         html.elem(
           "p",
           attrs: (
-            style: "margin-top: .5em; font-weight: bold; color: " + fill.to-hex() + ";",
+            style: "margin-top: .5em; font-weight: bold; color: "
+              + fill.to-hex()
+              + ";",
           ),
           full-title,
         )
@@ -68,7 +70,12 @@
 )
 
 // Definitions and foundations
-#let (definition-counter, definition-box, definition, show-definition) = make-frame(
+#let (
+  definition-counter,
+  definition-box,
+  definition,
+  show-definition,
+) = make-frame(
   "definition",
   theorion-i18n-map.at("definition"),
   counter: theorem-counter,
@@ -90,14 +97,24 @@
 )
 
 // Important results
-#let (proposition-counter, proposition-box, proposition, show-proposition) = make-frame(
+#let (
+  proposition-counter,
+  proposition-box,
+  proposition,
+  show-proposition,
+) = make-frame(
   "proposition",
   theorion-i18n-map.at("proposition"),
   counter: theorem-counter,
   render: render-fn.with(fill: blue.darken(10%)),
 )
 
-#let (assumption-counter, assumption-box, assumption, show-assumption) = make-frame(
+#let (
+  assumption-counter,
+  assumption-box,
+  assumption,
+  show-assumption,
+) = make-frame(
   "assumption",
   theorion-i18n-map.at("assumption"),
   counter: theorem-counter,
@@ -111,7 +128,12 @@
   render: render-fn.with(fill: eastern.darken(10%)),
 )
 
-#let (conjecture-counter, conjecture-box, conjecture, show-conjecture) = make-frame(
+#let (
+  conjecture-counter,
+  conjecture-box,
+  conjecture,
+  show-conjecture,
+) = make-frame(
   "conjecture",
   theorion-i18n-map.at("conjecture"),
   counter: theorem-counter,
@@ -140,7 +162,12 @@
   render: render-fn.with(fill: olive),
 )
 
-#let (conclusion-counter, conclusion-box, conclusion, show-conclusion) = make-frame(
+#let (
+  conclusion-counter,
+  conclusion-box,
+  conclusion,
+  show-conclusion,
+) = make-frame(
   "conclusion",
   theorion-i18n-map.at("conclusion"),
   counter: theorem-counter,
@@ -160,25 +187,6 @@
   counter: theorem-counter,
   render: render-fn.with(fill: eastern.darken(10%)),
 )
-
-/// Create a solution environment with colored start border
-/// Can be hidden using `#set-result("noanswer")`
-///
-/// - title (str, dictionary): Title text or dictionary for i18n. Default is "Solution"
-/// - body (content): Content of the solution
-/// -> content
-#let solution(
-  title: theorion-i18n-map.at("solution"),
-  body,
-) = context if get-result(here()) == "noanswer" { none } else {
-  render-fn(
-    fill: eastern.darken(10%),
-    prefix: none,
-    title: "",
-    full-title: theorion-i18n(title),
-    body,
-  )
-}
 
 /// Collection of show rules for all theorem environments
 /// Applies all theorion-related show rules to the document

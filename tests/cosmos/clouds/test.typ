@@ -1,6 +1,6 @@
 /// Test: clouds cosmos style
-#import "/lib.typ": show-theorion
-#import "/cosmos/clouds.typ": *
+#import "/lib.typ": *
+#import cosmos.clouds: *
 
 #set page(width: 350pt, height: auto, margin: (x: 15pt, y: 15pt))
 #set heading(numbering: "1.1")

@@ -161,7 +161,12 @@
   render: render-fn.with(fill: olive.lighten(85%)),
 )
 
-#let (conclusion-counter, conclusion-box, conclusion, show-conclusion) = make-frame(
+#let (
+  conclusion-counter,
+  conclusion-box,
+  conclusion,
+  show-conclusion,
+) = make-frame(
   "conclusion",
   theorion-i18n-map.at("conclusion"),
   counter: theorem-counter,
@@ -181,25 +186,6 @@
   counter: theorem-counter,
   render: render-fn.with(fill: eastern.lighten(85%)),
 )
-
-/// Create a solution environment with colored fill
-/// Can be hidden using `#set-result("noanswer")`
-///
-/// - title (str, dictionary): Title text or dictionary for i18n. Default is "Solution"
-/// - body (content): Content of the solution
-/// -> content
-#let solution(
-  title: theorion-i18n-map.at("solution"),
-  body,
-) = context if get-result(here()) == "noanswer" { none } else {
-  render-fn(
-    fill: eastern.lighten(85%),
-    prefix: none,
-    title: "",
-    full-title: theorion-i18n(title),
-    body,
-  )
-}
 
 /// Collection of show rules for all theorem environments
 /// Applies all theorion-related show rules to the document

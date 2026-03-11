@@ -10,8 +10,10 @@
 /// Global QED symbol configuration
 /// Modified by `#set-qed-symbol(sym.square.stroked)`
 /// Default is `sym.square`
-#let (get-qed-symbol, set-qed-symbol) = use-state("theorion-qed-symbol", sym.square)
-
+#let (get-qed-symbol, set-qed-symbol) = use-state(
+  "theorion-qed-symbol",
+  sym.square,
+)
 
 /// Create a proof environment with italic title and QED symbol
 /// Can be hidden using `#set-result("noanswer")`
@@ -97,10 +99,15 @@
     )
   } else {
     // Main rendering
-    block(stroke: language-aware-start(.25em + luma(200)), inset: language-aware-start(1em) + (y: .75em), ..args, text(
-      luma(100),
-      indent-repairer(body),
-    ))
+    block(
+      stroke: language-aware-start(.25em + luma(200)),
+      inset: language-aware-start(1em) + (y: .75em),
+      ..args,
+      text(
+        luma(100),
+        indent-repairer(body),
+      ),
+    )
   }
 }
 

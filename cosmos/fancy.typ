@@ -298,7 +298,12 @@
   ),
 )
 
-#let (conclusion-counter, conclusion-box, conclusion, show-conclusion) = make-frame(
+#let (
+  conclusion-counter,
+  conclusion-box,
+  conclusion,
+  show-conclusion,
+) = make-frame(
   "conclusion",
   theorion-i18n-map.at("conclusion"),
   counter: theorem-counter,
@@ -330,25 +335,6 @@
     get-symbol: get-secondary-symbol,
   ),
 )
-
-/// Create a solution environment with fancy box styling
-/// Can be hidden using `#set-result("noanswer")`
-///
-/// - title (str, dictionary): Title text or dictionary for i18n. Default is "Solution"
-/// - body (content): Content of the solution
-/// -> content
-#let solution(
-  title: theorion-i18n-map.at("solution"),
-  body,
-) = context if get-result(here()) == "noanswer" { none } else {
-  fancy-box(
-    get-border-color: get-secondary-border-color,
-    get-body-color: get-secondary-body-color,
-    get-symbol: get-secondary-symbol,
-    title: theorion-i18n(title),
-    body,
-  )
-}
 
 /// Collection of show rules for all theorem environments
 /// Applies all theorion-related show rules to the document

@@ -1,6 +1,6 @@
 /// Test: rainbow cosmos style
-#import "/lib.typ": show-theorion
-#import "/cosmos/rainbow.typ": *
+#import "/lib.typ": *
+#import cosmos.rainbow: *
 
 #set page(width: 350pt, height: auto, margin: (x: 15pt, y: 15pt))
 #set heading(numbering: "1.1")

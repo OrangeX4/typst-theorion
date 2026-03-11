@@ -1,5 +1,5 @@
 #import "../core.typ": *
-#import "default.typ": get-result, get-qed-symbol
+#import "default.typ": get-qed-symbol, get-result
 
 /// Render function for theorem environments (similar to amsthm)
 #let render-fn(
@@ -8,31 +8,35 @@
   full-title: auto,
   style: "plain",
   body,
-) = context box(width: 100%, inset: (x: 0em, top: 0em, bottom: .5em), indent-repairer({
-  if style == "definition" {
-    // Definition-style render function (LaTeX \theoremstyle{definition}):
-    // bold title, upright body. Used for definition, axiom, postulate, assumption, property.
-    if full-title != "" {
-      strong[#full-title.] + sym.space
+) = context box(
+  width: 100%,
+  inset: (x: 0em, top: 0em, bottom: .5em),
+  indent-repairer({
+    if style == "definition" {
+      // Definition-style render function (LaTeX \theoremstyle{definition}):
+      // bold title, upright body. Used for definition, axiom, postulate, assumption, property.
+      if full-title != "" {
+        strong[#full-title.] + sym.space
+      }
+      body
+    } else if style == "remark" {
+      // Remark-style render function (LaTeX \theoremstyle{remark}):
+      // italic title (not bold), upright body. Used for remark, note, example.
+      if full-title != "" {
+        emph[#full-title.] + sym.space
+      }
+      body
+    } else {
+      // Plain-style render function (LaTeX \theoremstyle{plain}):
+      // bold title, italic body. Used for theorem, lemma, corollary, proposition, conjecture.
+      // Fallback to plain style if an unknown style is provided
+      if full-title != "" {
+        strong[#full-title.] + sym.space
+      }
+      emph(body)
     }
-    body
-  } else if style == "remark" {
-    // Remark-style render function (LaTeX \theoremstyle{remark}):
-    // italic title (not bold), upright body. Used for remark, note, example.
-    if full-title != "" {
-      emph[#full-title.] + sym.space
-    }
-    body
-  } else {
-    // Plain-style render function (LaTeX \theoremstyle{plain}):
-    // bold title, italic body. Used for theorem, lemma, corollary, proposition, conjecture.
-    // Fallback to plain style if an unknown style is provided
-    if full-title != "" {
-      strong[#full-title.] + sym.space
-    }
-    emph(body)
-  }
-}))
+  }),
+)
 
 // Core theorems: plain style (italic body) - LaTeX \theoremstyle{plain}
 #let (theorem-counter, theorem-box, theorem, show-theorem) = make-frame(
@@ -148,7 +152,12 @@
   render: render-fn.with(style: "remark"),
 )
 
-#let (conclusion-counter, conclusion-box, conclusion, show-conclusion) = make-frame(
+#let (
+  conclusion-counter,
+  conclusion-box,
+  conclusion,
+  show-conclusion,
+) = make-frame(
   "conclusion",
   theorion-i18n-map.at("conclusion"),
   counter: theorem-counter,
@@ -169,29 +178,6 @@
   counter: theorem-counter,
   render: render-fn.with(style: "definition"),
 )
-
-/// Create a solution environment with remark-style italic title and QED symbol
-/// Can be hidden using `#set-result("noanswer")`
-/// Uses global QED symbol set by `#set-qed-symbol()`
-///
-/// - title (str, dictionary): Title text or dictionary for i18n. Default is "Solution"
-/// - qed (auto, symbol, content): Symbol to use for end of solution. Default is from global setting
-/// - body (content): Content of the solution
-/// -> content
-#let solution(
-  title: theorion-i18n-map.at("solution"),
-  qed: auto,
-  body,
-) = context if get-result(here()) == "noanswer" { none } else {
-  let qed-symbol = if qed == auto { get-qed-symbol(here()) } else { qed }
-  render-fn(
-    prefix: none,
-    title: "",
-    full-title: theorion-i18n(title),
-    style: "remark",
-    [#body#box(width: 0em)#h(1fr)#sym.wj#sym.space.nobreak$#qed-symbol$],
-  )
-}
 
 /// Collection of show rules for all theorem environments
 /// Applies all theorion-related show rules to the document

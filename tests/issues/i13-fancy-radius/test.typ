@@ -1,7 +1,7 @@
 /// Test: Issue #13 - fancy style global radius customization via set-fancy-radius
 /// Users can now customize the border radius of all fancy boxes globally.
-#import "/lib.typ": show-theorion
-#import "/cosmos/fancy.typ": *
+#import "/lib.typ": *
+#import cosmos.fancy: *
 
 #set page(width: 300pt, height: auto, margin: (x: 15pt, y: 15pt))
 #set heading(numbering: "1.")
