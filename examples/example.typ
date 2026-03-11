@@ -16,7 +16,7 @@
 // #set-theorion-numbering("1.1")
 
 /// 2. Other options:
-// #set-indent-mode(auto)  // auto (default), none, length or dictionary
+// #set-indent-mode(none)  // auto (default), none, length or dictionary
 // #set-result("noanswer")
 // #set-qed-symbol[#math.qed]
 

@@ -85,7 +85,7 @@
 ///
 /// - body (content): Content of the block
 /// -> content
-#let emph-block(body, breakable: false) = {
+#let emph-block(body, breakable: false) = context {
   // Main rendering
   let rendered = showybox(
     frame: (
@@ -95,11 +95,11 @@
     ),
     sep: (dash: "dashed"),
     breakable: breakable,
-    body,
+    indent-repairer(body),
   )
   if "html" in dictionary(std) {
     // HTML rendering
-    context if target() == "html" {
+    if target() == "html" {
       html.elem(
         "div",
         attrs: (
@@ -133,7 +133,7 @@
     // Main rendering
     block(stroke: language-aware-start(.25em + luma(200)), inset: language-aware-start(1em) + (y: .75em), ..args, text(
       luma(100),
-      body,
+      indent-repairer(body),
     ))
   }
 }
@@ -210,7 +210,7 @@
             + h(.5em)
             + title-i18n,
         ))
-        body
+        indent-repairer(body)
       },
     )
   }
