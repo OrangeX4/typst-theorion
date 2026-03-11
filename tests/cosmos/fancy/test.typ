@@ -1,6 +1,6 @@
 /// Test: fancy cosmos style (elegantbook-inspired)
-#import "/lib.typ": show-theorion
-#import "/cosmos/fancy.typ": *
+#import "/lib.typ": *
+#import cosmos.fancy: *
 
 #set page(width: 350pt, height: auto, margin: (x: 15pt, y: 15pt))
 #set heading(numbering: "1.1")
@@ -15,6 +15,16 @@
 #corollary[A corollary.]
 #proposition(title: "Proposition")[A proposition in fancy blue box.]
 #axiom(title: "Axiom")[An axiom.]
+
+= New Environments
+
+#example(title: "Example")[An example in fancy orange box.]
+#note[A note in fancy blue box.]
+#remark[A remark in fancy blue box.]
+#problem[A problem in fancy orange box.]
+#solution[A solution in fancy orange box (unnumbered).]
+#exercise[An exercise in fancy orange box.]
+#conclusion[A conclusion in fancy green box.]
 
 = Custom Colors
 

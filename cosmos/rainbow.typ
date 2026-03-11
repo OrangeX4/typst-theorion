@@ -20,7 +20,9 @@
         html.elem(
           "p",
           attrs: (
-            style: "margin-top: .5em; font-weight: bold; color: " + fill.to-hex() + ";",
+            style: "margin-top: .5em; font-weight: bold; color: "
+              + fill.to-hex()
+              + ";",
           ),
           full-title,
         )
@@ -67,7 +69,12 @@
 )
 
 // Definitions and foundations
-#let (definition-counter, definition-box, definition, show-definition) = make-frame(
+#let (
+  definition-counter,
+  definition-box,
+  definition,
+  show-definition,
+) = make-frame(
   "definition",
   theorion-i18n-map.at("definition"),
   counter: theorem-counter,
@@ -89,14 +96,24 @@
 )
 
 // Important results
-#let (proposition-counter, proposition-box, proposition, show-proposition) = make-frame(
+#let (
+  proposition-counter,
+  proposition-box,
+  proposition,
+  show-proposition,
+) = make-frame(
   "proposition",
   theorion-i18n-map.at("proposition"),
   counter: theorem-counter,
   render: render-fn.with(fill: blue.darken(10%)),
 )
 
-#let (assumption-counter, assumption-box, assumption, show-assumption) = make-frame(
+#let (
+  assumption-counter,
+  assumption-box,
+  assumption,
+  show-assumption,
+) = make-frame(
   "assumption",
   theorion-i18n-map.at("assumption"),
   counter: theorem-counter,
@@ -110,11 +127,52 @@
   render: render-fn.with(fill: eastern.darken(10%)),
 )
 
-#let (conjecture-counter, conjecture-box, conjecture, show-conjecture) = make-frame(
+#let (
+  conjecture-counter,
+  conjecture-box,
+  conjecture,
+  show-conjecture,
+) = make-frame(
   "conjecture",
   theorion-i18n-map.at("conjecture"),
   counter: theorem-counter,
   render: render-fn.with(fill: navy.darken(10%)),
+)
+
+
+#let (remark-counter, remark-box, remark, show-remark) = make-frame(
+  "remark",
+  theorion-i18n-map.at("remark"),
+  counter: theorem-counter,
+  render: render-fn.with(fill: fuchsia.darken(10%)),
+)
+
+#let (note-counter, note-box, note, show-note) = make-frame(
+  "note",
+  theorion-i18n-map.at("note"),
+  counter: theorem-counter,
+  render: render-fn.with(fill: navy.darken(10%)),
+)
+
+#let (example-counter, example-box, example, show-example) = make-frame(
+  "example",
+  theorion-i18n-map.at("example"),
+  counter: theorem-counter,
+  render: render-fn.with(fill: olive),
+)
+
+#let (exercise-counter, exercise-box, exercise, show-exercise) = make-frame(
+  "exercise",
+  theorion-i18n-map.at("exercise"),
+  counter: theorem-counter,
+  render: render-fn.with(fill: orange),
+)
+
+#let (problem-counter, problem-box, problem, show-problem) = make-frame(
+  "problem",
+  theorion-i18n-map.at("problem"),
+  counter: theorem-counter,
+  render: render-fn.with(fill: eastern.darken(10%)),
 )
 
 /// Collection of show rules for all theorem environments
@@ -133,6 +191,11 @@
   show: show-assumption
   show: show-property
   show: show-conjecture
+  show: show-remark
+  show: show-note
+  show: show-example
+  show: show-exercise
+  show: show-problem
   body
 }
 

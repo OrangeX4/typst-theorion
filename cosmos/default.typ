@@ -117,27 +117,6 @@
   })
 }
 
-/// Create an example environment with italic title
-///
-/// - title (str, dictionary): Title text or dictionary for i18n. Default is "Example"
-/// - body (content): Content of the example
-/// -> content
-#let example(
-  title: theorion-i18n-map.at("example"),
-  body,
-) = [#emph(theorion-i18n(title)).#sym.space#body]
-
-
-/// Create a problem environment with italic title
-///
-/// - title (str, dictionary): Title text or dictionary for i18n. Default is "Problem"
-/// - body (content): Content of the problem
-/// -> content
-#let problem(
-  title: theorion-i18n-map.at("problem"),
-  body,
-) = [#emph(theorion-i18n(title)).#sym.space#body]
-
 /// Create a solution environment with italic title
 /// Can be hidden using #set-result("noanswer")
 ///
@@ -156,16 +135,6 @@
 /// -> content
 #let conclusion(
   title: theorion-i18n-map.at("conclusion"),
-  body,
-) = [#emph(theorion-i18n(title)).#sym.space#body]
-
-/// Create an exercise environment with italic title
-///
-/// - title (str, dictionary): Title text or dictionary for i18n. Default is "Exercise"
-/// - body (content): Content of the exercise
-/// -> content
-#let exercise(
-  title: theorion-i18n-map.at("exercise"),
   body,
 ) = [#emph(theorion-i18n(title)).#sym.space#body]
 
@@ -238,10 +207,15 @@
     )
   } else {
     // Main rendering
-    block(stroke: language-aware-start(.25em + luma(200)), inset: language-aware-start(1em) + (y: .75em), ..args, text(
-      luma(100),
-      indent-repairer(body),
-    ))
+    block(
+      stroke: language-aware-start(.25em + luma(200)),
+      inset: language-aware-start(1em) + (y: .75em),
+      ..args,
+      text(
+        luma(100),
+        indent-repairer(body),
+      ),
+    )
   }
 }
 

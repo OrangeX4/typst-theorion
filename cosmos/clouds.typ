@@ -138,6 +138,42 @@
   render: render-fn.with(fill: navy.lighten(85%)),
 )
 
+
+#let (remark-counter, remark-box, remark, show-remark) = make-frame(
+  "remark",
+  theorion-i18n-map.at("remark"),
+  counter: theorem-counter,
+  render: render-fn.with(fill: fuchsia.lighten(85%)),
+)
+
+#let (note-counter, note-box, note, show-note) = make-frame(
+  "note",
+  theorion-i18n-map.at("note"),
+  counter: theorem-counter,
+  render: render-fn.with(fill: navy.lighten(90%)),
+)
+
+#let (example-counter, example-box, example, show-example) = make-frame(
+  "example",
+  theorion-i18n-map.at("example"),
+  counter: theorem-counter,
+  render: render-fn.with(fill: olive.lighten(85%)),
+)
+
+#let (exercise-counter, exercise-box, exercise, show-exercise) = make-frame(
+  "exercise",
+  theorion-i18n-map.at("exercise"),
+  counter: theorem-counter,
+  render: render-fn.with(fill: orange.lighten(85%)),
+)
+
+#let (problem-counter, problem-box, problem, show-problem) = make-frame(
+  "problem",
+  theorion-i18n-map.at("problem"),
+  counter: theorem-counter,
+  render: render-fn.with(fill: eastern.lighten(85%)),
+)
+
 /// Collection of show rules for all theorem environments
 /// Applies all theorion-related show rules to the document
 ///
@@ -154,6 +190,11 @@
   show: show-assumption
   show: show-property
   show: show-conjecture
+  show: show-remark
+  show: show-note
+  show: show-example
+  show: show-exercise
+  show: show-problem
   body
 }
 

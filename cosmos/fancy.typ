@@ -12,9 +12,7 @@
 )
 #let (get-secondary-border-color, set-secondary-border-color) = use-state(
   "fancy-secondary-border-color",
-  orange.darken(
-    0%,
-  ),
+  orange.darken(0%),
 )
 #let (get-secondary-body-color, set-secondary-body-color) = use-state(
   "fancy-secondary-body-color",
@@ -27,6 +25,14 @@
 #let (get-tertiary-body-color, set-tertiary-body-color) = use-state(
   "fancy-tertiary-body-color",
   blue.lighten(95%),
+)
+#let (get-quaternary-border-color, set-quaternary-border-color) = use-state(
+  "fancy-quaternary-border-color",
+  purple.darken(30%),
+)
+#let (get-quaternary-body-color, set-quaternary-body-color) = use-state(
+  "fancy-quaternary-body-color",
+  purple.lighten(95%),
 )
 
 /// Register global symbols.
@@ -41,6 +47,10 @@
 #let (get-tertiary-symbol, set-tertiary-symbol) = use-state(
   "fancy-tertiary-symbol",
   sym.suit.spade.filled,
+)
+#let (get-quaternary-symbol, set-quaternary-symbol) = use-state(
+  "fancy-quaternary-symbol",
+  sym.suit.diamond.stroked,
 )
 
 /// Register global radius for the fancy box border.
@@ -263,6 +273,62 @@
   ),
 )
 
+
+#let (remark-counter, remark-box, remark, show-remark) = make-frame(
+  "remark",
+  theorion-i18n-map.at("remark"),
+  counter: theorem-counter,
+  render: fancy-box.with(
+    get-border-color: get-quaternary-border-color,
+    get-body-color: get-quaternary-body-color,
+    get-symbol: get-quaternary-symbol,
+  ),
+)
+
+#let (note-counter, note-box, note, show-note) = make-frame(
+  "note",
+  theorion-i18n-map.at("note"),
+  counter: theorem-counter,
+  render: fancy-box.with(
+    get-border-color: get-quaternary-border-color,
+    get-body-color: get-quaternary-body-color,
+    get-symbol: get-quaternary-symbol,
+  ),
+)
+
+#let (example-counter, example-box, example, show-example) = make-frame(
+  "example",
+  theorion-i18n-map.at("example"),
+  counter: theorem-counter,
+  render: fancy-box.with(
+    get-border-color: get-quaternary-border-color,
+    get-body-color: get-quaternary-body-color,
+    get-symbol: get-quaternary-symbol,
+  ),
+)
+
+#let (exercise-counter, exercise-box, exercise, show-exercise) = make-frame(
+  "exercise",
+  theorion-i18n-map.at("exercise"),
+  counter: theorem-counter,
+  render: fancy-box.with(
+    get-border-color: get-quaternary-border-color,
+    get-body-color: get-quaternary-body-color,
+    get-symbol: get-quaternary-symbol,
+  ),
+)
+
+#let (problem-counter, problem-box, problem, show-problem) = make-frame(
+  "problem",
+  theorion-i18n-map.at("problem"),
+  counter: theorem-counter,
+  render: fancy-box.with(
+    get-border-color: get-quaternary-border-color,
+    get-body-color: get-quaternary-body-color,
+    get-symbol: get-quaternary-symbol,
+  ),
+)
+
 /// Collection of show rules for all theorem environments
 /// Applies all theorion-related show rules to the document
 ///
@@ -279,6 +345,11 @@
   show: show-assumption
   show: show-property
   show: show-conjecture
+  show: show-remark
+  show: show-note
+  show: show-example
+  show: show-exercise
+  show: show-problem
   body
 }
 

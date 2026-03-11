@@ -1,8 +1,10 @@
 /// Test: proof environment with QED symbol
-#import "/lib.typ": show-theorion, set-qed-symbol, set-result
-#import "/cosmos/default.typ": proof, solution, example, problem, exercise, conclusion
+#import "/lib.typ": *
+#import cosmos.simple: *
 
 #set page(width: 300pt, height: auto, margin: (x: 15pt, y: 15pt))
+#show: show-theorion
+#show: show-problem
 
 = Proof Environments
 
