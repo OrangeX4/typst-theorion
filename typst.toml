@@ -11,3 +11,6 @@ disciplines = ["computer-science", "engineering", "mathematics", "physics", "edu
 categories = ["components"]
 compiler = "0.13.0"
 exclude = ["examples"]
+
+[tool.tytanic]
+default.ppi = 72

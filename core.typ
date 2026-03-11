@@ -21,6 +21,13 @@
 /// Global theorion numbering
 #let (get-theorion-numbering, set-theorion-numbering) = use-state("theorion-numbering", "1.1")
 
+/// Global indent mode, available values: auto (default), none, length or dictionary
+/// - auto: remove first paragraph indent automatically
+/// - none: do nothing to the paragraph indent
+/// - length: set the first paragraph indent to the given length
+/// - dictionary: set the first paragraph indent based on the given dictionary, like (amount: 2em, all: true)
+#let (get-indent-mode, set-indent-mode) = use-state("theorion-indent-mode", auto)
+
 /// Code from: [jbirnick](https://github.com/jbirnick/typst-rich-counters)
 /// Modified by: [OrangeX4](https://github.com/OrangeX4)
 /// License: MIT
@@ -28,11 +35,11 @@
 
 /// Create a richer counter that can inherit from other counters and display the counter value. Returns a dictionary of functions to interact with the counter like `at`, `get-inherited-levels` and `set-inherited-levels`.
 ///
-/// - identifier (string): Unique identifier for the counter.
-/// - inherited-levels (integer): Number of heading levels to inherit from. Default is 0, which will inherit from the inherited-from counter if it is a dictionary.
+/// - identifier (str): Unique identifier for the counter.
+/// - inherited-levels (int): Number of heading levels to inherit from. Default is 0, which will inherit from the inherited-from counter if it is a dictionary.
 /// - inherited-from (counter): Counter to inherit from. Default is heading.
-/// - zero-fill (boolean): Whether to zero-fill the numbering. Default is false.
-/// - leading-zero (boolean): Whether to remove the leading zero. Default is false.
+/// - zero-fill (bool): Whether to zero-fill the numbering. Default is false.
+/// - leading-zero (bool): Whether to remove the leading zero. Default is false.
 #let richer-counter(
   identifier: none,
   inherited-levels: 0,
@@ -268,12 +275,12 @@
 
 /// Create a theorem environment based on richer-counter
 ///
-/// - identifier (string): Unique identifier for the counter and the kind of the frame
-/// - supplement-map (string|dict): Label text or dictionary of labels for different languages
+/// - identifier (str): Unique identifier for the counter and the kind of the frame
+/// - supplement-map (str, dictionary): Label text or dictionary of labels for different languages
 /// - counter (counter): Counter to use. Default is none, which creates a new counter based on the identifier
-/// - inherited-levels (integer): Number of heading levels to inherit from. Default is 0
+/// - inherited-levels (int): Number of heading levels to inherit from. Default is 0
 /// - inherited-from (counter): Counter to inherit from. Default is heading
-/// - numbering (string): Numbering format. Default is get-theorion-numbering
+/// - numbering (str): Numbering format. Default is get-theorion-numbering
 /// - render (function): Custom rendering function
 /// -> (counter, render-fn, frame-fn, show-fn)
 #let make-frame(
@@ -399,8 +406,11 @@
       let el = it.element
       if el != none and el.func() == figure and el.kind == identifier {
         link(el.location(), {
-          if it.supplement == auto { el.supplement } else { it.supplement }
-          " "
+          let supplement = if it.supplement == auto { el.supplement } else { it.supplement }
+          if supplement != none {
+            supplement
+            " "
+          }
           context theorion-display-number(el)
         })
       } else {
@@ -445,12 +455,52 @@
 
 /// Create a dictionary (right/left: value) based on `text.lang`
 ///
-/// - value (string): left value for LTR text, right value for RTL text
+/// - value (str): left value for LTR text, right value for RTL text
 /// -> dictionary
 #let language-aware-start(value) = {
   if text.lang == "ar" {
     (right: value)
   } else {
     (left: value)
+  }
+}
+
+
+/// Repair the indentation of the first paragraph. Default behavior is to remove the indent of the first paragraph, which is set by `#set-indent-mode(auto)`.
+/// 
+/// If you use `#set-indent-mode(none)`, the paragraphs will keep their default indentation and the repairer will do nothing.
+/// 
+/// If you use `#set-indent-mode(length)` or `#set-indent-mode(dictionary)`, the paragraphs will be indented with the specified length or the amount in the dictionary. The dictionary should have the format (amount: length, all: boolean).
+#let indent-repairer(cont) = {
+  let _negative-indent-if-indent-all = context {
+    if par.first-line-indent.all {
+      h(-par.first-line-indent.amount)
+    }
+  }
+
+  let _fakepar = context {
+    let b = par(box())
+    b
+    v(-measure(b + b).height)
+  }
+
+  let indent-mode = get-indent-mode()
+
+  // Apply negative indent to the first line of the theorem body if first-line-indent is set and remove-first-par-indent is true
+  if indent-mode == auto {
+    _negative-indent-if-indent-all
+  }
+
+  // Main content
+  if indent-mode != auto and indent-mode != none {
+    set par(first-line-indent: indent-mode)
+    cont
+  } else {
+    cont
+  }
+
+  // if remove-first-par-indent is true, add a fake paragraph with negative vertical space to counteract the first-line indent of the first paragraph in the theorem body
+  if indent-mode == auto {
+    _fakepar
   }
 }

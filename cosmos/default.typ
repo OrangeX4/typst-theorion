@@ -14,7 +14,7 @@
 
 /// Create an example environment with italic title
 ///
-/// - title (string|dict): Title text or dictionary for i18n. Default is "Example"
+/// - title (str, dictionary): Title text or dictionary for i18n. Default is "Example"
 /// - body (content): Content of the example
 /// -> content
 #let example(
@@ -25,7 +25,7 @@
 
 /// Create a problem environment with italic title
 ///
-/// - title (string|dict): Title text or dictionary for i18n. Default is "Problem"
+/// - title (str, dictionary): Title text or dictionary for i18n. Default is "Problem"
 /// - body (content): Content of the problem
 /// -> content
 #let problem(
@@ -36,7 +36,7 @@
 /// Create a solution environment with italic title
 /// Can be hidden using #set-result("noanswer")
 ///
-/// - title (string|dict): Title text or dictionary for i18n. Default is "Solution"
+/// - title (str, dictionary): Title text or dictionary for i18n. Default is "Solution"
 /// - body (content): Content of the solution
 /// -> content
 #let solution(
@@ -46,7 +46,7 @@
 
 /// Create a conclusion environment with italic title
 ///
-/// - title (string|dict): Title text or dictionary for i18n. Default is "Conclusion"
+/// - title (str, dictionary): Title text or dictionary for i18n. Default is "Conclusion"
 /// - body (content): Content of the conclusion
 /// -> content
 #let conclusion(
@@ -56,7 +56,7 @@
 
 /// Create an exercise environment with italic title
 ///
-/// - title (string|dict): Title text or dictionary for i18n. Default is "Exercise"
+/// - title (str, dictionary): Title text or dictionary for i18n. Default is "Exercise"
 /// - body (content): Content of the exercise
 /// -> content
 #let exercise(
@@ -65,11 +65,11 @@
 ) = [#emph(theorion-i18n(title)).#sym.space#body]
 
 /// Create a proof environment with italic title and QED symbol
-/// Can be hidden using #set-result("noanswer")
-/// Uses global QED symbol set by #set-qed-symbol()
+/// Can be hidden using `#set-result("noanswer")`
+/// Uses global QED symbol set by `#set-qed-symbol()`
 ///
-/// - title (string|dict): Title text or dictionary for i18n. Default is "Proof"
-/// - qed (symbol): Symbol to use for end of proof. Default is from global setting
+/// - title (str, dictionary): Title text or dictionary for i18n. Default is "Proof"
+/// - qed (auto, symbol, content): Symbol to use for end of proof. Default is from global setting
 /// - body (content): Content of the proof
 /// -> content
 #let proof(
@@ -81,11 +81,11 @@
   [#emph(theorion-i18n(title)).#sym.space#body#box(width: 0em)#h(1fr)#sym.wj#sym.space.nobreak$#qed-symbol$]
 }
 
-/// Create an emphasized box with yellow styling and dashed border
+/// Create an emphasized block with yellow styling and dashed border
 ///
-/// - body (content): Content of the box
+/// - body (content): Content of the block
 /// -> content
-#let emph-box(body, breakable: false) = {
+#let emph-block(body, breakable: false) = context {
   // Main rendering
   let rendered = showybox(
     frame: (
@@ -95,11 +95,11 @@
     ),
     sep: (dash: "dashed"),
     breakable: breakable,
-    body,
+    indent-repairer(body),
   )
   if "html" in dictionary(std) {
     // HTML rendering
-    context if target() == "html" {
+    if target() == "html" {
       html.elem(
         "div",
         attrs: (
@@ -115,11 +115,11 @@
   }
 }
 
-/// Create a quote box with start border styling in gray
+/// Create a quote block with start border styling in gray
 ///
 /// - body (content): Content to be quoted
 /// -> content
-#let quote-box(..args, body) = context {
+#let quote-block(..args, body) = context {
   // HTML rendering
   if "html" in dictionary(std) and target() == "html" {
     html.elem(
@@ -133,20 +133,20 @@
     // Main rendering
     block(stroke: language-aware-start(.25em + luma(200)), inset: language-aware-start(1em) + (y: .75em), ..args, text(
       luma(100),
-      body,
+      indent-repairer(body),
     ))
   }
 }
 
-/// Create a note box with customizable styling and icon
-/// Base template for tip-box, important-box, warning-box, and caution-box
+/// Create a note block with customizable styling and icon
+/// Base template for tip-block, important-block, warning-block, and caution-block
 ///
 /// - fill (color): Color of the border and icon. Default is `rgb("#0969DA")`
-/// - title (string|dict): Title text or dictionary for i18n. Default is "Note"
-/// - icon-name (string): Name of the icon to display from octicons set
+/// - title (str, dictionary): Title text or dictionary for i18n. Default is "Note"
+/// - icon-name (str): Name of the icon to display from octicons set
 /// - body (content): Content of the note
 /// -> content
-#let note-box(
+#let note-block(
   fill: rgb("#0969DA"),
   title: theorion-i18n-map.at("note"),
   icon-name: "info",
@@ -210,39 +210,39 @@
             + h(.5em)
             + title-i18n,
         ))
-        body
+        indent-repairer(body)
       },
     )
   }
 }
 
-/// Create a tip box with green styling and light bulb icon
+/// Create a tip block with green styling and light bulb icon
 /// Useful for helpful suggestions and tips
-#let tip-box = note-box.with(
+#let tip-block = note-block.with(
   fill: rgb("#1A7F37"),
   title: theorion-i18n-map.at("tip"),
   icon-name: "light-bulb",
 )
 
-/// Create an important box with purple styling and report icon
+/// Create an important block with purple styling and report icon
 /// Useful for highlighting key information
-#let important-box = note-box.with(
+#let important-block = note-block.with(
   fill: rgb("#8250DF"),
   title: theorion-i18n-map.at("important"),
   icon-name: "report",
 )
 
-/// Create a warning box with amber styling and alert icon
+/// Create a warning block with amber styling and alert icon
 /// Useful for potential issues or warnings
-#let warning-box = note-box.with(
+#let warning-block = note-block.with(
   fill: rgb("#9A6700"),
   title: theorion-i18n-map.at("warning"),
   icon-name: "alert",
 )
 
-/// Create a caution box with red styling and stop icon
+/// Create a caution block with red styling and stop icon
 /// Useful for serious warnings or dangerous situations
-#let caution-box = note-box.with(
+#let caution-block = note-block.with(
   fill: rgb("#CF222E"),
   title: theorion-i18n-map.at("caution"),
   icon-name: "stop",
@@ -250,10 +250,10 @@
 
 /// Create a remark environment
 ///
-/// - title (string|dict): Title text or dictionary for i18n. Default is "Remark"
+/// - title (str, dictionary): Title text or dictionary for i18n. Default is "Remark"
 /// - body (content): Content of the remark
 /// -> content
-#let remark = note-box.with(
+#let remark-block = note-block.with(
   fill: rgb("#118D8D"),
   title: theorion-i18n-map.at("remark"),
   icon-name: "comment",

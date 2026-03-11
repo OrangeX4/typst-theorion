@@ -1,20 +1,68 @@
 #import "../core.typ": *
 #import "../deps.typ": showybox
 
+/// Register global colors.
+#let (get-primary-border-color, set-primary-border-color) = use-state(
+  "fancy-primary-border-color",
+  green.darken(30%),
+)
+#let (get-primary-body-color, set-primary-body-color) = use-state(
+  "fancy-primary-body-color",
+  green.lighten(95%),
+)
+#let (get-secondary-border-color, set-secondary-border-color) = use-state(
+  "fancy-secondary-border-color",
+  orange.darken(
+    0%,
+  ),
+)
+#let (get-secondary-body-color, set-secondary-body-color) = use-state(
+  "fancy-secondary-body-color",
+  orange.lighten(95%),
+)
+#let (get-tertiary-border-color, set-tertiary-border-color) = use-state(
+  "fancy-tertiary-border-color",
+  blue.darken(30%),
+)
+#let (get-tertiary-body-color, set-tertiary-body-color) = use-state(
+  "fancy-tertiary-body-color",
+  blue.lighten(95%),
+)
+
+/// Register global symbols.
+#let (get-primary-symbol, set-primary-symbol) = use-state(
+  "fancy-primary-symbol",
+  sym.suit.club.filled,
+)
+#let (get-secondary-symbol, set-secondary-symbol) = use-state(
+  "fancy-secondary-symbol",
+  sym.suit.heart.stroked,
+)
+#let (get-tertiary-symbol, set-tertiary-symbol) = use-state(
+  "fancy-tertiary-symbol",
+  sym.suit.spade.filled,
+)
+
+/// Register global radius for the fancy box border.
+/// Use #set-fancy-radius(0em) to remove the border radius (square corners).
+#let (get-fancy-radius, set-fancy-radius) = use-state("fancy-radius", .3em)
+
 /// A fancy box design inspired by elegantbook style.
 ///
 /// - get-border-color (function): Color of the box border. Default is `loc => orange.darken(0%)`.
 /// - get-body-color (function): Color of the box background. Default is `loc => orange.lighten(95%)`.
 /// - get-symbol (function): Symbol to display at bottom right. Default is `loc => sym.suit.heart.stroked`.
+/// - get-radius (function): Border radius of the box. Default reads from global #set-fancy-radius state.
 /// - prefix (content): Prefix text before the title. Default is `none`.
-/// - title (string): Title of the box. Default is empty string.
-/// - full-title (auto|content): Complete title including prefix. Default is `auto`.
+/// - title (str): Title of the box. Default is empty string.
+/// - full-title (auto, content): Complete title including prefix. Default is `auto`.
 /// - body (content): Content of the box.
 /// -> content
 #let fancy-box(
   get-border-color: loc => orange.darken(0%),
   get-body-color: loc => orange.lighten(95%),
   get-symbol: loc => sym.suit.heart.stroked,
+  get-radius: auto,
   prefix: none,
   title: "",
   full-title: auto,
@@ -23,12 +71,19 @@
   ..args,
   body,
 ) = context {
+  let radius = if get-radius == auto { get-fancy-radius(here()) } else {
+    get-radius(here())
+  }
   // Main rendering
   let rendered = showybox(
     frame: (
       thickness: .05em,
-      radius: .3em,
-      inset: (x: 1.2em, top: if full-title != "" { .7em } else { 1.2em }, bottom: 1.2em),
+      radius: radius,
+      inset: (
+        x: 1.2em,
+        top: if full-title != "" { .7em } else { 1.2em },
+        bottom: 1.2em,
+      ),
       border-color: get-border-color(here()),
       title-color: get-border-color(here()),
       body-color: get-body-color(here()),
@@ -56,42 +111,25 @@
     },
     ..args,
     {
-      body
+      indent-repairer(body)
       if get-symbol(here()) != none {
-        place(end + bottom, dy: .8em, dx: .9em, text(size: .6em, fill: get-border-color(here()), get-symbol(here())))
+        place(end + bottom, dy: .8em, dx: .9em, text(
+          size: .6em,
+          fill: get-border-color(here()),
+          get-symbol(here()),
+        ))
       }
     },
   )
   if "html" in dictionary(std) and target() == "html" {
-    html.elem("div", attrs: (style: "margin-bottom: .5em;"), html.frame(block(width: html-width, rendered)))
+    html.elem("div", attrs: (style: "margin-bottom: .5em;"), html.frame(block(
+      width: html-width,
+      rendered,
+    )))
   } else {
     rendered
   }
 }
-
-/// Register global colors.
-#let (get-primary-border-color, set-primary-border-color) = use-state("fancy-primary-border-color", green.darken(30%))
-#let (get-primary-body-color, set-primary-body-color) = use-state("fancy-primary-body-color", green.lighten(95%))
-#let (get-secondary-border-color, set-secondary-border-color) = use-state("fancy-secondary-border-color", orange.darken(
-  0%,
-))
-#let (get-secondary-body-color, set-secondary-body-color) = use-state("fancy-secondary-body-color", orange.lighten(95%))
-#let (get-tertiary-border-color, set-tertiary-border-color) = use-state("fancy-tertiary-border-color", blue.darken(30%))
-#let (get-tertiary-body-color, set-tertiary-body-color) = use-state("fancy-tertiary-body-color", blue.lighten(95%))
-
-/// Register global symbols.
-#let (get-primary-symbol, set-primary-symbol) = use-state(
-  "fancy-primary-symbol",
-  sym.suit.club.filled,
-)
-#let (get-secondary-symbol, set-secondary-symbol) = use-state(
-  "fancy-secondary-symbol",
-  sym.suit.heart.stroked,
-)
-#let (get-tertiary-symbol, set-tertiary-symbol) = use-state(
-  "fancy-tertiary-symbol",
-  sym.suit.spade.filled,
-)
 
 
 /// Create corresponding theorem box.
@@ -150,7 +188,12 @@
   ),
 )
 
-#let (definition-counter, definition-box, definition, show-definition) = make-frame(
+#let (
+  definition-counter,
+  definition-box,
+  definition,
+  show-definition,
+) = make-frame(
   "definition",
   theorion-i18n-map.at("definition"),
   counter: theorem-counter,
@@ -161,7 +204,12 @@
   ),
 )
 
-#let (proposition-counter, proposition-box, proposition, show-proposition) = make-frame(
+#let (
+  proposition-counter,
+  proposition-box,
+  proposition,
+  show-proposition,
+) = make-frame(
   "proposition",
   theorion-i18n-map.at("proposition"),
   counter: theorem-counter,
@@ -172,7 +220,12 @@
   ),
 )
 
-#let (assumption-counter, assumption-box, assumption, show-assumption) = make-frame(
+#let (
+  assumption-counter,
+  assumption-box,
+  assumption,
+  show-assumption,
+) = make-frame(
   "assumption",
   theorion-i18n-map.at("assumption"),
   counter: theorem-counter,
@@ -194,7 +247,12 @@
   ),
 )
 
-#let (conjecture-counter, conjecture-box, conjecture, show-conjecture) = make-frame(
+#let (
+  conjecture-counter,
+  conjecture-box,
+  conjecture,
+  show-conjecture,
+) = make-frame(
   "conjecture",
   theorion-i18n-map.at("conjecture"),
   counter: theorem-counter,
@@ -227,16 +285,16 @@
 
 /// Set the number of inherited levels for theorem environments
 ///
-/// - value (integer): Number of levels to inherit
+/// - value (int): Number of levels to inherit
 #let set-inherited-levels(value) = (theorem-counter.set-inherited-levels)(value)
 
 
 /// Set the zero-fill option for theorem environments
 ///
-/// - value (boolean): Whether to zero-fill the numbering
+/// - value (bool): Whether to zero-fill the numbering
 #let set-zero-fill(value) = (theorem-counter.set-zero-fill)(value)
 
 /// Set the leading-zero option for theorem environments
 ///
-/// - value (boolean): Whether to include leading zeros in the numbering
+/// - value (bool): Whether to include leading zeros in the numbering
 #let set-leading-zero(value) = (theorem-counter.set-leading-zero)(value)
