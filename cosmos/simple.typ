@@ -7,31 +7,35 @@
   full-title: auto,
   style: "plain",
   body,
-) = context box(width: 100%, inset: (x: 0em, top: 0em, bottom: .5em), indent-repairer({
-  if style == "definition" {
-    // Definition-style render function (LaTeX \theoremstyle{definition}):
-    // bold title, upright body. Used for definition, axiom, postulate, assumption, property.
-    if full-title != "" {
-      strong[#full-title.] + sym.space
+) = context box(
+  width: 100%,
+  inset: (x: 0em, top: 0em, bottom: .5em),
+  indent-repairer({
+    if style == "definition" {
+      // Definition-style render function (LaTeX \theoremstyle{definition}):
+      // bold title, upright body. Used for definition, axiom, postulate, assumption, property.
+      if full-title != "" {
+        strong[#full-title.] + sym.space
+      }
+      body
+    } else if style == "remark" {
+      // Remark-style render function (LaTeX \theoremstyle{remark}):
+      // italic title (not bold), upright body. Used for remark, note, example.
+      if full-title != "" {
+        emph[#full-title.] + sym.space
+      }
+      body
+    } else {
+      // Plain-style render function (LaTeX \theoremstyle{plain}):
+      // bold title, italic body. Used for theorem, lemma, corollary, proposition, conjecture.
+      // Fallback to plain style if an unknown style is provided
+      if full-title != "" {
+        strong[#full-title.] + sym.space
+      }
+      emph(body)
     }
-    body
-  } else if style == "remark" {
-    // Remark-style render function (LaTeX \theoremstyle{remark}):
-    // italic title (not bold), upright body. Used for remark, note, example.
-    if full-title != "" {
-      emph[#full-title.] + sym.space
-    }
-    body
-  } else {
-    // Plain-style render function (LaTeX \theoremstyle{plain}):
-    // bold title, italic body. Used for theorem, lemma, corollary, proposition, conjecture.
-    // Fallback to plain style if an unknown style is provided
-    if full-title != "" {
-      strong[#full-title.] + sym.space
-    }
-    emph(body)
-  }
-}))
+  }),
+)
 
 // Core theorems: plain style (italic body) - LaTeX \theoremstyle{plain}
 #let (theorem-counter, theorem-box, theorem, show-theorem) = make-frame(
@@ -125,6 +129,43 @@
   render: render-fn.with(style: "definition"),
 )
 
+// Remarks and notes: remark style (italic title, upright body) - LaTeX \theoremstyle{remark}
+#let (remark-counter, remark-box, remark, show-remark) = make-frame(
+  "remark",
+  theorion-i18n-map.at("remark"),
+  counter: theorem-counter,
+  render: render-fn.with(style: "remark"),
+)
+
+#let (note-counter, note-box, note, show-note) = make-frame(
+  "note",
+  theorion-i18n-map.at("note"),
+  counter: theorem-counter,
+  render: render-fn.with(style: "remark"),
+)
+
+#let (example-counter, example-box, example, show-example) = make-frame(
+  "example",
+  theorion-i18n-map.at("example"),
+  counter: theorem-counter,
+  render: render-fn.with(style: "remark"),
+)
+
+// Exercises and problems: definition style (upright body) - LaTeX \theoremstyle{definition}
+#let (exercise-counter, exercise-box, exercise, show-exercise) = make-frame(
+  "exercise",
+  theorion-i18n-map.at("exercise"),
+  counter: theorem-counter,
+  render: render-fn.with(style: "definition"),
+)
+
+#let (problem-counter, problem-box, problem, show-problem) = make-frame(
+  "problem",
+  theorion-i18n-map.at("problem"),
+  counter: theorem-counter,
+  render: render-fn.with(style: "definition"),
+)
+
 /// Collection of show rules for all theorem environments
 /// Applies all theorion-related show rules to the document
 ///
@@ -141,6 +182,11 @@
   show: show-assumption
   show: show-property
   show: show-conjecture
+  show: show-remark
+  show: show-note
+  show: show-example
+  show: show-exercise
+  show: show-problem
   body
 }
 
