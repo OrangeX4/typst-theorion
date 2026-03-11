@@ -160,18 +160,6 @@
   render: render-fn.with(fill: olive.lighten(85%)),
 )
 
-#let (
-  conclusion-counter,
-  conclusion-box,
-  conclusion,
-  show-conclusion,
-) = make-frame(
-  "conclusion",
-  theorion-i18n-map.at("conclusion"),
-  counter: theorem-counter,
-  render: render-fn.with(fill: purple.lighten(85%)),
-)
-
 #let (exercise-counter, exercise-box, exercise, show-exercise) = make-frame(
   "exercise",
   theorion-i18n-map.at("exercise"),
@@ -205,7 +193,6 @@
   show: show-remark
   show: show-note
   show: show-example
-  show: show-conclusion
   show: show-exercise
   show: show-problem
   body

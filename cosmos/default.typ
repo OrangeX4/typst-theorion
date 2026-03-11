@@ -15,6 +15,27 @@
   sym.square,
 )
 
+/// Create a solution environment with italic title
+/// Can be hidden using #set-result("noanswer")
+///
+/// - title (str, dictionary): Title text or dictionary for i18n. Default is "Solution"
+/// - body (content): Content of the solution
+/// -> content
+#let solution(
+  title: theorion-i18n-map.at("solution"),
+  body,
+) = context if get-result(here()) == "noanswer" { none } else [#emph(theorion-i18n(title)).#sym.space#body]
+
+/// Create a conclusion environment with italic title
+///
+/// - title (str, dictionary): Title text or dictionary for i18n. Default is "Conclusion"
+/// - body (content): Content of the conclusion
+/// -> content
+#let conclusion(
+  title: theorion-i18n-map.at("conclusion"),
+  body,
+) = [#emph(theorion-i18n(title)).#sym.space#body]
+
 /// Create a proof environment with italic title and QED symbol
 /// Can be hidden using `#set-result("noanswer")`
 /// Uses global QED symbol set by `#set-qed-symbol()`
@@ -25,23 +46,6 @@
 /// -> content
 #let proof(
   title: theorion-i18n-map.at("proof"),
-  qed: auto,
-  body,
-) = context if get-result(here()) == "noanswer" { none } else {
-  let qed-symbol = if qed == auto { get-qed-symbol(here()) } else { qed }
-  [#emph(theorion-i18n(title)).#sym.space#body#box(width: 0em)#h(1fr)#sym.wj#sym.space.nobreak$#qed-symbol$]
-}
-
-/// Create a solution environment with italic title and QED symbol
-/// Can be hidden using `#set-result("noanswer")`
-/// Uses global QED symbol set by `#set-qed-symbol()`
-///
-/// - title (str, dictionary): Title text or dictionary for i18n. Default is "Solution"
-/// - qed (auto, symbol, content): Symbol to use for end of solution. Default is from global setting
-/// - body (content): Content of the solution
-/// -> content
-#let solution(
-  title: theorion-i18n-map.at("solution"),
   qed: auto,
   body,
 ) = context if get-result(here()) == "noanswer" { none } else {

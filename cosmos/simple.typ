@@ -151,18 +151,6 @@
   render: render-fn.with(style: "remark"),
 )
 
-#let (
-  conclusion-counter,
-  conclusion-box,
-  conclusion,
-  show-conclusion,
-) = make-frame(
-  "conclusion",
-  theorion-i18n-map.at("conclusion"),
-  counter: theorem-counter,
-  render: render-fn.with(style: "remark"),
-)
-
 // Exercises and problems: definition style (upright body) - LaTeX \theoremstyle{definition}
 #let (exercise-counter, exercise-box, exercise, show-exercise) = make-frame(
   "exercise",
@@ -197,7 +185,6 @@
   show: show-remark
   show: show-note
   show: show-example
-  show: show-conclusion
   show: show-exercise
   show: show-problem
   body

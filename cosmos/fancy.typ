@@ -12,9 +12,7 @@
 )
 #let (get-secondary-border-color, set-secondary-border-color) = use-state(
   "fancy-secondary-border-color",
-  orange.darken(
-    0%,
-  ),
+  orange.darken(0%),
 )
 #let (get-secondary-body-color, set-secondary-body-color) = use-state(
   "fancy-secondary-body-color",
@@ -297,22 +295,6 @@
   ),
 )
 
-#let (
-  conclusion-counter,
-  conclusion-box,
-  conclusion,
-  show-conclusion,
-) = make-frame(
-  "conclusion",
-  theorion-i18n-map.at("conclusion"),
-  counter: theorem-counter,
-  render: fancy-box.with(
-    get-border-color: get-primary-border-color,
-    get-body-color: get-primary-body-color,
-    get-symbol: get-primary-symbol,
-  ),
-)
-
 #let (exercise-counter, exercise-box, exercise, show-exercise) = make-frame(
   "exercise",
   theorion-i18n-map.at("exercise"),
@@ -354,7 +336,6 @@
   show: show-remark
   show: show-note
   show: show-example
-  show: show-conclusion
   show: show-exercise
   show: show-problem
   body
