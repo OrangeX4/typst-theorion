@@ -142,7 +142,7 @@ Let's start with the most fundamental definition.
   There are infinitely many prime numbers.
 ] <thm:euclid>
 
-#proof[
+#proof(title: [Proof of @thm:euclid])[
   By contradiction: Suppose $p_1, p_2, dots, p_n$ is a finite enumeration of all primes.
   Let $P = p_1 p_2 dots p_n$. Since $P + 1$ is not in our list,
   it cannot be prime. Thus, some prime $p_j$ divides $P + 1$.
@@ -164,7 +164,7 @@ Let's start with the most fundamental definition.
   If a function $f$ is differentiable at every point, then $f$ is continuous.
 ] <thm:continuous>
 
-#tip-box[
+#tip-block[
   @thm:continuous tells us that differentiability implies continuity,
   but not vice versa. For example, $f(x) = |x|$ is continuous but not differentiable at $x = 0$.
   For a deeper understanding of continuous functions, see @thm:max-value in the appendix.
@@ -177,7 +177,7 @@ Let's start with the most fundamental definition.
   $x^2 + y^2 = z^2$
 ] <thm:pythagoras>
 
-#important-box[
+#important-block[
   @thm:pythagoras is one of the most fundamental and important theorems in plane geometry,
   bridging geometry and algebra.
 ]
@@ -224,7 +224,7 @@ Let's start with the most fundamental definition.
   A continuous function on a closed interval must attain both a maximum and a minimum value.
 ] <thm:max-value>
 
-#warning-box[
+#warning-block[
   Both conditions of this theorem are essential:
   - The function must be continuous
   - The domain must be a closed interval
@@ -275,21 +275,21 @@ Let's start with the most fundamental definition.
 
 == Important Notes
 
-#note-box[
+#note-block[
   Remember that mathematical proofs should be both rigorous and clear.
   Clarity without rigor is insufficient, and rigor without clarity is ineffective.
 ]
 
-#caution-box[
+#caution-block[
   When dealing with infinite series, always verify convergence before discussing other properties.
 ]
 
-#quote-box[
+#quote-block[
   Mathematics is the queen of sciences, and number theory is the queen of mathematics.
   — Gauss
 ]
 
-#emph-box[
+#emph-block[
   Chapter Summary:
   - We introduced basic number theory concepts
   - Proved several important theorems

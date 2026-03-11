@@ -162,7 +162,7 @@
   设函数 $f$ 在每一点都可导，则 $f$ 是连续函数。
 ] <thm:continuous>
 
-#tip-box[
+#tip-block[
   @thm:continuous 告诉我们可导性蕴含连续性，但反之不成立。比如 $f(x) = |x|$ 在 $x = 0$ 处连续但不可导。
   更深入理解连续函数，请参见附录中的@thm:max-value。
 ]
@@ -174,7 +174,7 @@
   $x^2 + y^2 = z^2$
 ] <thm:pythagoras>
 
-#important-box[
+#important-block[
   @thm:pythagoras 是平面几何中最基本也是最重要的定理之一，它连接了几何与代数。
 ]
 
@@ -217,7 +217,7 @@
   闭区间上的连续函数必有最大值和最小值。
 ] <thm:max-value>
 
-#warning-box[
+#warning-block[
   这个定理的两个条件缺一不可：
   - 函数必须是连续的
   - 定义域必须是闭区间
@@ -267,21 +267,21 @@
 
 == 注意事项
 
-#note-box[
+#note-block[
   请记住数学证明既要严谨又要清晰。
   没有严谨性的清晰是不充分的，没有清晰性的严谨也是无效的。
 ]
 
-#caution-box[
+#caution-block[
   在处理无穷级数时，一定要先检验其收敛性，再讨论其他性质。
 ]
 
-#quote-box[
+#quote-block[
   数学是科学的女王，而数论是数学的女王。
   — 高斯
 ]
 
-#emph-box[
+#emph-block[
   本章总结：
   - 我们介绍了基本的数论概念
   - 证明了几个重要定理
