@@ -258,7 +258,21 @@
     return ""
   } else {
     assert(type(el.numbering) == function, message: "The numbering must be a function with get-loc.")
-    let res = (el.numbering)(get-loc: () => el.location())
+    // Use the metadata location (placed inside the frame body, after the counter step)
+    // so that the counter value is already correct and no "+1" adjustment is needed.
+    // The first <theorion-frame-metadata> after el.location() is always this frame's
+    // own metadata, because the metadata is emitted as the very first content inside
+    // the figure body (right after the step label).  Any later metadata elements
+    // belong to subsequent frames.
+    let get-loc = () => {
+      let metadata-els = query(selector(<theorion-frame-metadata>).after(el.location()))
+      if metadata-els.len() > 0 {
+        metadata-els.first().location()
+      } else {
+        el.location()
+      }
+    }
+    let res = (el.numbering)(get-loc: get-loc)
     if type(res) == dictionary {
       assert(
         "kind" in res and "value" in res and res.at("kind") == "static",
@@ -304,13 +318,13 @@
   let supplement-i18n = theorion-i18n(supplement-map)
   let display-number(get-loc: here, .._args) = (counter: frame-counter, ..args) => context {
     let loc = get-loc()
-    // We need to add 1 to the counter value.
+    // The counter is stepped at the beginning of the frame body, before this location,
+    // so the value already reflects the current frame's number.
     let counter-value = if type(counter) == dictionary {
       (counter.at)(loc)
     } else {
       counter.at(loc)
     }
-    counter-value = counter-value.slice(0, -1) + (counter-value.at(-1) + 1,)
     std.numbering(get-numbering(get-loc()), ..counter-value)
   }
 
@@ -337,6 +351,11 @@
     outlined: outlined,
     numbering: if number == auto { numbering } else { (..args) => (kind: "static", value: number) },
     {
+      // Step the counter first so that nested child-counter frames (e.g. a corollary
+      // placed inside a theorem body) can inherit the correct parent number.
+      if numbering != none and number == auto {
+        (frame-counter.step)()
+      }
       [#metadata((
           identifier: identifier,
           number: number,
@@ -362,10 +381,6 @@
         ..args,
         body,
       )
-      // Update the counter.
-      if numbering != none and number == auto {
-        (frame-counter.step)()
-      }
     },
   )
   /// Frame without the counter.
