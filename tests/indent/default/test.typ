@@ -1,6 +1,5 @@
 /// Test: theorem indentation
 #import "/lib.typ": *
-#import cosmos.simple: *
 
 #set page(width: 250pt, height: auto, margin: (x: 15pt, y: 15pt))
 #set heading(numbering: "1.")
@@ -17,7 +16,7 @@
 
 #lorem(20)
 
-#theorem[
+#proof[
   First theorem body.
 
   Second paragraph inside theorem - should not be indented.
@@ -25,7 +24,7 @@
 
 #lorem(20)
 
-#theorem[
+#proof[
   Second theorem after text - theorem itself should not be indented.
 ]
 
@@ -43,7 +42,7 @@
 
 #lorem(20)
 
-#theorem[
+#proof[
   First theorem body.
 
   Second paragraph inside theorem - should be indented.
@@ -51,7 +50,7 @@
 
 #lorem(20)
 
-#theorem[
+#proof[
   Second theorem after text - theorem itself should not be indented.
 ]
 
@@ -69,7 +68,7 @@
 
 #lorem(20)
 
-#theorem[
+#proof[
   First theorem body.
 
   Second paragraph inside theorem - should be indented.
@@ -77,7 +76,7 @@
 
 #lorem(20)
 
-#theorem[
+#proof[
   Second theorem after text - theorem itself should not be indented.
 ]
 
