@@ -157,7 +157,7 @@
   "example",
   theorion-i18n-map.at("example"),
   counter: theorem-counter,
-  render: render-fn.with(fill: olive.lighten(85%)),
+  render: render-fn.with(fill: green.lighten(90%)),
 )
 
 #let (exercise-counter, exercise-box, exercise, show-exercise) = make-frame(
@@ -171,7 +171,7 @@
   "problem",
   theorion-i18n-map.at("problem"),
   counter: theorem-counter,
-  render: render-fn.with(fill: eastern.lighten(85%)),
+  render: render-fn.with(fill: eastern.lighten(90%)),
 )
 
 /// Collection of show rules for all theorem environments
