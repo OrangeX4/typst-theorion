@@ -9,12 +9,12 @@
 
 = Clouds Cosmos Style
 
-#definition(title: "Definition")[A definition in olive cloud box.]
-#theorem(title: "Theorem")[A theorem in red cloud box.]
+#definition[Definition][A definition in olive cloud box.]
+#theorem[Theorem][A theorem in red cloud box.]
 #lemma[A lemma in teal.]
 #corollary[A corollary in navy.]
 #proposition[A proposition in blue.]
-#axiom(title: "Axiom")[An axiom in green.]
+#axiom[Axiom][An axiom in green.]
 
 = New Environments
 

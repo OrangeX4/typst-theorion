@@ -32,10 +32,10 @@
 // #show: show-theorem
 
 /// 4. 开始使用
-// #theorem(title: "欧几里得定理")[
+// #theorem[欧几里得定理][
 //   素数有无穷多个。
 // ] <thm:euclid>
-// #theorem-box(title: "无编号定理", outlined: false)[
+// #theorem-box(outlined: false)[无编号定理][
 //   这个定理没有编号。
 // ]
 
@@ -63,11 +63,11 @@
 // #import cosmos.clouds: *
 #show: show-theorion
 
-#theorem(title: "欧几里得定理")[
+#theorem[欧几里得定理][
   素数有无穷多个。
 ] <thm:euclid>
 
-#theorem-box(title: "无编号定理", outlined: false)[
+#theorem-box(outlined: false)[无编号定理][
   这个定理没有编号。
 ]
 ```
@@ -97,10 +97,10 @@
 #show: show-theorem
 
 // 4. 开始使用
-#theorem(title: "欧几里得定理")[
+#theorem[欧几里得定理][
   素数有无穷多个。
 ] <thm:euclid>
-#theorem-box(title: "无编号定理")[
+#theorem-box[无编号定理][
   这个定理没有编号。
 ]
 
@@ -133,11 +133,11 @@
   两个偶数之和仍为偶数。
 ]
 
-#conjecture(title: "孪生素数猜想")[
+#conjecture[孪生素数猜想][
   存在无穷多对素数 $p$ 使得 $p+2$ 也是素数。
 ]
 
-#theorem(title: "欧几里得定理")[
+#theorem[欧几里得定理][
   素数有无穷多个。
 ] <thm:euclid>
 
@@ -158,7 +158,7 @@
 
 == 函数与连续性
 
-#theorem(title: "连续性定理")[
+#theorem[连续性定理][
   设函数 $f$ 在每一点都可导，则 $f$ 是连续函数。
 ] <thm:continuous>
 
@@ -169,7 +169,7 @@
 
 == 几何定理
 
-#theorem(title: "勾股定理")[
+#theorem[勾股定理][
   直角三角形的两条直角边的平方和等于斜边的平方：
   $x^2 + y^2 = z^2$
 ] <thm:pythagoras>
@@ -188,7 +188,7 @@
 
 == 代数结构
 
-#definition(title: "环")[
+#definition[环][
   设 $R$ 是一个非空集合，如果 $R$ 上定义了两个二元运算 $+$ 和 $dot$，满足：
   1. $(R, +)$ 是阿贝尔群
   2. $(R, dot)$ 是半群
@@ -213,7 +213,7 @@
 
 == 进阶分析
 
-#theorem(title: "最大值定理")[
+#theorem[最大值定理][
   闭区间上的连续函数必有最大值和最小值。
 ] <thm:max-value>
 
@@ -225,7 +225,7 @@
 
 == 高等代数补充
 
-#axiom(title: "群公理")[
+#axiom[群公理][
   群 $(G, \cdot)$ 需满足：
   1. 封闭性
   2. 结合律
@@ -233,7 +233,7 @@
   4. 存在逆元
 ]
 
-#postulate(title: "代数基本定理")[
+#postulate[代数基本定理][
   任意一个非零复系数多项式一定有复数根。
 ]
 

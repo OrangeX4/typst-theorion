@@ -10,7 +10,7 @@
 
 == Named parameter (current syntax)
 
-#theorem(title: "Named Theorem")[
+#theorem[Named Theorem][
   This uses the named title parameter.
 ]
 

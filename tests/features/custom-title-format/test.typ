@@ -10,7 +10,7 @@
 
 = Default Title Format
 
-#theorem(title: "Named Theorem")[
+#theorem[Named Theorem][
   Default format: "Theorem 1.1 (Named Theorem)"
 ]
 
@@ -21,7 +21,7 @@
   get-full-title: (prefix, title) => if title == "" { prefix } else { [#prefix: #title] },
 )
 
-#theorem(title: "Colon Theorem")[
+#theorem[Colon Theorem][
   Custom format: "Theorem 1.2: Colon Theorem"
 ]
 
@@ -32,6 +32,6 @@
   get-full-title: (prefix, title) => if title == "" { prefix } else { [#prefix — #title] },
 )
 
-#theorem(title: "Dash Theorem")[
+#theorem[Dash Theorem][
   Custom format: "Theorem 1.3 — Dash Theorem"
 ]

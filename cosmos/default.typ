@@ -163,48 +163,69 @@
 /// Can be hidden using `#set-result("noanswer")`
 /// Uses global QED symbol set by `#set-qed-symbol()`
 ///
-/// - title (str, dictionary): Title text or dictionary for i18n. Default is "Proof"
+/// - title (auto, str, dictionary): Title text or dictionary for i18n. Default is auto
 /// - qed (none, auto, symbol, content): Symbol to use for end of proof. Default is from global setting
 /// - body (content): Content of the proof
 /// -> content
 #let proof(
-  title: theorion-i18n-map.at("proof"),
+  title: auto,
   qed: auto,
+  ..args,
   body,
 ) = context if get-result(here()) == "noanswer" { none } else {
-  environment-with-qed(qed: qed, title, body)
+  let default-title = theorion-i18n-map.at("proof")
+  let actual-title = if args.pos().len() > 0 and title == auto {
+    args.pos().first()
+  } else {
+    if title == auto { default-title } else { title }
+  }
+  environment-with-qed(qed: qed, actual-title, body)
 }
 
 /// Create a solution environment with italic title and optional QED symbol
 /// Can be hidden using `#set-result("noanswer")`
 /// Uses global QED symbol set by `#set-qed-symbol()`
 ///
-/// - title (str, dictionary): Title text or dictionary for i18n. Default is "solution"
+/// - title (auto, str, dictionary): Title text or dictionary for i18n. Default is auto
 /// - qed (none, auto, symbol, content): Symbol to use for end of solution. Default is none
 /// - body (content): Content of the solution
 /// -> content
 #let solution(
-  title: theorion-i18n-map.at("solution"),
+  title: auto,
   qed: none,
+  ..args,
   body,
 ) = context if get-result(here()) == "noanswer" { none } else {
-  environment-with-qed(qed: qed, title, body)
+  let default-title = theorion-i18n-map.at("solution")
+  let actual-title = if args.pos().len() > 0 and title == auto {
+    args.pos().first()
+  } else {
+    if title == auto { default-title } else { title }
+  }
+  environment-with-qed(qed: qed, actual-title, body)
 }
 
 /// Create a conclusion environment with italic title and optional QED symbol
 /// Can be hidden using `#set-result("noanswer")`
 /// Uses global QED symbol set by `#set-qed-symbol()`
 ///
-/// - title (str, dictionary): Title text or dictionary for i18n. Default is "conclusion"
+/// - title (auto, str, dictionary): Title text or dictionary for i18n. Default is auto
 /// - qed (none, auto, symbol, content): Symbol to use for end of conclusion. Default is none
 /// - body (content): Content of the conclusion
 /// -> content
 #let conclusion(
-  title: theorion-i18n-map.at("conclusion"),
+  title: auto,
   qed: none,
+  ..args,
   body,
 ) = context if get-result(here()) == "noanswer" { none } else {
-  environment-with-qed(qed: qed, title, body)
+  let default-title = theorion-i18n-map.at("conclusion")
+  let actual-title = if args.pos().len() > 0 and title == auto {
+    args.pos().first()
+  } else {
+    if title == auto { default-title } else { title }
+  }
+  environment-with-qed(qed: qed, actual-title, body)
 }
 
 /// Create an emphasized block with yellow styling and dashed border

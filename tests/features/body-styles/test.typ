@@ -14,7 +14,7 @@
 
 = Plain Style (italic body)
 
-#theorem(title: "Fermat's Last Theorem")[
+#theorem[Fermat's Last Theorem][
   No three positive integers $a$, $b$, $c$ satisfy $a^n + b^n = c^n$ for $n > 2$.
 ]
 
@@ -36,11 +36,11 @@
 
 = Definition Style (upright body)
 
-#definition(title: "Prime Number")[
+#definition[Prime Number][
   A natural number greater than 1 that cannot be formed by multiplying two smaller naturals.
 ]
 
-#axiom(title: "Axiom of Choice")[
+#axiom[Axiom of Choice][
   Every collection of non-empty sets has a choice function.
 ]
 

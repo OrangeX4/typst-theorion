@@ -36,11 +36,11 @@ Just import and use theorion.
 // #import cosmos.clouds: *
 #show: show-theorion
 
-#theorem(title: "Euclid's Theorem")[
+#theorem[Euclid's Theorem][
   There are infinitely many prime numbers.
 ] <thm:euclid>
 
-#theorem-box(title: "Theorem without numbering", outlined: false)[
+#theorem-box(outlined: false)[Theorem without numbering][
   This theorem is not numbered.
 ]
 ```
@@ -50,6 +50,9 @@ Just import and use theorion.
 ## Customization
 
 ```typst
+#import "@preview/theorion:0.4.1": *
+#show: show-theorion
+
 // 1. Change the counters and numbering:
 #set-inherited-levels(1)
 #set-zero-fill(true)
@@ -84,14 +87,14 @@ Just import and use theorion.
 #show: show-theorem
 
 // 4. Just use it.
-#theorem(title: "Euclid's Theorem")[
+#theorem[Euclid's Theorem][
   There are infinitely many prime numbers.
 ] <thm:euclid>
 // Positional title syntax (alternative to named title parameter):
 #theorem[Euclid's Theorem][
   There are infinitely many prime numbers.
 ]
-#theorem-box(title: "Theorem without numbering", outlined: false)[
+#theorem-box(outlined: false)[Theorem without numbering][
   This theorem is not numbered.
 ]
 
@@ -106,35 +109,16 @@ Just import and use theorion.
 // 7. Specify a number or supplement
 #theorem(title: "Euclid's Theorem", number: "233", supplement: [Theorion])[
   There are infinitely many prime numbers.
-] <thm:euclid>
+]
 
 // 8. Counter continuation: use an array number to continue numbering from a specific value
 #theorem(number: (2, 3))[
   This theorem is explicitly numbered 2.3.
   The counter continues from here, so the next auto-numbered theorem is 2.4.
 ]
-```
 
-## Flexible References
-
-Theorion supports flexible reference supplements using Typst's built-in reference syntax:
-
-```typst
-#theorem(title: "Euclid's Theorem")[
-  There are infinitely many prime numbers.
-] <thm:euclid>
-
-// Default: supplement + number (e.g. "Theorem 1.1")
-@thm:euclid
-
-// Number only (e.g. "1.1")
-@thm:euclid[-]
-
-// Full reference with title (e.g. "Theorem 1.1 (Euclid's Theorem)")
-@thm:euclid[!!]
-
-// Custom supplement (e.g. "Thm. 1.1")
-@thm:euclid[Thm.]
+// 9. Flexible References via specific supplements. A reference without the title using @label[-]; or one with title and number using @label[!!]
+A reference without the title: @thm:euclid[-]; or one with title and number: @thm:euclid[!!]
 ```
 
 ## Restate Theorems
@@ -193,10 +177,10 @@ Theorion supports flexible reference supplements using Typst's built-in referenc
 // #show: show-theorem
 
 /// 4. Just use it.
-// #theorem(title: "Euclid's Theorem")[
+// #theorem[Euclid's Theorem][
 //   There are infinitely many prime numbers.
 // ] <thm:euclid>
-// #theorem-box(title: "Theorem without numbering", outlined: false)[
+// #theorem-box(outlined: false)[Theorem without numbering][
 //   This theorem is not numbered.
 // ]
 
@@ -228,7 +212,7 @@ Let's start with the most fundamental definition.
   this list is far from complete! See @thm:euclid for the full proof.
 ]
 
-#theorem(title: "Euclid's Theorem")[
+#theorem[Euclid's Theorem][
   There are infinitely many prime numbers.
 ] <thm:euclid>
 
@@ -250,7 +234,7 @@ Let's start with the most fundamental definition.
 
 == Functions and Continuity
 
-#theorem(title: "Continuity Theorem")[
+#theorem[Continuity Theorem][
   If a function $f$ is differentiable at every point, then $f$ is continuous.
 ] <thm:continuous>
 
@@ -262,7 +246,7 @@ Let's start with the most fundamental definition.
 
 == Geometric Theorems
 
-#theorem(title: "Pythagorean Theorem")[
+#theorem[Pythagorean Theorem][
   In a right triangle, the square of the hypotenuse equals the sum of squares of the other two sides:
   $x^2 + y^2 = z^2$
 ] <thm:pythagoras>
@@ -284,7 +268,7 @@ Let's start with the most fundamental definition.
 
 == Algebraic Structures
 
-#definition(title: "Ring")[
+#definition[Ring][
   Let $R$ be a non-empty set with two binary operations $+$ and $dot$, satisfying:
   1. $(R, +)$ is an abelian group
   2. $(R, dot)$ is a semigroup
@@ -310,7 +294,7 @@ Let's start with the most fundamental definition.
 
 == Advanced Analysis
 
-#theorem(title: "Maximum Value Theorem")[
+#theorem[Maximum Value Theorem][
   A continuous function on a closed interval must attain both a maximum and a minimum value.
 ] <thm:max-value>
 
@@ -322,7 +306,7 @@ Let's start with the most fundamental definition.
 
 == Advanced Algebra Supplements
 
-#axiom(title: "Group Axioms")[
+#axiom[Group Axioms][
   A group $(G, \cdot)$ must satisfy:
   1. Closure
   2. Associativity
@@ -330,7 +314,7 @@ Let's start with the most fundamental definition.
   4. Inverse elements exist
 ] <axiom:group>
 
-#postulate(title: "Fundamental Theorem of Algebra")[
+#postulate[Fundamental Theorem of Algebra][
   Every non-zero polynomial with complex coefficients has a complex root.
 ] <post:fta>
 
@@ -488,7 +472,7 @@ Theorion provides experimental support for HTML rendering, allowing you to embed
 
 - **BREAKING CHANGE: rename `xxx-box` to `xxx-block`** — `remark`, `note-box`, `important-box` are now named `remark-block`, `note-block`, `important-bblock` to avoid duplicate names.
 - **feat: flexible references** — `@label[-]` shows number only, `@label[!!]` shows supplement + number + title, thank theoretic for the idea
-- **feat: positional title syntax** — `#theorem[Title][Body]` as an alternative to `#theorem(title: "Title")[Body]`
+- **feat: positional title syntax** — `#theorem[Title][Body]` as an alternative to `#theorem[Title][Body]`
 - **feat: counter continuation** — pass an array as `number` (e.g. `number: (2, 3)`) to set the counter and continue numbering from there
 - **feat: `#set-indent-mode`** — configure paragraph indentation inside theorem environments (`auto`, `none`, a length, or a dictionary)
 - **feat: `#indent-repairer`** — automatically repairs first-paragraph indentation inside theorem bodies

@@ -8,7 +8,7 @@
 
 = Flexible References
 
-#theorem(title: "Euclid's Theorem")[
+#theorem[Euclid's Theorem][
   There are infinitely many prime numbers.
 ] <thm:euclid>
 

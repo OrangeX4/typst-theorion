@@ -10,20 +10,20 @@
 
 = Default Radius
 
-#theorem(title: "Rounded")[Default radius is 0.3em (rounded corners).]
+#theorem[Rounded][Default radius is 0.3em (rounded corners).]
 
 = Square Corners via set-fancy-radius
 
 // Issue #13: set-fancy-radius allows global radius customization
 #set-fancy-radius(0em)
 
-#theorem(title: "Square")[Square corners via #set-fancy-radius(0em).]
+#theorem[Square][Square corners via #set-fancy-radius(0em).]
 
-#definition(title: "Square Definition")[Also square corners.]
+#definition[Square Definition][Also square corners.]
 
 = Restored Default
 
 // Restore to default
 #set-fancy-radius(.3em)
 
-#theorem(title: "Rounded Again")[Rounded corners restored.]
+#theorem[Rounded Again][Rounded corners restored.]

@@ -358,7 +358,7 @@
     body,
   ) = {
     // Support positional title syntax: #theorem[Title][Body]
-    let actual-title = if args.pos().len() > 0 and title == "" {
+    let actual-title = if args.pos().len() > 0 and (title == "" or title == auto) {
       args.pos().first()
     } else {
       title
