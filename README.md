@@ -20,8 +20,9 @@
 - **Additional features** 📑:
   - Theorem table of contents
   - Appendix numbering adjustments
-  - Complete label and reference system
+  - Complete label and reference system with flexible supplements
   - Optional outline and numbering display
+  - Configurable paragraph indentation inside theorem environments
   - [Touying](https://github.com/touying-typ/touying) animation support
 
 ## Quick Start
@@ -29,7 +30,7 @@
 Just import and use theorion.
 
 ```typst
-#import "@preview/theorion:0.4.1": *
+#import "@preview/theorion:0.4.2": *
 #import cosmos.fancy: *
 // #import cosmos.rainbow: *
 // #import cosmos.clouds: *
@@ -39,7 +40,7 @@ Just import and use theorion.
   There are infinitely many prime numbers.
 ] <thm:euclid>
 
-#theorem-box(title: "Theorem without numbering", outlined: false)[
+#theorem-block(title: "Theorem without numbering", outlined: false)[
   This theorem is not numbered.
 ]
 ```
@@ -58,6 +59,7 @@ Just import and use theorion.
 // 2. Other options:
 #set-result("noanswer")
 #set-qed-symbol[#math.qed]
+#set-indent-mode(auto)  // auto (default), none, length or dictionary
 
 // Use #qedhere to place the QED symbol at a specific position in a proof
 // (e.g., when the proof ends with a block equation or inside a list)
@@ -71,7 +73,7 @@ Just import and use theorion.
 ]
 
 // 3. Custom theorem environment for yourself
-#let (theorem-counter, theorem-box, theorem, show-theorem) = make-frame(
+#let (theorem-counter, theorem-block, theorem, show-theorem) = make-frame(
   "theorem",
   "Theorem",  // supplement, string or dictionary like `(en: "Theorem")`, or `theorion-i18n-map.at("theorem")` for built-in i18n support
   counter: theorem-counter,  // inherit the old counter, `none` by default
@@ -85,7 +87,11 @@ Just import and use theorion.
 #theorem(title: "Euclid's Theorem")[
   There are infinitely many prime numbers.
 ] <thm:euclid>
-#theorem-box(title: "Theorem without numbering", outlined: false)[
+// Positional title syntax (alternative to named title parameter):
+#theorem[Euclid's Theorem][
+  There are infinitely many prime numbers.
+]
+#theorem-block(title: "Theorem without numbering", outlined: false)[
   This theorem is not numbered.
 ]
 
@@ -101,6 +107,34 @@ Just import and use theorion.
 #theorem(title: "Euclid's Theorem", number: "233", supplement: [Theorion])[
   There are infinitely many prime numbers.
 ] <thm:euclid>
+
+// 8. Counter continuation: use an array number to continue numbering from a specific value
+#theorem(number: (2, 3))[
+  This theorem is explicitly numbered 2.3.
+  The counter continues from here, so the next auto-numbered theorem is 2.4.
+]
+```
+
+## Flexible References
+
+Theorion supports flexible reference supplements using Typst's built-in reference syntax:
+
+```typst
+#theorem(title: "Euclid's Theorem")[
+  There are infinitely many prime numbers.
+] <thm:euclid>
+
+// Default: supplement + number (e.g. "Theorem 1.1")
+@thm:euclid
+
+// Number only (e.g. "1.1")
+@thm:euclid[-]
+
+// Full reference with title (e.g. "Theorem 1.1 (Euclid's Theorem)")
+@thm:euclid[!!]
+
+// Custom supplement (e.g. "Thm. 1.1")
+@thm:euclid[Thm.]
 ```
 
 ## Restate Theorems
@@ -126,7 +160,7 @@ Just import and use theorion.
 ![example](examples/example.png)
 
 ```typst
-#import "@preview/theorion:0.4.1": *
+#import "@preview/theorion:0.4.2": *
 #import cosmos.fancy: *
 // #import cosmos.rainbow: *
 // #import cosmos.clouds: *
@@ -143,11 +177,12 @@ Just import and use theorion.
 // #set-theorion-numbering("1.1")
 
 /// 2. Other options:
+// #set-indent-mode(none)  // auto (default), none, length or dictionary
 // #set-result("noanswer")
 // #set-qed-symbol[#math.qed]
 
 /// 3. Custom theorem environment for yourself
-// #let (theorem-counter, theorem-box, theorem, show-theorem) = make-frame(
+// #let (theorem-counter, theorem-block, theorem, show-theorem) = make-frame(
 //   "theorem",
 //   "Theorem",  // supplement, string or dictionary like `(en: "Theorem")`, or `theorion-i18n-map.at("theorem")` for built-in i18n support
 //   counter: theorem-counter,  // inherit the counter, `none` by default
@@ -161,7 +196,7 @@ Just import and use theorion.
 // #theorem(title: "Euclid's Theorem")[
 //   There are infinitely many prime numbers.
 // ] <thm:euclid>
-// #theorem-box(title: "Theorem without numbering", outlined: false)[
+// #theorem-block(title: "Theorem without numbering", outlined: false)[
 //   This theorem is not numbered.
 // ]
 
@@ -369,7 +404,7 @@ Let's start with the most fundamental definition.
 ### 📄 Simple
 
 ```typst
-#import "@preview/theorion:0.4.1": *
+#import "@preview/theorion:0.4.2": *
 #import cosmos.simple: *
 #show: show-theorion
 ```
@@ -381,7 +416,7 @@ Let's start with the most fundamental definition.
 ### 🌈 Rainbow
 
 ```typst
-#import "@preview/theorion:0.4.1": *
+#import "@preview/theorion:0.4.2": *
 #import cosmos.rainbow: *
 #show: show-theorion
 ```
@@ -391,7 +426,7 @@ Let's start with the most fundamental definition.
 ```typst
 /// Custom color
 #let theorem = theorem.with(fill: blue.darken(10%))
-#let theorem-box = theorem-box.with(fill: blue.darken(10%))
+#let theorem-block = theorem-block.with(fill: blue.darken(10%))
 ```
 
 ![image](https://github.com/user-attachments/assets/5e6e29f9-c493-4e21-b14a-347f3ca83b99)
@@ -399,7 +434,7 @@ Let's start with the most fundamental definition.
 ### ☁️ Clouds
 
 ```typst
-#import "@preview/theorion:0.4.1": *
+#import "@preview/theorion:0.4.2": *
 #import cosmos.clouds: *
 #show: show-theorion
 ```
@@ -409,11 +444,11 @@ Let's start with the most fundamental definition.
 ```typst
 /// Custom color
 #let theorem = theorem.with(fill: blue.lighten(85%))
-#let theorem-box = theorem-box.with(fill: blue.lighten(85%))
+#let theorem-block = theorem-block.with(fill: blue.lighten(85%))
 
 /// Custom block style
 #let theorem = theorem.with(radius: 0pt)
-#let theorem-box = theorem-box.with(radius: 0pt)
+#let theorem-block = theorem-block.with(radius: 0pt)
 ```
 
 ![image](https://github.com/user-attachments/assets/1f0f280b-94f5-43b7-b685-d2998d867b58)
@@ -421,7 +456,7 @@ Let's start with the most fundamental definition.
 ### ✨ Fancy
 
 ```typst
-#import "@preview/theorion:0.4.1": *
+#import "@preview/theorion:0.4.2": *
 #import cosmos.fancy: *
 #show: show-theorion
 ```
@@ -439,7 +474,7 @@ Let's start with the most fundamental definition.
 
 ### Contributing your cosmos
 
-Welcome to [open a pull request](htps://github.com/OrangeX4/typst-theorion/pulls) and contribute your beautiful cosmos to Theorion!
+Welcome to [open a pull request](https://github.com/OrangeX4/typst-theorion/pulls) and contribute your beautiful cosmos to Theorion!
 
 ## Experimental HTML Support
 
@@ -451,8 +486,21 @@ Theorion provides experimental support for HTML rendering, allowing you to embed
 
 ### 0.4.2
 
-- **feat: improved QED placement** — `proof` now correctly places the QED symbol at the bottom-right of block equations when the proof ends with a math equation
-- **feat: `#qedhere`** — new function to manually place the QED symbol at a specific position (useful when proof ends with a list item or when early termination is desired)
+- **BREAKING CHANGE: rename `xxx-box` to `xxx-block`** — numberless frame functions are now named `theorem-block`, `definition-block`, etc. instead of `theorem-box`, `definition-box`, etc.
+- **feat: flexible references** — `@label[-]` shows number only, `@label[!!]` shows supplement + number + title
+- **feat: positional title syntax** — `#theorem[Title][Body]` as an alternative to `#theorem(title: "Title")[Body]`
+- **feat: counter continuation** — pass an array as `number` (e.g. `number: (2, 3)`) to set the counter and continue numbering from there
+- **feat: input validation** — better error messages when counter values are invalid
+- **feat: `#set-indent-mode`** — configure paragraph indentation inside theorem environments (`auto`, `none`, a length, or a dictionary)
+- **feat: `#indent-repairer`** — automatically repairs first-paragraph indentation inside theorem bodies
+- **feat: improved QED placement** [#33](https://github.com/OrangeX4/typst-theorion/pull/33) — `proof` now correctly places the QED symbol at the bottom-right of block equations when the proof ends with a math equation
+- **feat: `#qedhere`** [#33](https://github.com/OrangeX4/typst-theorion/pull/33) — new function to manually place the QED symbol at a specific position (useful when proof ends with a list item or when early termination is desired)
+- **feat: LaTeX-aligned body styles, fancy radius, numbered remark support** — cosmos styles now more closely match LaTeX defaults
+- **feat(cosmos): add `note`, `remark`, `example`, `problem`, `exercise` environments** [#32](https://github.com/OrangeX4/typst-theorion/pull/32)
+- **feat(i18n): add Swedish translation** [#27](https://github.com/OrangeX4/typst-theorion/pull/27)
+- **fix: fix nested theorem numbering** [#35](https://github.com/OrangeX4/typst-theorion/pull/35) — child counters (e.g. corollary inside theorem) now inherit the correct parent number
+- **fix: fix inconsistent margins with `first-line-indent`** [#34](https://github.com/OrangeX4/typst-theorion/pull/34) — simple/default theorem environments no longer have inconsistent spacing when `first-line-indent` is set
+- **fix: prevent theorem indentation when `first-line-indent` is set** [#29](https://github.com/OrangeX4/typst-theorion/issues/29)
 
 ### 0.4.1
 
@@ -461,8 +509,6 @@ Theorion provides experimental support for HTML rendering, allowing you to embed
 - fix: add lower fn to fix upper-case text region [#22](https://github.com/OrangeX4/typst-theorion/pull/22)
 - fix: bump octique version to 0.1.1
 - fix: allow multiple outline targets [#19](https://github.com/OrangeX4/typst-theorion/pull/19)
-
-
 
 ### 0.4.0
 
