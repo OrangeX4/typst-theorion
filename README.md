@@ -40,7 +40,7 @@ Just import and use theorion.
   There are infinitely many prime numbers.
 ] <thm:euclid>
 
-#theorem-block(title: "Theorem without numbering", outlined: false)[
+#theorem-box(title: "Theorem without numbering", outlined: false)[
   This theorem is not numbered.
 ]
 ```
@@ -73,7 +73,7 @@ Just import and use theorion.
 ]
 
 // 3. Custom theorem environment for yourself
-#let (theorem-counter, theorem-block, theorem, show-theorem) = make-frame(
+#let (theorem-counter, theorem-box, theorem, show-theorem) = make-frame(
   "theorem",
   "Theorem",  // supplement, string or dictionary like `(en: "Theorem")`, or `theorion-i18n-map.at("theorem")` for built-in i18n support
   counter: theorem-counter,  // inherit the old counter, `none` by default
@@ -91,7 +91,7 @@ Just import and use theorion.
 #theorem[Euclid's Theorem][
   There are infinitely many prime numbers.
 ]
-#theorem-block(title: "Theorem without numbering", outlined: false)[
+#theorem-box(title: "Theorem without numbering", outlined: false)[
   This theorem is not numbered.
 ]
 
@@ -182,7 +182,7 @@ Theorion supports flexible reference supplements using Typst's built-in referenc
 // #set-qed-symbol[#math.qed]
 
 /// 3. Custom theorem environment for yourself
-// #let (theorem-counter, theorem-block, theorem, show-theorem) = make-frame(
+// #let (theorem-counter, theorem-box, theorem, show-theorem) = make-frame(
 //   "theorem",
 //   "Theorem",  // supplement, string or dictionary like `(en: "Theorem")`, or `theorion-i18n-map.at("theorem")` for built-in i18n support
 //   counter: theorem-counter,  // inherit the counter, `none` by default
@@ -196,7 +196,7 @@ Theorion supports flexible reference supplements using Typst's built-in referenc
 // #theorem(title: "Euclid's Theorem")[
 //   There are infinitely many prime numbers.
 // ] <thm:euclid>
-// #theorem-block(title: "Theorem without numbering", outlined: false)[
+// #theorem-box(title: "Theorem without numbering", outlined: false)[
 //   This theorem is not numbered.
 // ]
 
@@ -426,7 +426,7 @@ Let's start with the most fundamental definition.
 ```typst
 /// Custom color
 #let theorem = theorem.with(fill: blue.darken(10%))
-#let theorem-block = theorem-block.with(fill: blue.darken(10%))
+#let theorem-box = theorem-box.with(fill: blue.darken(10%))
 ```
 
 ![image](https://github.com/user-attachments/assets/5e6e29f9-c493-4e21-b14a-347f3ca83b99)
@@ -444,11 +444,11 @@ Let's start with the most fundamental definition.
 ```typst
 /// Custom color
 #let theorem = theorem.with(fill: blue.lighten(85%))
-#let theorem-block = theorem-block.with(fill: blue.lighten(85%))
+#let theorem-box = theorem-box.with(fill: blue.lighten(85%))
 
 /// Custom block style
 #let theorem = theorem.with(radius: 0pt)
-#let theorem-block = theorem-block.with(radius: 0pt)
+#let theorem-box = theorem-box.with(radius: 0pt)
 ```
 
 ![image](https://github.com/user-attachments/assets/1f0f280b-94f5-43b7-b685-d2998d867b58)
@@ -484,23 +484,21 @@ Theorion provides experimental support for HTML rendering, allowing you to embed
 
 ## Changelog
 
-### 0.4.2
+### 0.5.0
 
-- **BREAKING CHANGE: rename `xxx-box` to `xxx-block`** — numberless frame functions are now named `theorem-block`, `definition-block`, etc. instead of `theorem-box`, `definition-box`, etc.
-- **feat: flexible references** — `@label[-]` shows number only, `@label[!!]` shows supplement + number + title
+- **BREAKING CHANGE: rename `xxx-box` to `xxx-block`** — `remark`, `note-box`, `important-box` are now named `remark-block`, `note-block`, `important-bblock` to avoid duplicate names.
+- **feat: flexible references** — `@label[-]` shows number only, `@label[!!]` shows supplement + number + title, thank theoretic for the idea
 - **feat: positional title syntax** — `#theorem[Title][Body]` as an alternative to `#theorem(title: "Title")[Body]`
 - **feat: counter continuation** — pass an array as `number` (e.g. `number: (2, 3)`) to set the counter and continue numbering from there
-- **feat: input validation** — better error messages when counter values are invalid
 - **feat: `#set-indent-mode`** — configure paragraph indentation inside theorem environments (`auto`, `none`, a length, or a dictionary)
 - **feat: `#indent-repairer`** — automatically repairs first-paragraph indentation inside theorem bodies
-- **feat: improved QED placement** [#33](https://github.com/OrangeX4/typst-theorion/pull/33) — `proof` now correctly places the QED symbol at the bottom-right of block equations when the proof ends with a math equation
-- **feat: `#qedhere`** [#33](https://github.com/OrangeX4/typst-theorion/pull/33) — new function to manually place the QED symbol at a specific position (useful when proof ends with a list item or when early termination is desired)
-- **feat: LaTeX-aligned body styles, fancy radius, numbered remark support** — cosmos styles now more closely match LaTeX defaults
-- **feat(cosmos): add `note`, `remark`, `example`, `problem`, `exercise` environments** [#32](https://github.com/OrangeX4/typst-theorion/pull/32)
-- **feat(i18n): add Swedish translation** [#27](https://github.com/OrangeX4/typst-theorion/pull/27)
-- **fix: fix nested theorem numbering** [#35](https://github.com/OrangeX4/typst-theorion/pull/35) — child counters (e.g. corollary inside theorem) now inherit the correct parent number
-- **fix: fix inconsistent margins with `first-line-indent`** [#34](https://github.com/OrangeX4/typst-theorion/pull/34) — simple/default theorem environments no longer have inconsistent spacing when `first-line-indent` is set
-- **fix: prevent theorem indentation when `first-line-indent` is set** [#29](https://github.com/OrangeX4/typst-theorion/issues/29)
+- **feat: improved QED placement** — `proof` now correctly places the QED symbol at the bottom-right of block equations when the proof ends with a math equation, thank theoretic for the idea
+- **feat: `#qedhere`** — new function to manually place the QED symbol at a specific position for `proof`, `solution` and `conclusion`
+- **feat: LaTeX-aligned body styles, numbered remark support** — simple cosmos styles now more closely match LaTeX defaults
+- **feat(cosmos): add `note`, `remark`, `example`, `problem`, `exercise` environments**
+- **feat(i18n): add Swedish translation**
+- **fix: fix nested theorem numbering** — child counters (e.g. corollary inside theorem) now inherit the correct parent number
+- **fix: prevent theorem indentation when `first-line-indent` is set**
 
 ### 0.4.1
 
