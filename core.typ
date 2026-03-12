@@ -260,10 +260,10 @@
     assert(type(el.numbering) == function, message: "The numbering must be a function with get-loc.")
     // Use the metadata location (placed inside the frame body, after the counter step)
     // so that the counter value is already correct and no "+1" adjustment is needed.
-    // The first <theorion-frame-metadata> after el.location() is always this frame's
-    // own metadata, because the metadata is emitted as the very first content inside
-    // the figure body (right after the step label).  Any later metadata elements
-    // belong to subsequent frames.
+    // We rely on the first <theorion-frame-metadata> after el.location() being this
+    // frame's own metadata, because that metadata is emitted as the very first content
+    // inside the figure body (right after the step label).  Later metadata elements
+    // may come from nested or subsequent frames and are intentionally ignored here.
     let get-loc = () => {
       let metadata-els = query(selector(<theorion-frame-metadata>).after(el.location()))
       if metadata-els.len() > 0 {
