@@ -52,7 +52,7 @@
 == Quick Start
 
 ```typst
-#import "@preview/theorion:0.4.1": *
+#import "@preview/theorion:0.5.0": *
 #import cosmos.fancy: *
 // #import cosmos.rainbow: *
 // #import cosmos.clouds: *

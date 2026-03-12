@@ -1,4 +1,5 @@
 #import "/lib.typ": *
+// #import cosmos.simple: *
 #import cosmos.fancy: *
 // #import cosmos.rainbow: *
 // #import cosmos.clouds: *
@@ -52,7 +53,7 @@
 == Quick Start
 
 ```typst
-#import "@preview/theorion:0.4.1": *
+#import "@preview/theorion:0.5.0": *
 #import cosmos.fancy: *
 // #import cosmos.rainbow: *
 // #import cosmos.clouds: *
@@ -142,7 +143,7 @@ Let's start with the most fundamental definition.
   There are infinitely many prime numbers.
 ] <thm:euclid>
 
-#proof(title: [Proof of @thm:euclid])[
+#proof[Proof of @thm:euclid][
   By contradiction: Suppose $p_1, p_2, dots, p_n$ is a finite enumeration of all primes.
   Let $P = p_1 p_2 dots p_n$. Since $P + 1$ is not in our list,
   it cannot be prime. Thus, some prime $p_j$ divides $P + 1$.

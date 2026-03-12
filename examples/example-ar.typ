@@ -1,4 +1,5 @@
 #import "/lib.typ": *
+// #import cosmos.simple: *
 #import cosmos.fancy: *
 // #import cosmos.rainbow: *
 // #import cosmos.clouds: *
@@ -51,7 +52,7 @@
 == بداية سريعة
 
 ```typst
-#import "@preview/theorion:0.4.1": *
+#import "@preview/theorion:0.5.0": *
 #import cosmos.fancy: *
 // #import cosmos.rainbow: *
 // #import cosmos.clouds: *
