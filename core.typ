@@ -504,3 +504,21 @@
     _fakepar
   }
 }
+
+/// A "fake paragraph" that should be placed *outside* a surrounding block element.
+///
+/// When a theorem environment is rendered inside a `block` (rather than an inline `box`),
+/// the `_fakepar` inside `indent-repairer` is contained within the block and cannot affect
+/// the outer document flow.  Placing `indent-fakepar` immediately after the enclosing
+/// `block` ensures that the paragraph following the theorem is treated as a "subsequent
+/// paragraph" (not the first paragraph of a new block), so `first-line-indent` is applied
+/// to it correctly.
+///
+/// Used internally by the `simple` and `default` cosmos render functions.
+#let indent-fakepar = context {
+  if get-indent-mode() == auto {
+    let b = par(box())
+    b
+    v(-measure(b + b).height)
+  }
+}

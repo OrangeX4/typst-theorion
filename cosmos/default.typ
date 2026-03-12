@@ -138,11 +138,14 @@
 /// -> content
 #let environment-with-qed(
   qed: auto,
-  render-fn: (title, body) => box(
-    width: 100%,
-    inset: (x: 0em, top: 0em, bottom: .5em),
-    indent-repairer[#emph(theorion-i18n(title)).#sym.space#body],
-  ),
+  render-fn: (title, body) => context {
+    block(
+      width: 100%,
+      inset: (x: 0em, top: 0em, bottom: .5em),
+      indent-repairer[#emph(theorion-i18n(title)).#sym.space#body],
+    )
+    indent-fakepar
+  },
   title,
   body,
 ) = {

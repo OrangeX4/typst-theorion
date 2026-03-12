@@ -7,35 +7,38 @@
   full-title: auto,
   style: "plain",
   body,
-) = context box(
-  width: 100%,
-  inset: (x: 0em, top: 0em, bottom: .5em),
-  indent-repairer({
-    if style == "definition" {
-      // Definition-style render function (LaTeX \theoremstyle{definition}):
-      // bold title, upright body. Used for definition, axiom, postulate, assumption, property.
-      if full-title != "" {
-        strong[#full-title.] + sym.space
+) = context {
+  block(
+    width: 100%,
+    inset: (x: 0em, top: 0em, bottom: .5em),
+    indent-repairer({
+      if style == "definition" {
+        // Definition-style render function (LaTeX \theoremstyle{definition}):
+        // bold title, upright body. Used for definition, axiom, postulate, assumption, property.
+        if full-title != "" {
+          strong[#full-title.] + sym.space
+        }
+        body
+      } else if style == "remark" {
+        // Remark-style render function (LaTeX \theoremstyle{remark}):
+        // italic title (not bold), upright body. Used for remark, note, example.
+        if full-title != "" {
+          emph[#full-title.] + sym.space
+        }
+        body
+      } else {
+        // Plain-style render function (LaTeX \theoremstyle{plain}):
+        // bold title, italic body. Used for theorem, lemma, corollary, proposition, conjecture.
+        // Fallback to plain style if an unknown style is provided
+        if full-title != "" {
+          strong[#full-title.] + sym.space
+        }
+        emph(body)
       }
-      body
-    } else if style == "remark" {
-      // Remark-style render function (LaTeX \theoremstyle{remark}):
-      // italic title (not bold), upright body. Used for remark, note, example.
-      if full-title != "" {
-        emph[#full-title.] + sym.space
-      }
-      body
-    } else {
-      // Plain-style render function (LaTeX \theoremstyle{plain}):
-      // bold title, italic body. Used for theorem, lemma, corollary, proposition, conjecture.
-      // Fallback to plain style if an unknown style is provided
-      if full-title != "" {
-        strong[#full-title.] + sym.space
-      }
-      emph(body)
-    }
-  }),
-)
+    }),
+  )
+  indent-fakepar
+}
 
 // Core theorems: plain style (italic body) - LaTeX \theoremstyle{plain}
 #let (theorem-counter, theorem-box, theorem, show-theorem) = make-frame(
