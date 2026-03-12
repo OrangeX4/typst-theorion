@@ -138,10 +138,10 @@
 /// -> content
 #let environment-with-qed(
   qed: auto,
-  render-fn: (title, body) => context {
+  render-fn: (inset: (top: .3em, bottom: .3em), title, body) => context {
     block(
       width: 100%,
-      inset: (x: 0em, top: 0em, bottom: .5em),
+      inset: inset,
       indent-repairer[#emph(theorion-i18n(title)).#sym.space#body],
     )
     indent-fakepar

@@ -6,11 +6,14 @@
   title: "",
   full-title: auto,
   style: "plain",
+  inset: (top: .3em, bottom: .3em),
   body,
 ) = context {
   block(
     width: 100%,
-    inset: (x: 0em, top: 0em, bottom: .5em),
+    // above: 1.2em,
+    // below: 1.2em,
+    inset: inset,
     indent-repairer({
       if style == "definition" {
         // Definition-style render function (LaTeX \theoremstyle{definition}):
