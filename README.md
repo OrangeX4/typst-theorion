@@ -30,7 +30,7 @@
 Just import and use theorion.
 
 ```typst
-#import "@preview/theorion:0.4.2": *
+#import "@preview/theorion:0.4.1": *
 #import cosmos.fancy: *
 // #import cosmos.rainbow: *
 // #import cosmos.clouds: *
@@ -160,7 +160,7 @@ Theorion supports flexible reference supplements using Typst's built-in referenc
 ![example](examples/example.png)
 
 ```typst
-#import "@preview/theorion:0.4.2": *
+#import "@preview/theorion:0.4.1": *
 #import cosmos.fancy: *
 // #import cosmos.rainbow: *
 // #import cosmos.clouds: *
@@ -404,7 +404,7 @@ Let's start with the most fundamental definition.
 ### 📄 Simple
 
 ```typst
-#import "@preview/theorion:0.4.2": *
+#import "@preview/theorion:0.4.1": *
 #import cosmos.simple: *
 #show: show-theorion
 ```
@@ -416,7 +416,7 @@ Let's start with the most fundamental definition.
 ### 🌈 Rainbow
 
 ```typst
-#import "@preview/theorion:0.4.2": *
+#import "@preview/theorion:0.4.1": *
 #import cosmos.rainbow: *
 #show: show-theorion
 ```
@@ -434,7 +434,7 @@ Let's start with the most fundamental definition.
 ### ☁️ Clouds
 
 ```typst
-#import "@preview/theorion:0.4.2": *
+#import "@preview/theorion:0.4.1": *
 #import cosmos.clouds: *
 #show: show-theorion
 ```
@@ -456,7 +456,7 @@ Let's start with the most fundamental definition.
 ### ✨ Fancy
 
 ```typst
-#import "@preview/theorion:0.4.2": *
+#import "@preview/theorion:0.4.1": *
 #import cosmos.fancy: *
 #show: show-theorion
 ```
@@ -526,4 +526,4 @@ Theorion provides experimental support for HTML rendering, allowing you to embed
 - Thanks [s15n](https://github.com/s15n) for [typst-thmbox](https://github.com/s15n/typst-thmbox)
 - Thanks [0x6b](https://github.com/0x6b) for [octique](https://github.com/0x6b/typst-octique)
 - Thanks [Pablo González Calderón](https://github.com/Pablo-Gonzalez-Calderon) for [showybox](https://github.com/Pablo-Gonzalez-Calderon/showybox-package)
-- Thanks [nleanba](https://github.com/nleanba) for [theoretic](https://github.com/nleanba/typst-theoretic)
+- Thanks [nleanba](https://github.com/nleanba) for [theoretic](https://github.com/nleanba/typst-theoretic), many ideas are inspired by theoretic
