@@ -120,14 +120,20 @@
 
   // `update` method for this richer-counter
   // only support array of integers as counter value
-  let update(counter-value) = [
-    #metadata((
-      kind: "richer-counter:update",
-      identifier: identifier,
-      value: counter-value,
-    ))
-    #label("richer-counter:update:" + identifier)
-  ]
+  let update(counter-value) = {
+    assert(
+      type(counter-value) == array and counter-value.all(v => type(v) == int),
+      message: "Counter value for '" + identifier + "' must be an array of integers, e.g. (1, 2).",
+    )
+    [
+      #metadata((
+        kind: "richer-counter:update",
+        identifier: identifier,
+        value: counter-value,
+      ))
+      #label("richer-counter:update:" + identifier)
+    ]
+  }
 
   // find updates of own partial (!) counter in certain range
   let updates-during(after-key, before-key) = {
@@ -329,10 +335,16 @@
   }
 
   /// Useful functions for the frame.
+  // Helper: check whether a title value is non-empty (works for both str and content)
+  let has-nonempty-title(title) = (type(title) == str and title != "") or (type(title) == content and title != [] and title != [#""])
   let get-prefix(get-loc, number: auto, supplement: auto) = [#if supplement == auto { supplement-i18n } else {
       supplement
-    } #if number == auto { display-number(get-loc: get-loc)() } else { number }]
-  let get-full-title(prefix, title) = [#prefix#{ if title != "" [ (#title)] }]
+    } #if number == auto { display-number(get-loc: get-loc)() } else if type(number) == array {
+      context std.numbering(get-numbering(get-loc()), ..number)
+    } else { number }]
+  let get-full-title(prefix, title) = [#prefix#{
+      if has-nonempty-title(title) [ (#title)]
+    }]
   /// Frame with the counter.
   let frame(
     title: "",
@@ -344,45 +356,67 @@
     get-full-title: get-full-title,
     ..args,
     body,
-  ) = figure(
-    kind: identifier,
-    supplement: if supplement == auto { supplement-i18n } else { supplement },
-    caption: title,
-    outlined: outlined,
-    numbering: if number == auto { numbering } else { (..args) => (kind: "static", value: number) },
-    {
-      // Step the counter first so that nested child-counter frames (e.g. a corollary
-      // placed inside a theorem body) can inherit the correct parent number.
-      if numbering != none and number == auto {
-        (frame-counter.step)()
-      }
-      [#metadata((
-          identifier: identifier,
-          number: number,
+  ) = {
+    // Support positional title syntax: #theorem[Title][Body]
+    let actual-title = if args.pos().len() > 0 and (title == "" or title == auto) {
+      args.pos().first()
+    } else {
+      title
+    }
+    // For array numbers, emit counter update BEFORE the figure so that the
+    // counter is set to the correct base value before stepping.
+    if type(number) == array and number.len() > 0 {
+      let target = number.slice(0, -1) + (number.last() - 1,)
+      (frame-counter.update)(target)
+    }
+    figure(
+      kind: identifier,
+      supplement: if supplement == auto { supplement-i18n } else { supplement },
+      caption: actual-title,
+      outlined: outlined,
+      numbering: if number == auto or type(number) == array {
+        numbering
+      } else {
+        (..fig-args) => (kind: "static", value: number)
+      },
+      {
+        // Step the counter first so that nested child-counter frames (e.g. a corollary
+        // placed inside a theorem body) can inherit the correct parent number.
+        if numbering != none and (number == auto or type(number) == array) {
+          (frame-counter.step)()
+        }
+        [#metadata((
+            identifier: identifier,
+            number: number,
+            supplement: supplement,
+            supplement-map: supplement-map,
+            supplement-i18n: supplement-i18n,
+            kind: identifier,
+            counter: frame-counter,
+            title: actual-title,
+            numbering: numbering,
+            outlined: outlined,
+            get-prefix: get-prefix,
+            get-full-title: get-full-title,
+            render: render,
+            args: args,
+            body: body,
+          )) <theorion-frame-metadata>]
+        let prefix = get-prefix(
+          here,
+          number: if type(number) == array { auto } else { number },
           supplement: supplement,
-          supplement-map: supplement-map,
-          supplement-i18n: supplement-i18n,
-          kind: identifier,
-          counter: frame-counter,
-          title: title,
-          numbering: numbering,
-          outlined: outlined,
-          get-prefix: get-prefix,
-          get-full-title: get-full-title,
-          render: render,
-          args: args,
-          body: body,
-        )) <theorion-frame-metadata>]
-      let prefix = get-prefix(here, number: number, supplement: supplement)
-      render(
-        prefix: prefix,
-        title: title,
-        full-title: get-full-title(prefix, title),
-        ..args,
-        body,
-      )
-    },
-  )
+        )
+        render(
+          prefix: prefix,
+          title: actual-title,
+          full-title: get-full-title(prefix, actual-title),
+          ..args.named(),
+          body,
+        )
+      },
+    )
+  }
   /// Frame without the counter.
   let frame-box = frame.with(
     numbering: none,
@@ -421,12 +455,29 @@
       let el = it.element
       if el != none and el.func() == figure and el.kind == identifier {
         link(el.location(), {
-          let supplement = if it.supplement == auto { el.supplement } else { it.supplement }
-          if supplement != none {
-            supplement
-            " "
+          if it.supplement == [-] {
+            // @label[-]: number only, no supplement
+            context theorion-display-number(el)
+          } else if it.supplement == [!!] {
+            // @label[!!]: supplement + number + title
+            let supplement = el.supplement
+            if supplement != none {
+              supplement
+              " "
+            }
+            context theorion-display-number(el)
+            context {
+              let title = el.caption.body
+              if has-nonempty-title(title) [ (#title)]
+            }
+          } else {
+            let supplement = if it.supplement == auto { el.supplement } else { it.supplement }
+            if supplement != none {
+              supplement
+              " "
+            }
+            context theorion-display-number(el)
           }
-          context theorion-display-number(el)
         })
       } else {
         it

@@ -20,8 +20,9 @@
 - **Additional features** 📑:
   - Theorem table of contents
   - Appendix numbering adjustments
-  - Complete label and reference system
+  - Complete label and reference system with flexible supplements
   - Optional outline and numbering display
+  - Configurable paragraph indentation inside theorem environments
   - [Touying](https://github.com/touying-typ/touying) animation support
 
 ## Quick Start
@@ -29,17 +30,18 @@
 Just import and use theorion.
 
 ```typst
-#import "@preview/theorion:0.4.1": *
+#import "@preview/theorion:0.5.0": *
+// #import cosmos.simple: *
 #import cosmos.fancy: *
 // #import cosmos.rainbow: *
 // #import cosmos.clouds: *
 #show: show-theorion
 
-#theorem(title: "Euclid's Theorem")[
+#theorem[Euclid's Theorem][
   There are infinitely many prime numbers.
 ] <thm:euclid>
 
-#theorem-box(title: "Theorem without numbering", outlined: false)[
+#theorem-box(outlined: false)[Theorem without numbering][
   This theorem is not numbered.
 ]
 ```
@@ -49,6 +51,9 @@ Just import and use theorion.
 ## Customization
 
 ```typst
+#import "@preview/theorion:0.5.0": *
+#show: show-theorion
+
 // 1. Change the counters and numbering:
 #set-inherited-levels(1)
 #set-zero-fill(true)
@@ -58,6 +63,7 @@ Just import and use theorion.
 // 2. Other options:
 #set-result("noanswer")
 #set-qed-symbol[#math.qed]
+#set-indent-mode(auto)  // auto (default), none, length or dictionary
 
 // Use #qedhere to place the QED symbol at a specific position in a proof
 // (e.g., when the proof ends with a block equation or inside a list)
@@ -82,10 +88,14 @@ Just import and use theorion.
 #show: show-theorem
 
 // 4. Just use it.
-#theorem(title: "Euclid's Theorem")[
+#theorem[Euclid's Theorem][
   There are infinitely many prime numbers.
 ] <thm:euclid>
-#theorem-box(title: "Theorem without numbering", outlined: false)[
+// Positional title syntax (alternative to named title parameter):
+#theorem[Euclid's Theorem][
+  There are infinitely many prime numbers.
+]
+#theorem-box(outlined: false)[Theorem without numbering][
   This theorem is not numbered.
 ]
 
@@ -100,7 +110,16 @@ Just import and use theorion.
 // 7. Specify a number or supplement
 #theorem(title: "Euclid's Theorem", number: "233", supplement: [Theorion])[
   There are infinitely many prime numbers.
-] <thm:euclid>
+]
+
+// 8. Counter continuation: use an array number to continue numbering from a specific value
+#theorem(number: (2, 3))[
+  This theorem is explicitly numbered 2.3.
+  The counter continues from here, so the next auto-numbered theorem is 2.4.
+]
+
+// 9. Flexible References via specific supplements. A reference without the title using @label[-]; or one with title and number using @label[!!]
+A reference without the title: @thm:euclid[-]; or one with title and number: @thm:euclid[!!]
 ```
 
 ## Restate Theorems
@@ -126,7 +145,8 @@ Just import and use theorion.
 ![example](examples/example.png)
 
 ```typst
-#import "@preview/theorion:0.4.1": *
+#import "@preview/theorion:0.5.0": *
+// #import cosmos.simple: *
 #import cosmos.fancy: *
 // #import cosmos.rainbow: *
 // #import cosmos.clouds: *
@@ -143,6 +163,7 @@ Just import and use theorion.
 // #set-theorion-numbering("1.1")
 
 /// 2. Other options:
+// #set-indent-mode(none)  // auto (default), none, length or dictionary
 // #set-result("noanswer")
 // #set-qed-symbol[#math.qed]
 
@@ -158,10 +179,10 @@ Just import and use theorion.
 // #show: show-theorem
 
 /// 4. Just use it.
-// #theorem(title: "Euclid's Theorem")[
+// #theorem[Euclid's Theorem][
 //   There are infinitely many prime numbers.
 // ] <thm:euclid>
-// #theorem-box(title: "Theorem without numbering", outlined: false)[
+// #theorem-box(outlined: false)[Theorem without numbering][
 //   This theorem is not numbered.
 // ]
 
@@ -193,11 +214,23 @@ Let's start with the most fundamental definition.
   this list is far from complete! See @thm:euclid for the full proof.
 ]
 
-#theorem(title: "Euclid's Theorem")[
+#assumption[
+  For all $n in NN$, assume $n$ is even if $n = 2k$ for some $k in NN$.
+]
+
+#property[
+  The sum of two even numbers is always even.
+]
+
+#conjecture[Twin Prime Conjecture][
+  There are infinitely many primes $p$ such that $p+2$ is also prime.
+]
+
+#theorem[Euclid's Theorem][
   There are infinitely many prime numbers.
 ] <thm:euclid>
 
-#proof[
+#proof[Proof of @thm:euclid][
   By contradiction: Suppose $p_1, p_2, dots, p_n$ is a finite enumeration of all primes.
   Let $P = p_1 p_2 dots p_n$. Since $P + 1$ is not in our list,
   it cannot be prime. Thus, some prime $p_j$ divides $P + 1$.
@@ -215,11 +248,11 @@ Let's start with the most fundamental definition.
 
 == Functions and Continuity
 
-#theorem(title: "Continuity Theorem")[
+#theorem[Continuity Theorem][
   If a function $f$ is differentiable at every point, then $f$ is continuous.
 ] <thm:continuous>
 
-#tip-box[
+#tip-block[
   @thm:continuous tells us that differentiability implies continuity,
   but not vice versa. For example, $f(x) = |x|$ is continuous but not differentiable at $x = 0$.
   For a deeper understanding of continuous functions, see @thm:max-value in the appendix.
@@ -227,12 +260,12 @@ Let's start with the most fundamental definition.
 
 == Geometric Theorems
 
-#theorem(title: "Pythagorean Theorem")[
+#theorem[Pythagorean Theorem][
   In a right triangle, the square of the hypotenuse equals the sum of squares of the other two sides:
   $x^2 + y^2 = z^2$
 ] <thm:pythagoras>
 
-#important-box[
+#important-block[
   @thm:pythagoras is one of the most fundamental and important theorems in plane geometry,
   bridging geometry and algebra.
 ]
@@ -249,7 +282,7 @@ Let's start with the most fundamental definition.
 
 == Algebraic Structures
 
-#definition(title: "Ring")[
+#definition[Ring][
   Let $R$ be a non-empty set with two binary operations $+$ and $dot$, satisfying:
   1. $(R, +)$ is an abelian group
   2. $(R, dot)$ is a semigroup
@@ -275,11 +308,11 @@ Let's start with the most fundamental definition.
 
 == Advanced Analysis
 
-#theorem(title: "Maximum Value Theorem")[
+#theorem[Maximum Value Theorem][
   A continuous function on a closed interval must attain both a maximum and a minimum value.
 ] <thm:max-value>
 
-#warning-box[
+#warning-block[
   Both conditions of this theorem are essential:
   - The function must be continuous
   - The domain must be a closed interval
@@ -287,7 +320,7 @@ Let's start with the most fundamental definition.
 
 == Advanced Algebra Supplements
 
-#axiom(title: "Group Axioms")[
+#axiom[Group Axioms][
   A group $(G, \cdot)$ must satisfy:
   1. Closure
   2. Associativity
@@ -295,11 +328,11 @@ Let's start with the most fundamental definition.
   4. Inverse elements exist
 ] <axiom:group>
 
-#postulate(title: "Fundamental Theorem of Algebra")[
+#postulate[Fundamental Theorem of Algebra][
   Every non-zero polynomial with complex coefficients has a complex root.
 ] <post:fta>
 
-#remark[
+#remark-block[
   This theorem is also known as Gauss's theorem, as it was first rigorously proved by Gauss.
 ]
 
@@ -309,7 +342,7 @@ Let's start with the most fundamental definition.
   Prove: For any integer $n > 1$, there exists a sequence of $n$ consecutive composite numbers.
 ]
 
-#solution[
+#solution(qed: auto)[
   Consider the sequence: $n! + 2, n! + 3, ..., n! + n$
 
   For any $2 <= k <= n$, $n! + k$ is divisible by $k$ because:
@@ -330,21 +363,21 @@ Let's start with the most fundamental definition.
 
 == Important Notes
 
-#note-box[
+#note-block[
   Remember that mathematical proofs should be both rigorous and clear.
   Clarity without rigor is insufficient, and rigor without clarity is ineffective.
 ]
 
-#caution-box[
+#caution-block[
   When dealing with infinite series, always verify convergence before discussing other properties.
 ]
 
-#quote-box[
+#quote-block[
   Mathematics is the queen of sciences, and number theory is the queen of mathematics.
   — Gauss
 ]
 
-#emph-box[
+#emph-block[
   Chapter Summary:
   - We introduced basic number theory concepts
   - Proved several important theorems
@@ -354,7 +387,10 @@ Let's start with the most fundamental definition.
 == Restated Theorems
 
 // 1. Restate all theorems
-#theorion-restate(filter: it => it.outlined and it.identifier == "theorem", render: it => it.render)
+#theorion-restate(
+  filter: it => it.outlined and it.identifier == "theorem",
+  render: it => it.render,
+)
 // 2. Restate all theorems with custom render function
 // #theorion-restate(
 //   filter: it => it.outlined and it.identifier == "theorem",
@@ -362,6 +398,8 @@ Let's start with the most fundamental definition.
 // )
 // 3. Restate a specific theorem
 // #theorion-restate(filter: it => it.label == <thm:euclid>)
+// or we can use
+// #theorion-restate(filter: <thm:euclid>)
 ```
 
 ## All Cosmos
@@ -369,7 +407,7 @@ Let's start with the most fundamental definition.
 ### 📄 Simple
 
 ```typst
-#import "@preview/theorion:0.4.1": *
+#import "@preview/theorion:0.5.0": *
 #import cosmos.simple: *
 #show: show-theorion
 ```
@@ -381,7 +419,7 @@ Let's start with the most fundamental definition.
 ### 🌈 Rainbow
 
 ```typst
-#import "@preview/theorion:0.4.1": *
+#import "@preview/theorion:0.5.0": *
 #import cosmos.rainbow: *
 #show: show-theorion
 ```
@@ -399,7 +437,7 @@ Let's start with the most fundamental definition.
 ### ☁️ Clouds
 
 ```typst
-#import "@preview/theorion:0.4.1": *
+#import "@preview/theorion:0.5.0": *
 #import cosmos.clouds: *
 #show: show-theorion
 ```
@@ -421,7 +459,7 @@ Let's start with the most fundamental definition.
 ### ✨ Fancy
 
 ```typst
-#import "@preview/theorion:0.4.1": *
+#import "@preview/theorion:0.5.0": *
 #import cosmos.fancy: *
 #show: show-theorion
 ```
@@ -433,13 +471,14 @@ Let's start with the most fundamental definition.
 #set-primary-border-color(red)
 #set-primary-body-color(red.lighten(95%))
 #set-primary-symbol[#sym.suit.diamond.filled]
+#set-fancy-radius(0em)
 ```
 
 ![image](https://github.com/user-attachments/assets/a8938339-9510-4371-ae23-7f73a828c17d)
 
 ### Contributing your cosmos
 
-Welcome to [open a pull request](htps://github.com/OrangeX4/typst-theorion/pulls) and contribute your beautiful cosmos to Theorion!
+Welcome to [open a pull request](https://github.com/OrangeX4/typst-theorion/pulls) and contribute your beautiful cosmos to Theorion!
 
 ## Experimental HTML Support
 
@@ -449,20 +488,30 @@ Theorion provides experimental support for HTML rendering, allowing you to embed
 
 ## Changelog
 
-### 0.4.2
+### 0.5.0
 
-- **feat: improved QED placement** — `proof` now correctly places the QED symbol at the bottom-right of block equations when the proof ends with a math equation
-- **feat: `#qedhere`** — new function to manually place the QED symbol at a specific position (useful when proof ends with a list item or when early termination is desired)
+- **BREAKING CHANGE: rename `xxx-box` to `xxx-block`** — `remark`, `note-box`, `important-box` are now named `remark-block`, `note-block`, `important-bblock` to avoid duplicate names.
+- **feat: flexible references** — `@label[-]` shows number only, `@label[!!]` shows supplement + number + title, thank theoretic for the idea
+- **feat: border radius in fancy cosmos** `#set-fancy-radius(0em)` to remove the border radius for fancy cosmos
+- **feat: positional title syntax** — `#theorem[Title][Body]` as an alternative to `#theorem[Title][Body]`
+- **feat: counter continuation** — pass an array as `number` (e.g. `number: (2, 3)`) to set the counter and continue numbering from there
+- **feat: `#set-indent-mode`** — configure paragraph indentation inside theorem environments (`auto`, `none`, a length, or a dictionary)
+- **feat: `#indent-repairer`** — automatically repairs first-paragraph indentation inside theorem bodies
+- **feat: improved QED placement** — `proof` now correctly places the QED symbol at the bottom-right of block equations when the proof ends with a math equation, thank theoretic for the idea
+- **feat: `#qedhere`** — new function to manually place the QED symbol at a specific position for `proof`, `solution` and `conclusion`
+- **feat: LaTeX-aligned body styles, numbered remark support** — simple cosmos styles now more closely match LaTeX defaults
+- **feat(cosmos): add `note`, `remark`, `example`, `problem`, `exercise` environments**
+- **feat(i18n): add Swedish translation**
+- **fix: fix nested theorem numbering** — child counters (e.g. corollary inside theorem) now inherit the correct parent number
+- **fix: prevent theorem indentation when `first-line-indent` is set**
 
-### 0.4.1
+### 0.5.0
 
 - **URGENT FIX: fix display-number and support typst 0.14**
 - feat(i18n): add polish translation [#21](https://github.com/OrangeX4/typst-theorion/pull/21)
 - fix: add lower fn to fix upper-case text region [#22](https://github.com/OrangeX4/typst-theorion/pull/22)
 - fix: bump octique version to 0.1.1
 - fix: allow multiple outline targets [#19](https://github.com/OrangeX4/typst-theorion/pull/19)
-
-
 
 ### 0.4.0
 
@@ -482,4 +531,4 @@ Theorion provides experimental support for HTML rendering, allowing you to embed
 - Thanks [s15n](https://github.com/s15n) for [typst-thmbox](https://github.com/s15n/typst-thmbox)
 - Thanks [0x6b](https://github.com/0x6b) for [octique](https://github.com/0x6b/typst-octique)
 - Thanks [Pablo González Calderón](https://github.com/Pablo-Gonzalez-Calderon) for [showybox](https://github.com/Pablo-Gonzalez-Calderon/showybox-package)
-- Thanks [nleanba](https://github.com/nleanba) for [theoretic](https://github.com/nleanba/typst-theoretic)
+- Thanks [nleanba](https://github.com/nleanba) for [theoretic](https://github.com/nleanba/typst-theoretic), many ideas are inspired by theoretic

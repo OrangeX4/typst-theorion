@@ -8,7 +8,7 @@
 
 = Theorems
 
-#theorem(title: "Euclid's Theorem")[
+#theorem[Euclid's Theorem][
   There are infinitely many prime numbers.
 ] <thm:euclid>
 
@@ -16,7 +16,7 @@
   A prime number is a number greater than 1.
 ] <def:prime>
 
-#theorem(title: "Fermat's Last Theorem")[
+#theorem[Fermat's Last Theorem][
   No three positive integers $a$, $b$, $c$ satisfy $a^n + b^n = c^n$ for $n > 2$.
 ] <thm:fermat>
 

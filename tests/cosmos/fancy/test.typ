@@ -9,16 +9,16 @@
 
 = Fancy Cosmos Style
 
-#definition(title: "Definition")[A definition in fancy green box.]
-#theorem(title: "Theorem")[A theorem in fancy orange box.]
+#definition[Definition][A definition in fancy green box.]
+#theorem[Theorem][A theorem in fancy orange box.]
 #lemma[A lemma without title.]
 #corollary[A corollary.]
-#proposition(title: "Proposition")[A proposition in fancy blue box.]
-#axiom(title: "Axiom")[An axiom.]
+#proposition[Proposition][A proposition in fancy blue box.]
+#axiom[Axiom][An axiom.]
 
 = New Environments
 
-#example(title: "Example")[An example in fancy orange box.]
+#example[Example][An example in fancy orange box.]
 #note[A note in fancy blue box.]
 #remark[A remark in fancy blue box.]
 #problem[A problem in fancy orange box.]
@@ -31,15 +31,15 @@
 #set-primary-border-color(purple.darken(30%))
 #set-primary-body-color(purple.lighten(90%))
 
-#definition(title: "Colored Definition")[A definition with custom purple color.]
+#definition[Colored Definition][A definition with custom purple color.]
 
 = Zero Radius (Issue #13)
 
 // set-fancy-radius allows customizing the border radius
 #set-fancy-radius(0em)
 
-#theorem(title: "Square Corners")[This theorem has square corners (radius = 0).]
+#theorem[Square Corners][This theorem has square corners (radius = 0).]
 
 #set-fancy-radius(.3em)
 
-#theorem(title: "Rounded Corners")[This theorem has rounded corners (default radius).]
+#theorem[Rounded Corners][This theorem has rounded corners (default radius).]
