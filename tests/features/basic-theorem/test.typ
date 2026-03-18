@@ -10,12 +10,12 @@
 
 == Subsection
 
-#definition(title: "Prime Number")[
+#definition[Prime Number][
   A natural number is called a _prime number_ if it is greater than 1
   and cannot be written as the product of two smaller natural numbers.
 ] <def:prime>
 
-#theorem(title: "Euclid's Theorem")[
+#theorem[Euclid's Theorem][
   There are infinitely many prime numbers.
 ] <thm:euclid>
 
@@ -41,10 +41,10 @@
 
 == Numbered Box vs Unnumbered Box
 
-#theorem(title: "Named Theorem")[
+#theorem[Named Theorem][
   A named theorem with title.
 ]
 
-#theorem-box(title: "Unnumbered Box")[
+#theorem-box[Unnumbered Box][
   This theorem is not numbered.
 ]

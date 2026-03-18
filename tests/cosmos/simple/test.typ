@@ -13,7 +13,7 @@
 
 == Plain Style (italic body)
 
-#theorem(title: "Theorem")[Body is italic (LaTeX plain style).]
+#theorem[Theorem][Body is italic (LaTeX plain style).]
 #lemma[Body is italic (lemma).]
 #corollary[Body is italic (corollary).]
 #proposition[Body is italic (proposition).]
@@ -21,9 +21,9 @@
 
 == Definition Style (upright body)
 
-#definition(title: "Definition")[Body is upright / not italic (LaTeX definition style).]
-#axiom(title: "Axiom")[Body is upright (axiom).]
-#postulate(title: "Postulate")[Body is upright (postulate).]
+#definition[Definition][Body is upright / not italic (LaTeX definition style).]
+#axiom[Axiom][Body is upright (axiom).]
+#postulate[Postulate][Body is upright (postulate).]
 #assumption[Body is upright (assumption).]
 #property[Body is upright (property).]
 
@@ -31,7 +31,7 @@
 
 #remark[A remark with italic title.]
 #note[A note with italic title.]
-#example(title: "Example Title")[An example with italic title.]
+#example[Example Title][An example with italic title.]
 #conclusion[A conclusion with italic title.]
 
 == Exercise / Problem / Solution

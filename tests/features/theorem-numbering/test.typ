@@ -14,17 +14,17 @@
 
 #theorem[Second theorem (counter: 1.1.2)]
 
-#lemma()[Lemma shares counter with theorem (1.1.3)]
+#lemma[Lemma shares counter with theorem (1.1.3)]
 
 == Section 1.2
 
 #theorem[Theorem in section 1.2 (counter: 1.2.1)]
 
-#corollary()[Corollary inherits from theorem (counter: 1.2.1.1)]
+#corollary[Corollary inherits from theorem (counter: 1.2.1.1)]
 
 #theorem[Another theorem (counter: 1.2.2)]
 
-#corollary()[Another corollary (counter: 1.2.2.1)]
+#corollary[Another corollary (counter: 1.2.2.1)]
 
 = Chapter Two
 
@@ -46,4 +46,4 @@
 #set-zero-fill(false)
 
 // Test theorem-box (no counter)
-#theorem-box()[Unnumbered - no counter]
+#theorem-box[Unnumbered - no counter]

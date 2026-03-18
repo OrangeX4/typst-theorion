@@ -9,17 +9,17 @@
 
 = Nested Numbering
 
-#theorem()[
-  #corollary()[Corollary inside Theorem 1 (should be 1.1.1)]
+#theorem[
+  #corollary[Corollary inside Theorem 1 (should be 1.1.1)]
 ]
 
-#theorem()[
-  #corollary()[Corollary inside Theorem 2 (should be 1.2.1)]
+#theorem[
+  #corollary[Corollary inside Theorem 2 (should be 1.2.1)]
 ]
 
 = Multiple Corollaries
 
-#theorem()[
-  #corollary()[First corollary (2.1.1)]
-  #corollary()[Second corollary (2.1.2)]
+#theorem[
+  #corollary[First corollary (2.1.1)]
+  #corollary[Second corollary (2.1.2)]
 ]

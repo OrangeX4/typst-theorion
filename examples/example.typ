@@ -1,4 +1,5 @@
 #import "/lib.typ": *
+// #import cosmos.simple: *
 #import cosmos.fancy: *
 // #import cosmos.rainbow: *
 // #import cosmos.clouds: *
@@ -32,10 +33,10 @@
 // #show: show-theorem
 
 /// 4. Just use it.
-// #theorem(title: "Euclid's Theorem")[
+// #theorem[Euclid's Theorem][
 //   There are infinitely many prime numbers.
 // ] <thm:euclid>
-// #theorem-box(title: "Theorem without numbering")[
+// #theorem-box[Theorem without numbering][
 //   This theorem is not numbered.
 // ]
 
@@ -52,17 +53,17 @@
 == Quick Start
 
 ```typst
-#import "@preview/theorion:0.4.1": *
+#import "@preview/theorion:0.5.0": *
 #import cosmos.fancy: *
 // #import cosmos.rainbow: *
 // #import cosmos.clouds: *
 #show: show-theorion
 
-#theorem(title: "Euclid's Theorem")[
+#theorem[Euclid's Theorem][
   There are infinitely many prime numbers.
 ] <thm:euclid>
 
-#theorem-box(title: "Theorem without numbering", outlined: false)[
+#theorem-box(outlined: false)[Theorem without numbering][
   This theorem is not numbered.
 ]
 ```
@@ -92,10 +93,10 @@
 #show: show-theorem
 
 // 4. Just use it.
-#theorem(title: "Euclid's Theorem")[
+#theorem[Euclid's Theorem][
   There are infinitely many prime numbers.
 ] <thm:euclid>
-#theorem-box(title: "Theorem without numbering", outlined: false)[
+#theorem-box(outlined: false)[Theorem without numbering][
   This theorem is not numbered.
 ]
 
@@ -134,15 +135,15 @@ Let's start with the most fundamental definition.
   The sum of two even numbers is always even.
 ]
 
-#conjecture(title: "Twin Prime Conjecture")[
+#conjecture[Twin Prime Conjecture][
   There are infinitely many primes $p$ such that $p+2$ is also prime.
 ]
 
-#theorem(title: "Euclid's Theorem")[
+#theorem[Euclid's Theorem][
   There are infinitely many prime numbers.
 ] <thm:euclid>
 
-#proof(title: [Proof of @thm:euclid])[
+#proof[Proof of @thm:euclid][
   By contradiction: Suppose $p_1, p_2, dots, p_n$ is a finite enumeration of all primes.
   Let $P = p_1 p_2 dots p_n$. Since $P + 1$ is not in our list,
   it cannot be prime. Thus, some prime $p_j$ divides $P + 1$.
@@ -160,7 +161,7 @@ Let's start with the most fundamental definition.
 
 == Functions and Continuity
 
-#theorem(title: "Continuity Theorem")[
+#theorem[Continuity Theorem][
   If a function $f$ is differentiable at every point, then $f$ is continuous.
 ] <thm:continuous>
 
@@ -172,7 +173,7 @@ Let's start with the most fundamental definition.
 
 == Geometric Theorems
 
-#theorem(title: "Pythagorean Theorem")[
+#theorem[Pythagorean Theorem][
   In a right triangle, the square of the hypotenuse equals the sum of squares of the other two sides:
   $x^2 + y^2 = z^2$
 ] <thm:pythagoras>
@@ -194,7 +195,7 @@ Let's start with the most fundamental definition.
 
 == Algebraic Structures
 
-#definition(title: "Ring")[
+#definition[Ring][
   Let $R$ be a non-empty set with two binary operations $+$ and $dot$, satisfying:
   1. $(R, +)$ is an abelian group
   2. $(R, dot)$ is a semigroup
@@ -220,7 +221,7 @@ Let's start with the most fundamental definition.
 
 == Advanced Analysis
 
-#theorem(title: "Maximum Value Theorem")[
+#theorem[Maximum Value Theorem][
   A continuous function on a closed interval must attain both a maximum and a minimum value.
 ] <thm:max-value>
 
@@ -232,7 +233,7 @@ Let's start with the most fundamental definition.
 
 == Advanced Algebra Supplements
 
-#axiom(title: "Group Axioms")[
+#axiom[Group Axioms][
   A group $(G, \cdot)$ must satisfy:
   1. Closure
   2. Associativity
@@ -240,7 +241,7 @@ Let's start with the most fundamental definition.
   4. Inverse elements exist
 ] <axiom:group>
 
-#postulate(title: "Fundamental Theorem of Algebra")[
+#postulate[Fundamental Theorem of Algebra][
   Every non-zero polynomial with complex coefficients has a complex root.
 ] <post:fta>
 

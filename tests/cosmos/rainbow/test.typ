@@ -9,12 +9,12 @@
 
 = Rainbow Cosmos Style
 
-#definition(title: "Definition")[A definition with colored left border.]
-#theorem(title: "Theorem")[A theorem with red left border.]
+#definition[Definition][A definition with colored left border.]
+#theorem[Theorem][A theorem with red left border.]
 #lemma[A lemma with teal border.]
 #corollary[A corollary with fuchsia border.]
 #proposition[A proposition with blue border.]
-#axiom(title: "Axiom")[An axiom with green border.]
+#axiom[Axiom][An axiom with green border.]
 
 = New Environments
 
