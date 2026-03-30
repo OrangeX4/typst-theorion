@@ -91,10 +91,6 @@ Just import and use theorion.
 #theorem[Euclid's Theorem][
   There are infinitely many prime numbers.
 ] <thm:euclid>
-// Positional title syntax (alternative to named title parameter):
-#theorem[Euclid's Theorem][
-  There are infinitely many prime numbers.
-]
 #theorem-box(outlined: false)[Theorem without numbering][
   This theorem is not numbered.
 ]
