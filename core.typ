@@ -544,11 +544,11 @@
     }
   }
 
-  let _fakepar = context {
+  let _fakepar = block(sticky: true, breakable: false, context {
     let b = par(box())
     b
     v(-measure(b + b).height)
-  }
+  })
 
   let indent-mode = get-indent-mode()
 
