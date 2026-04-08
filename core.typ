@@ -565,6 +565,10 @@
     cont
   }
 
+  // if remove-first-par-indent is true, add a fake paragraph with negative vertical space to counteract the first-line indent of the first paragraph in the theorem body
+  if indent-mode == auto {
+    _fakepar
+  }
 }
 
 /// A "fake paragraph" that should be placed *outside* a surrounding block element.
