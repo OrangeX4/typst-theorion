@@ -1,7 +1,7 @@
 # 🌌 Theorion
 
 [![Typst Universe](https://img.shields.io/badge/dynamic/xml?url=https%3A%2F%2Ftypst.app%2Funiverse%2Fpackage%2Ftheorion&query=%2Fhtml%2Fbody%2Fdiv%2Fmain%2Fdiv%5B2%5D%2Faside%2Fsection%5B2%5D%2Fdl%2Fdd%5B3%5D&logo=typst&label=universe&color=%2339cccc)](https://typst.app/universe/package/theorion)
-![GitHub](https://img.shields.io/github/license/OrangeX4/typst-theorion)
+![GitHub License](https://img.shields.io/github/license/OrangeX4/typst-theorion)
 ![GitHub Repo stars](https://img.shields.io/github/stars/OrangeX4/typst-theorion)
 ![Cosmos badge](https://img.shields.io/badge/cosmos-4-aqua)
 
@@ -30,7 +30,7 @@
 Just import and use theorion.
 
 ```typst
-#import "@preview/theorion:0.5.0": *
+#import "@preview/theorion:0.6.0": *
 // #import cosmos.simple: *
 #import cosmos.fancy: *
 // #import cosmos.rainbow: *
@@ -46,12 +46,12 @@ Just import and use theorion.
 ]
 ```
 
-![image](./examples/simple.png)
+![Quick Start Example](./examples/simple.png)
 
 ## Customization
 
 ```typst
-#import "@preview/theorion:0.5.0": *
+#import "@preview/theorion:0.6.0": *
 #show: show-theorion
 
 // 1. Change the counters and numbering:
@@ -143,10 +143,10 @@ A reference without the title: @thm:euclid[-]; or one with title and number: @th
 
 [Source code](examples/example.typ)
 
-![example](examples/example.png)
+![Theorion Full Example](examples/example.png)
 
 ```typst
-#import "@preview/theorion:0.5.0": *
+#import "@preview/theorion:0.6.0": *
 // #import cosmos.simple: *
 #import cosmos.fancy: *
 // #import cosmos.rainbow: *
@@ -408,19 +408,19 @@ Let's start with the most fundamental definition.
 ### 📄 Simple
 
 ```typst
-#import "@preview/theorion:0.5.0": *
+#import "@preview/theorion:0.6.0": *
 #import cosmos.simple: *
 #show: show-theorion
 ```
 
 [Customize from source code](cosmos/simple.typ)
 
-![image](https://github.com/user-attachments/assets/f1876cfb-1bc9-4edb-a19a-a1922a8babc0)
+![Simple Cosmos Preview](https://github.com/user-attachments/assets/f1876cfb-1bc9-4edb-a19a-a1922a8babc0)
 
 ### 🌈 Rainbow
 
 ```typst
-#import "@preview/theorion:0.5.0": *
+#import "@preview/theorion:0.6.0": *
 #import cosmos.rainbow: *
 #show: show-theorion
 ```
@@ -433,12 +433,12 @@ Let's start with the most fundamental definition.
 #let theorem-box = theorem-box.with(fill: blue.darken(10%))
 ```
 
-![image](https://github.com/user-attachments/assets/5e6e29f9-c493-4e21-b14a-347f3ca83b99)
+![Rainbow Cosmos Preview](https://github.com/user-attachments/assets/5e6e29f9-c493-4e21-b14a-347f3ca83b99)
 
 ### ☁️ Clouds
 
 ```typst
-#import "@preview/theorion:0.5.0": *
+#import "@preview/theorion:0.6.0": *
 #import cosmos.clouds: *
 #show: show-theorion
 ```
@@ -455,12 +455,12 @@ Let's start with the most fundamental definition.
 #let theorem-box = theorem-box.with(radius: 0pt)
 ```
 
-![image](https://github.com/user-attachments/assets/1f0f280b-94f5-43b7-b685-d2998d867b58)
+![Clouds Cosmos Preview](https://github.com/user-attachments/assets/1f0f280b-94f5-43b7-b685-d2998d867b58)
 
 ### ✨ Fancy
 
 ```typst
-#import "@preview/theorion:0.5.0": *
+#import "@preview/theorion:0.6.0": *
 #import cosmos.fancy: *
 #show: show-theorion
 ```
@@ -475,7 +475,7 @@ Let's start with the most fundamental definition.
 #set-fancy-radius(0em)
 ```
 
-![image](https://github.com/user-attachments/assets/a8938339-9510-4371-ae23-7f73a828c17d)
+![Fancy Cosmos Preview](https://github.com/user-attachments/assets/a8938339-9510-4371-ae23-7f73a828c17d)
 
 ### Contributing your cosmos
 
@@ -495,14 +495,14 @@ Theorion provides experimental support for HTML rendering, allowing you to embed
 - **BREAKING CHANGE: natural unnumbered theorem prefix** — `frame-box` (i.e. `frame.with(numbering: none)`) now displays the supplement prefix (e.g. "Theorem", "Example") without numbering, instead of losing the prefix entirely. No need to manually type `#theorem-box[Theorem (Title)][...]` anymore — just use `#theorem-box[Title][...]`.
 - **feat: `full-title` parameter** — pass `full-title` to any frame to override the auto-generated full title (prefix + number + title). Works with both numbered and unnumbered theorems, and is respected by `theorion-restate`.
 - **feat: unnumbered theorem references** — `@label` on unnumbered theorems now shows "Supplement (Title)" instead of "Supplement " with a trailing space. `@label[-]` shows the title only, and `@label[!!]` shows supplement + title.
-- **fix: use stick for from indent-repairer to fix empty frame after page break**
+- **fix: use stick for indent-repairer to fix empty frame after page break**
 
 ### 0.5.0
 
-- **BREAKING CHANGE: rename `xxx-box` to `xxx-block`** — `remark`, `note-box`, `important-box` are now named `remark-block`, `note-block`, `important-bblock` to avoid duplicate names.
+- **BREAKING CHANGE: rename `xxx-box` to `xxx-block`** — `remark`, `note-box`, `important-box` are now named `remark-block`, `note-block`, `important-block` to avoid duplicate names.
 - **feat: flexible references** — `@label[-]` shows number only, `@label[!!]` shows supplement + number + title, thank theoretic for the idea
 - **feat: border radius in fancy cosmos** `#set-fancy-radius(0em)` to remove the border radius for fancy cosmos
-- **feat: positional title syntax** — `#theorem[Title][Body]` as an alternative to `#theorem[Title][Body]`
+- **feat: positional title syntax** — `#theorem[Title][Body]` as an alternative to `#theorem(title: [Title])[Body]`
 - **feat: counter continuation** — pass an array as `number` (e.g. `number: (2, 3)`) to set the counter and continue numbering from there
 - **feat: `#set-indent-mode`** — configure paragraph indentation inside theorem environments (`auto`, `none`, a length, or a dictionary)
 - **feat: `#indent-repairer`** — automatically repairs first-paragraph indentation inside theorem bodies
