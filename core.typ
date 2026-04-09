@@ -337,11 +337,23 @@
   /// Useful functions for the frame.
   // Helper: check whether a title value is non-empty (works for both str and content)
   let has-nonempty-title(title) = (type(title) == str and title != "") or (type(title) == content and title != [] and title != [#""])
-  let get-prefix(get-loc, number: auto, supplement: auto) = [#if supplement == auto { supplement-i18n } else {
-      supplement
-    } #if number == auto { display-number(get-loc: get-loc)() } else if type(number) == array {
+  let get-prefix(get-loc, number: auto, supplement: auto) = {
+    let supplement-content = if supplement == auto { supplement-i18n } else { supplement }
+    let number-content = if number == none {
+      none
+    } else if number == auto {
+      display-number(get-loc: get-loc)()
+    } else if type(number) == array {
       context std.numbering(get-numbering(get-loc()), ..number)
-    } else { number }]
+    } else {
+      number
+    }
+    if number-content == none {
+      supplement-content
+    } else {
+      [#supplement-content #number-content]
+    }
+  }
   let get-full-title(prefix, title) = [#prefix#{
       if has-nonempty-title(title) [ (#title)]
     }]
@@ -352,6 +364,7 @@
     numbering: display-number,
     number: auto,
     supplement: auto,
+    full-title: auto,
     get-prefix: get-prefix,
     get-full-title: get-full-title,
     ..args,
@@ -394,6 +407,7 @@
             kind: identifier,
             counter: frame-counter,
             title: actual-title,
+            full-title: full-title,
             numbering: numbering,
             outlined: outlined,
             get-prefix: get-prefix,
@@ -404,13 +418,24 @@
           )) <theorion-frame-metadata>]
         let prefix = get-prefix(
           here,
-          number: if type(number) == array { auto } else { number },
+          number: if numbering == none and number == auto {
+            none
+          } else if type(number) == array {
+            auto
+          } else {
+            number
+          },
           supplement: supplement,
         )
+        let actual-full-title = if full-title != auto {
+          full-title
+        } else {
+          get-full-title(prefix, actual-title)
+        }
         render(
           prefix: prefix,
           title: actual-title,
-          full-title: get-full-title(prefix, actual-title),
+          full-title: actual-full-title,
           ..args.named(),
           body,
         )
@@ -420,9 +445,6 @@
   /// Frame without the counter.
   let frame-box = frame.with(
     numbering: none,
-    outlined: false,
-    get-prefix: (get-loc, number: auto, supplement: auto) => none,
-    get-full-title: (prefix, title) => title,
   )
   /// Show rule for the frame.
   let show-frame(body) = {
@@ -457,26 +479,48 @@
         link(el.location(), {
           if it.supplement == [-] {
             // @label[-]: number only, no supplement
-            context theorion-display-number(el)
+            if el.numbering == none {
+              // No numbering: show title instead
+              context {
+                let title = el.caption.body
+                if has-nonempty-title(title) { title } else { el.supplement }
+              }
+            } else {
+              context theorion-display-number(el)
+            }
           } else if it.supplement == [!!] {
             // @label[!!]: supplement + number + title
             let supplement = el.supplement
             if supplement != none {
               supplement
-              " "
             }
-            context theorion-display-number(el)
+            if el.numbering != none {
+              " "
+              context theorion-display-number(el)
+            }
             context {
               let title = el.caption.body
               if has-nonempty-title(title) [ (#title)]
             }
           } else {
+            // Default: supplement + number, or supplement + (title) when unnumbered
             let supplement = if it.supplement == auto { el.supplement } else { it.supplement }
-            if supplement != none {
-              supplement
-              " "
+            if el.numbering == none {
+              // No numbering: show "Supplement (Title)" or just "Supplement"
+              if supplement != none {
+                supplement
+              }
+              context {
+                let title = el.caption.body
+                if has-nonempty-title(title) [ (#title)]
+              }
+            } else {
+              if supplement != none {
+                supplement
+                " "
+              }
+              context theorion-display-number(el)
             }
-            context theorion-display-number(el)
           }
         })
       } else {
@@ -508,11 +552,21 @@
       filter
     }
     if filter(it) {
-      let prefix = (it.get-prefix)(get-loc, number: it.number, supplement: it.supplement)
+      let number = if it.numbering == none and it.number == auto {
+        none
+      } else {
+        it.number
+      }
+      let prefix = (it.get-prefix)(get-loc, number: number, supplement: it.supplement)
+      let actual-full-title = if it.full-title != auto {
+        it.full-title
+      } else {
+        (it.get-full-title)(prefix, it.title)
+      }
       (render(it))(
         prefix: prefix,
         title: it.title,
-        full-title: (it.get-full-title)(prefix, it.title),
+        full-title: actual-full-title,
         it.body,
       )
     }

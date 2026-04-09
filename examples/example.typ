@@ -48,6 +48,25 @@
 /// 6. Table of contents
 // #outline(title: none, target: figure.where(kind: "theorem"))
 
+/// 7. Specify a number or supplement
+// #theorem(title: "Euclid's Theorem", number: "233", supplement: [Theorion])[
+//   There are infinitely many prime numbers.
+// ]
+
+/// 8. Counter continuation: use an array number to continue numbering from a specific value
+// #theorem(number: (2, 3))[
+//   This theorem is explicitly numbered 2.3.
+//   The counter continues from here, so the next auto-numbered theorem is 2.4.
+// ]
+
+/// 9. Flexible References via specific supplements. A reference without the title using @label[-]; or one with title and number using @label[!!]
+// A reference without the title: @thm:euclid[-]; or one with title and number: @thm:euclid[!!]
+
+/// 10. Custom full-title: override the auto-generated "Prefix Number (Title)" format
+// #theorem(full-title: [Fundamental Theorem])[
+//   There is a fundamental result.
+// ]
+
 = Theorion Environments
 
 == Quick Start
@@ -107,6 +126,26 @@
 
 // 6. Table of contents
 #outline(title: none, target: figure.where(kind: "theorem"))
+
+
+// 7. Specify a number or supplement
+#theorem(title: "Euclid's Theorem", number: "233", supplement: [Theorion])[
+  There are infinitely many prime numbers.
+]
+
+// 8. Counter continuation: use an array number to continue numbering from a specific value
+#theorem(number: (2, 3))[
+  This theorem is explicitly numbered 2.3.
+  The counter continues from here, so the next auto-numbered theorem is 2.4.
+]
+
+// 9. Flexible References via specific supplements. A reference without the title using @label[-]; or one with title and number using @label[!!]
+A reference without the title: @thm:euclid[-]; or one with title and number: @thm:euclid[!!]
+
+// 10. Custom full-title: override the auto-generated "Prefix Number (Title)" format
+#theorem(full-title: [Fundamental Theorem])[
+  There is a fundamental result.
+]
 ```
 
 == Table of Theorems

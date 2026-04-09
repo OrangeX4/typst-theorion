@@ -116,6 +116,11 @@ Just import and use theorion.
 
 // 9. Flexible References via specific supplements. A reference without the title using @label[-]; or one with title and number using @label[!!]
 A reference without the title: @thm:euclid[-]; or one with title and number: @thm:euclid[!!]
+
+// 10. Custom full-title: override the auto-generated "Prefix Number (Title)" format
+#theorem(full-title: [Fundamental Theorem])[
+  There is a fundamental result.
+]
 ```
 
 ## Restate Theorems
@@ -483,6 +488,14 @@ Theorion provides experimental support for HTML rendering, allowing you to embed
 ![HTML Example](./examples/html.png)
 
 ## Changelog
+
+### 0.6.0
+
+- **BREAKING CHANGE: `frame-box` no longer sets `outlined: false`** — unnumbered theorems created via `theorem-box` etc. now appear in outlines by default. Use `#theorem-box(outlined: false)[...]` to opt out.
+- **BREAKING CHANGE: natural unnumbered theorem prefix** — `frame-box` (i.e. `frame.with(numbering: none)`) now displays the supplement prefix (e.g. "Theorem", "Example") without numbering, instead of losing the prefix entirely. No need to manually type `#theorem-box[Theorem (Title)][...]` anymore — just use `#theorem-box[Title][...]`.
+- **feat: `full-title` parameter** — pass `full-title` to any frame to override the auto-generated full title (prefix + number + title). Works with both numbered and unnumbered theorems, and is respected by `theorion-restate`.
+- **feat: unnumbered theorem references** — `@label` on unnumbered theorems now shows "Supplement (Title)" instead of "Supplement " with a trailing space. `@label[-]` shows the title only, and `@label[!!]` shows supplement + title.
+- **fix: use stick for from indent-repairer to fix empty frame after page break**
 
 ### 0.5.0
 

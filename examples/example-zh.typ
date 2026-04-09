@@ -36,7 +36,7 @@
 // #theorem[欧几里得定理][
 //   素数有无穷多个。
 // ] <thm:euclid>
-// #theorem-box(outlined: false)[无编号定理][
+// #theorem-box[无编号定理][
 //   这个定理没有编号。
 // ]
 
@@ -48,6 +48,24 @@
 /// 6. 目录
 // #outline(title: none, target: figure.where(kind: "theorem"))
 
+/// 7. 指定编号或 supplement
+// #theorem(title: "欧几里得定理", number: "233", supplement: [定理])[
+//   素数有无穷多个。
+// ]
+
+/// 8. 计数器延续：使用数组编号从指定值继续编号
+// #theorem(number: (2, 3))[
+//   这个定理被显式编号为 2.3。
+//   计数器从这里继续，所以下一个自动编号的定理是 2.4。
+// ]
+
+/// 9. 灵活引用：通过特定 supplement 引用。使用 @label[-] 只显示编号；使用 @label[!!] 显示 supplement + 编号 + 标题
+// 不带标题的引用：@thm:euclid[-]；带标题和编号的引用：@thm:euclid[!!]
+
+/// 10. 自定义 full-title：覆盖自动生成的"前缀 编号 (标题)"格式
+// #theorem(full-title: [基本定理])[
+//   这是一个基本结果。
+// ]
 
 = Theorion 环境示例
 
@@ -112,6 +130,25 @@
 
 // 6. 目录
 #outline(title: none, target: figure.where(kind: "theorem"))
+
+// 7. 指定编号或 supplement
+#theorem(title: "欧几里得定理", number: "233", supplement: [定理])[
+  素数有无穷多个。
+]
+
+// 8. 计数器延续：使用数组编号从指定值继续编号
+#theorem(number: (2, 3))[
+  这个定理被显式编号为 2.3。
+  计数器从这里继续，所以下一个自动编号的定理是 2.4。
+]
+
+// 9. 灵活引用：通过特定 supplement 引用。使用 @label[-] 只显示编号；使用 @label[!!] 显示 supplement + 编号 + 标题
+不带标题的引用：@thm:euclid[-]；带标题和编号的引用：@thm:euclid[!!]
+
+// 10. 自定义 full-title：覆盖自动生成的"前缀 编号 (标题)"格式
+#theorem(full-title: [基本定理])[
+  这是一个基本结果。
+]
 ```
 
 == 基础定理环境
@@ -142,7 +179,7 @@
   素数有无穷多个。
 ] <thm:euclid>
 
-#proof[
+#proof[@thm:euclid 的证明][
   反证法：假设 $p_1, p_2, dots, p_n$ 是所有素数的有限列举。
   记 $P = p_1 p_2 dots p_n$。因为 $P + 1$ 不在我们的列表中，
   它不可能是素数。因此，一定存在某个素数 $p_j$ 整除 $P + 1$。

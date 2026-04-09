@@ -35,3 +35,17 @@
 @def:prime[-] (number only)
 
 @def:prime[!!] (supplement + number, no title to append)
+
+== Unnumbered References
+
+#theorem-box[My Theorem][An unnumbered theorem.] <thm:unnum>
+
+#theorem-box[An unnumbered theorem without title.] <thm:unnum-notitle>
+
+@thm:unnum (supplement + title for unnumbered)
+
+@thm:unnum[-] (title only for unnumbered)
+
+@thm:unnum[!!] (supplement + title for unnumbered)
+
+@thm:unnum-notitle (supplement only, no number, no title)
