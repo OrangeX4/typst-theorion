@@ -1,4 +1,4 @@
-/// Test: nested theorem numbering - corollary inside theorem inherits parent number
+/// Test: Issue #24 - nested theorem numbering - corollary inside theorem inherits parent number
 #import "/lib.typ": *
 #import cosmos.fancy: *
 
