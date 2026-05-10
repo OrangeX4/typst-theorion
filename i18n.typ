@@ -100,7 +100,7 @@
     it: "Osservazione",
     vi: "Ghi chú",
     pl: "Dopisek",
-    sv: "Anmärkning", // Not
+    sv: "Kommentar", // Not, anmärkning
   ),
   warning: (
     en: (us: "Warning", gb: "Warning"),
