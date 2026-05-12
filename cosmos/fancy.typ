@@ -139,7 +139,7 @@
         anchor: (x: start, y: horizon),
         radius: get-title-radius(here()),
       ),
-      color: get-font-color(here()),
+      color: get-title-font-color(here()),
       weight: "semibold",
     ),
     breakable: get-breakable(here()),
