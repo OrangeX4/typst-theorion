@@ -25,7 +25,7 @@
 )
 #let (get-secondary-title-color, set-secondary-title-color) = use-state(
   "fancy-secondary-title-color",
-  orange.darken(30%)
+  orange.darken(0%)
 )
 
 #let (get-tertiary-border-color, set-tertiary-border-color) = use-state(
