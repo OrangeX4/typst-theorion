@@ -10,6 +10,11 @@
   "fancy-primary-body-color",
   green.lighten(95%),
 )
+#let (get-primary-title-color, set-primary-title-color) = use-state(
+  "fancy-primary-title-color",
+  green.darken(30%)
+)
+
 #let (get-secondary-border-color, set-secondary-border-color) = use-state(
   "fancy-secondary-border-color",
   orange.darken(0%),
@@ -18,6 +23,11 @@
   "fancy-secondary-body-color",
   orange.lighten(95%),
 )
+#let (get-secondary-title-color, set-secondary-title-color) = use-state(
+  "fancy-secondary-title-color",
+  orange.darken(0%)
+)
+
 #let (get-tertiary-border-color, set-tertiary-border-color) = use-state(
   "fancy-tertiary-border-color",
   blue.darken(30%),
@@ -26,6 +36,11 @@
   "fancy-tertiary-body-color",
   blue.lighten(95%),
 )
+#let (get-tertiary-title-color, set-tertiary-title-color) = use-state(
+  "fancy-tertiary-title-color",
+  blue.darken(30%)
+)
+
 #let (get-quaternary-border-color, set-quaternary-border-color) = use-state(
   "fancy-quaternary-border-color",
   purple.darken(30%),
@@ -33,6 +48,16 @@
 #let (get-quaternary-body-color, set-quaternary-body-color) = use-state(
   "fancy-quaternary-body-color",
   purple.lighten(95%),
+)
+#let (get-quaternary-title-color, set-quaternary-title-color) = use-state(
+  "fancy-quaternary-title-color",
+  purple.darken(30%)
+)
+
+// Register font color for the title
+#let (get-title-font-color, set-title-font-color) = use-state(
+  "title-font-color",
+  white
 )
 
 /// Register global symbols.
@@ -57,10 +82,19 @@
 /// Use #set-fancy-radius(0em) to remove the border radius (square corners).
 #let (get-fancy-radius, set-fancy-radius) = use-state("fancy-radius", .3em)
 
+/// Register global radius for the fancy title box border.
+/// Use #set-title-radius(0em) to remove the title border radius (square corners).
+#let (get-title-radius, set-title-radius) = use-state("title-radius", 0pt)
+
+
+// Register whether the box can break on page jump
+#let (get-breakable, set-breakable) = use-state("breakable", false)
+
 /// A fancy box design inspired by elegantbook style.
 ///
 /// - get-border-color (function): Color of the box border. Default is `loc => orange.darken(0%)`.
 /// - get-body-color (function): Color of the box background. Default is `loc => orange.lighten(95%)`.
+/// - get-title-color (function): Color of the title box background. Default is `loc => orange.darken(0%)`.
 /// - get-symbol (function): Symbol to display at bottom right. Default is `loc => sym.suit.heart.stroked`.
 /// - get-radius (function): Border radius of the box. Default reads from global #set-fancy-radius state.
 /// - prefix (content): Prefix text before the title. Default is `none`.
@@ -71,6 +105,7 @@
 #let fancy-box(
   get-border-color: loc => orange.darken(0%),
   get-body-color: loc => orange.lighten(95%),
+  get-title-color: loc => orange.darken(0%),
   get-symbol: loc => sym.suit.heart.stroked,
   get-radius: auto,
   prefix: none,
@@ -95,19 +130,19 @@
         bottom: 1.2em,
       ),
       border-color: get-border-color(here()),
-      title-color: get-border-color(here()),
+      title-color: get-title-color(here()),
       body-color: get-body-color(here()),
       title-inset: (x: 1em, y: .5em),
     ),
     title-style: (
       boxed-style: (
         anchor: (x: start, y: horizon),
-        radius: 0em,
+        radius: get-title-radius(here()),
       ),
-      color: white,
+      color: get-title-font-color(here()),
       weight: "semibold",
     ),
-    breakable: breakable,
+    breakable: get-breakable(here()),
     title: {
       if full-title == auto {
         if prefix != none {
@@ -150,6 +185,7 @@
   render: fancy-box.with(
     get-border-color: get-secondary-border-color,
     get-body-color: get-secondary-body-color,
+    get-title-color: get-secondary-title-color,
     get-symbol: get-secondary-symbol,
   ),
 )
@@ -161,6 +197,7 @@
   render: fancy-box.with(
     get-border-color: get-secondary-border-color,
     get-body-color: get-secondary-body-color,
+    get-title-color: get-secondary-title-color,
     get-symbol: get-secondary-symbol,
   ),
 )
@@ -172,6 +209,7 @@
   render: fancy-box.with(
     get-border-color: get-secondary-border-color,
     get-symbol: get-secondary-symbol,
+    get-title-color: get-secondary-title-color,
     get-body-color: get-secondary-body-color,
   ),
 )
@@ -183,6 +221,7 @@
   render: fancy-box.with(
     get-border-color: get-secondary-border-color,
     get-body-color: get-secondary-body-color,
+    get-title-color: get-secondary-title-color,
     get-symbol: get-secondary-symbol,
   ),
 )
@@ -194,6 +233,7 @@
   render: fancy-box.with(
     get-border-color: get-secondary-border-color,
     get-body-color: get-secondary-body-color,
+    get-title-color: get-secondary-title-color,
     get-symbol: get-secondary-symbol,
   ),
 )
@@ -210,6 +250,7 @@
   render: fancy-box.with(
     get-border-color: get-primary-border-color,
     get-body-color: get-primary-body-color,
+    get-title-color: get-primary-title-color,
     get-symbol: get-primary-symbol,
   ),
 )
@@ -226,6 +267,7 @@
   render: fancy-box.with(
     get-border-color: get-tertiary-border-color,
     get-body-color: get-tertiary-body-color,
+    get-title-color: get-tertiary-title-color, 
     get-symbol: get-tertiary-symbol,
   ),
 )
@@ -242,6 +284,7 @@
   render: fancy-box.with(
     get-border-color: get-secondary-border-color,
     get-body-color: get-secondary-body-color,
+    get-title-color: get-secondary-title-color,
     get-symbol: get-secondary-symbol,
   ),
 )
@@ -253,6 +296,7 @@
   render: fancy-box.with(
     get-border-color: get-tertiary-border-color,
     get-body-color: get-tertiary-body-color,
+    get-title-color: get-tertiary-title-color,
     get-symbol: get-tertiary-symbol,
   ),
 )
@@ -269,6 +313,7 @@
   render: fancy-box.with(
     get-border-color: get-secondary-border-color,
     get-body-color: get-secondary-body-color,
+    get-title-color: get-secondary-title-color,
     get-symbol: get-secondary-symbol,
   ),
 )
@@ -281,6 +326,7 @@
   render: fancy-box.with(
     get-border-color: get-quaternary-border-color,
     get-body-color: get-quaternary-body-color,
+    get-title-color: get-quaternary-title-color,
     get-symbol: get-quaternary-symbol,
   ),
 )
@@ -292,6 +338,7 @@
   render: fancy-box.with(
     get-border-color: get-quaternary-border-color,
     get-body-color: get-quaternary-body-color,
+    get-title-color: get-quaternary-title-color,
     get-symbol: get-quaternary-symbol,
   ),
 )
@@ -303,6 +350,7 @@
   render: fancy-box.with(
     get-border-color: get-quaternary-border-color,
     get-body-color: get-quaternary-body-color,
+    get-title-color: get-quaternary-title-color,
     get-symbol: get-quaternary-symbol,
   ),
 )
@@ -314,6 +362,7 @@
   render: fancy-box.with(
     get-border-color: get-quaternary-border-color,
     get-body-color: get-quaternary-body-color,
+    get-title-color: get-quaternary-title-color,
     get-symbol: get-quaternary-symbol,
   ),
 )
@@ -325,6 +374,7 @@
   render: fancy-box.with(
     get-border-color: get-quaternary-border-color,
     get-body-color: get-quaternary-body-color,
+    get-title-color: get-quaternary-title-color,
     get-symbol: get-quaternary-symbol,
   ),
 )
