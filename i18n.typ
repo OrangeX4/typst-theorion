@@ -46,7 +46,8 @@
     it: "Teorema",
     vi: "Định lý",
     pl: "Twierdzenie",
-    sv: "Sats", // Teorem
+    sv: "Sats", // Teorem,
+    hr: "Teorem",
   ),
   lemma: (
     en: (us: "Lemma", gb: "Lemma"),
@@ -64,7 +65,8 @@
     it: "Lemma",
     vi: "Bổ đề",
     pl: "Lemat",
-    sv: "Lemma", // Hjälpsats
+    sv: "Lemma", // Hjälpsats,
+    hr: "Lema",
   ),
   corollary: (
     en: (us: "Corollary", gb: "Corollary"),
@@ -82,7 +84,8 @@
     it: "Corollario",
     vi: "Hệ quả",
     pl: "Wniosek",
-    sv: "Följdsats", // Korollarium
+    sv: "Följdsats", // Korollarium,
+    hr: "Korolar",
   ),
   note: (
     en: (us: "Note", gb: "Note"),
@@ -100,7 +103,8 @@
     it: "Osservazione",
     vi: "Ghi chú",
     pl: "Dopisek",
-    sv: "Kommentar", // Not, anmärkning
+    sv: "Kommentar", // Not, anmärkning,
+    hr: "Bilješka",
   ),
   warning: (
     en: (us: "Warning", gb: "Warning"),
@@ -119,6 +123,7 @@
     vi: "Cảnh báo",
     pl: "Uwaga",
     sv: "Varning",
+    hr: "Upozorenje",
   ),
   definition: (
     en: (us: "Definition", gb: "Definition"),
@@ -137,6 +142,7 @@
     vi: "Định nghĩa",
     pl: "Definicja",
     sv: "Definition",
+    hr: "Definicija",
   ),
   axiom: (
     en: (us: "Axiom", gb: "Axiom"),
@@ -155,6 +161,7 @@
     vi: "Tiên đề",
     pl: "Aksjomat",
     sv: "Axiom",
+    hr: "Aksiom",
   ),
   postulate: (
     en: (us: "Postulate", gb: "Postulate"),
@@ -173,6 +180,7 @@
     vi: "Định đề",
     pl: "Postulat",
     sv: "Postulat",
+    hr: "Postulat",
   ),
   proposition: (
     en: (us: "Proposition", gb: "Proposition"),
@@ -190,7 +198,8 @@
     it: "Proposizione",
     vi: "Mệnh đề",
     pl: "Propozycja",
-    sv: "Proposition", // Påstående
+    sv: "Proposition", // Påstående,
+    hr: "Propozicija",
   ),
   example: (
     en: (us: "Example", gb: "Example"),
@@ -209,6 +218,7 @@
     vi: "Ví dụ",
     pl: "Przyklad",
     sv: "Exempel",
+    hr: "Primjer",
   ),
   problem: (
     en: (us: "Problem", gb: "Problem"),
@@ -227,6 +237,7 @@
     vi: "Bài toán",
     pl: "Zadanie",
     sv: "Problem",
+    hr: "Problem",
   ),
   exercise: (
     en: (us: "Exercise", gb: "Exercise"),
@@ -245,6 +256,7 @@
     vi: "Bài tập",
     pl: "Ćwiczenie",
     sv: "Övning",
+    hr: "Zadatak",
   ),
   conclusion: (
     en: (us: "Conclusion", gb: "Conclusion"),
@@ -263,6 +275,7 @@
     vi: "Kết luận",
     pl: "Wniosek",
     sv: "Slutsats",
+    hr: "Zaključak",
   ),
   assumption: (
     en: (us: "Assumption", gb: "Assumption"),
@@ -281,6 +294,7 @@
     vi: "Giả sử",
     pl: "Założenie",
     sv: "Antagande",
+    hr: "Pretpostavka",
   ),
   property: (
     en: (us: "Property", gb: "Property"),
@@ -299,6 +313,7 @@
     vi: "Tính chất",
     pl: "Własność",
     sv: "Egenskap",
+    hr: "Svojstvo",
   ),
   remark: (
     en: (us: "Remark", gb: "Remark"),
@@ -316,7 +331,8 @@
     it: "Osservazione",
     vi: "Nhận xét",
     pl: "Obserwacja",
-    sv: "Anmärkning", // Kommentar
+    sv: "Anmärkning", // Kommentar,
+    hr: "Primjedba",
   ),
   solution: (
     en: (us: "Solution", gb: "Solution"),
@@ -335,6 +351,7 @@
     vi: "Lời giải",
     pl: "Rozwiązanie",
     sv: "Lösning",
+    hr: "Rješenje",
   ),
   proof: (
     en: (us: "Proof", gb: "Proof"),
@@ -353,6 +370,7 @@
     vi: "Chứng minh",
     pl: "Dowód",
     sv: "Bevis",
+    hr: "Dokaz",
   ),
   tip: (
     en: (us: "Tip", gb: "Tip"),
@@ -371,6 +389,7 @@
     vi: "Mẹo",
     pl: "Wskazówka",
     sv: "Tips",
+    hr: "Uputa",
   ),
   important: (
     en: (us: "Important", gb: "Important"),
@@ -389,6 +408,7 @@
     vi: "Quan trọng",
     pl: "Ważne",
     sv: "Viktigt",
+    hr: "Važno",
   ),
   conjecture: (
     en: (us: "Conjecture", gb: "Conjecture"),
@@ -406,7 +426,8 @@
     it: "Congettura",
     vi: "Giả thuyết",
     pl: "Przypuszczenie",
-    sv: "Förmodan", // Konjektur
+    sv: "Förmodan", // Konjektur,
+    hr: "Hipoteza",
   ),
   caution: (
     en: (us: "Caution", gb: "Caution"),
@@ -424,6 +445,7 @@
     it: "Attenzione",
     vi: "Chú ý",
     pl: "Uwaga",
-    sv: "Försiktigt", // Varning, Försiktighet
+    sv: "Försiktigt", // Varning, Försiktighet,
+    hr: "Oprez",
   ),
 )
