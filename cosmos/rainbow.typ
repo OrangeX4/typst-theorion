@@ -33,9 +33,10 @@
     // Main rendering
     block(
       stroke: language-aware-start(.25em + fill),
-      inset: language-aware-start(1em) + (y: .75em),
+      inset: language-aware-start(1em) + (y: .75em, x: .5em),
       width: 100%,
       ..args,
+      fill: fill.lighten(90%).transparentize(70%),
       [
         #if full-title != "" {
           block(sticky: true, strong(text(fill: fill, full-title)))
