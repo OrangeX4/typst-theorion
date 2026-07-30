@@ -14,15 +14,15 @@
     html.elem("div", attrs: (
       style: "border-inline-start: .25em solid "
         + fill.to-hex()
-        + "; padding: .1em 1em; width: 100%; box-sizing: border-box; margin-bottom: .5em;",
+        + "; padding: .1em 1em; width: 100%; box-sizing: border-box; margin-bottom: .5em; background-color:"
+        + fill.lighten(90%).transparentize(70%).to-hex()
+        + ";",
     ))[
       #if full-title != "" {
         html.elem(
           "p",
           attrs: (
-            style: "margin-top: .5em; font-weight: bold; color: "
-              + fill.to-hex()
-              + ";",
+            style: "margin-top: .5em; font-weight: bold; color: " + fill.to-hex() + ";",
           ),
           full-title,
         )
@@ -33,9 +33,10 @@
     // Main rendering
     block(
       stroke: language-aware-start(.25em + fill),
-      inset: language-aware-start(1em) + (y: .75em),
+      inset: language-aware-start(1em) + (y: .75em, x: 1.5em),
       width: 100%,
       ..args,
+      fill: fill.lighten(90%).transparentize(70%),
       [
         #if full-title != "" {
           block(sticky: true, strong(text(fill: fill, full-title)))
