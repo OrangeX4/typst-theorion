@@ -122,8 +122,9 @@
   // only support array of integers as counter value
   let update(counter-value) = {
     assert(
-      type(counter-value) == array and counter-value.all(v => type(v) == int),
-      message: "Counter value for '" + identifier + "' must be an array of integers, e.g. (1, 2).",
+      type(counter-value) == function
+        or type(counter-value) == array and counter-value.all(v => type(v) == int),
+      message: "Counter value for '" + identifier + "' must be an array of integers, e.g. (1, 2), or a function.",
     )
     [
       #metadata((
@@ -166,7 +167,7 @@
         if update.value.value <= level - get-inherited-levels(here()) {
           return update.location()
         }
-      } else if kind == "richer-counter:update" {
+      } else if kind == "richer-counter:update" and type(update.value.value) == array {
         if update.value.value.len() < level {
           return update.location()
         }
@@ -177,7 +178,8 @@
   }
 
   // compute value of the counter after the given updates, starting from 0
-  let compute-counter(updates) = {
+  // a function update gets and returns the whole value (`parent` + own part)
+  let compute-counter(updates, parent) = {
     let value = (0,)
     for update in updates {
       let kind = update.value.kind
@@ -189,7 +191,12 @@
       } else if kind == "richer-counter:update" {
         let inherited-levels = get-inherited-levels(here())
         let counter-value = update.value.value
-        counter-value = counter-value.slice(calc.min(inherited-levels, counter-value.len()))
+        if type(counter-value) == function {
+          counter-value = counter-value(..parent, ..value)
+          counter-value = counter-value.slice(calc.min(parent.len(), counter-value.len()))
+        } else {
+          counter-value = counter-value.slice(calc.min(inherited-levels, counter-value.len()))
+        }
         value = if counter-value.len() == 0 {
           (0,)
         } else {
@@ -214,7 +221,7 @@
 
     // get numbers of own partial counter
     let updates = updates-during((parent-richer-counter().last-update-location)(inherited-levels, key), key)
-    let num-self = compute-counter(updates)
+    let num-self = compute-counter(updates, num-parent)
 
     return num-parent + num-self
   }
@@ -250,6 +257,7 @@
     get-leading-zero: get-leading-zero,
     set-leading-zero: set-leading-zero,
     last-update-location: last-update-location,
+    update-takes-function: true,
   )
 }
 
