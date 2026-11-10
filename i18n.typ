@@ -48,6 +48,7 @@
     pl: "Twierdzenie",
     sv: "Sats", // Teorem,
     hr: "Teorem",
+    bn: "উপপাদ্য",
   ),
   lemma: (
     en: (us: "Lemma", gb: "Lemma"),
@@ -67,6 +68,7 @@
     pl: "Lemat",
     sv: "Lemma", // Hjälpsats,
     hr: "Lema",
+    bn: "সহায়ক উপপাদ্য",
   ),
   corollary: (
     en: (us: "Corollary", gb: "Corollary"),
@@ -86,6 +88,7 @@
     pl: "Wniosek",
     sv: "Följdsats", // Korollarium,
     hr: "Korolar",
+    bn: "অনুসিদ্ধান্ত",
   ),
   note: (
     en: (us: "Note", gb: "Note"),
@@ -105,6 +108,7 @@
     pl: "Dopisek",
     sv: "Kommentar", // Not, anmärkning,
     hr: "Bilješka",
+    bn: "দ্রষ্টব্য",
   ),
   warning: (
     en: (us: "Warning", gb: "Warning"),
@@ -124,6 +128,7 @@
     pl: "Uwaga",
     sv: "Varning",
     hr: "Upozorenje",
+    bn: "সাবধান", // সতর্কবার্তা
   ),
   definition: (
     en: (us: "Definition", gb: "Definition"),
@@ -143,6 +148,7 @@
     pl: "Definicja",
     sv: "Definition",
     hr: "Definicija",
+    bn: "সংজ্ঞা",
   ),
   axiom: (
     en: (us: "Axiom", gb: "Axiom"),
@@ -162,6 +168,7 @@
     pl: "Aksjomat",
     sv: "Axiom",
     hr: "Aksiom",
+    bn: "স্বতঃসিদ্ধ", // স্বীকার্য
   ),
   postulate: (
     en: (us: "Postulate", gb: "Postulate"),
@@ -181,6 +188,7 @@
     pl: "Postulat",
     sv: "Postulat",
     hr: "Postulat",
+    bn: "স্বীকার্য",
   ),
   proposition: (
     en: (us: "Proposition", gb: "Proposition"),
@@ -200,6 +208,7 @@
     pl: "Propozycja",
     sv: "Proposition", // Påstående,
     hr: "Propozicija",
+    bn: "প্রতিজ্ঞা",
   ),
   example: (
     en: (us: "Example", gb: "Example"),
@@ -219,6 +228,7 @@
     pl: "Przyklad",
     sv: "Exempel",
     hr: "Primjer",
+    bn: "উদাহরণ",
   ),
   problem: (
     en: (us: "Problem", gb: "Problem"),
@@ -238,6 +248,7 @@
     pl: "Zadanie",
     sv: "Problem",
     hr: "Problem",
+    bn: "সমস্যা",
   ),
   exercise: (
     en: (us: "Exercise", gb: "Exercise"),
@@ -257,6 +268,7 @@
     pl: "Ćwiczenie",
     sv: "Övning",
     hr: "Zadatak",
+    bn: "অনুশীলনী",
   ),
   conclusion: (
     en: (us: "Conclusion", gb: "Conclusion"),
@@ -276,6 +288,7 @@
     pl: "Wniosek",
     sv: "Slutsats",
     hr: "Zaključak",
+    bn: "সিদ্ধান্ত",
   ),
   assumption: (
     en: (us: "Assumption", gb: "Assumption"),
@@ -295,6 +308,7 @@
     pl: "Założenie",
     sv: "Antagande",
     hr: "Pretpostavka",
+    bn: "অনুমান", // ধারণা
   ),
   property: (
     en: (us: "Property", gb: "Property"),
@@ -314,6 +328,7 @@
     pl: "Własność",
     sv: "Egenskap",
     hr: "Svojstvo",
+    bn: "বৈশিষ্ট্য", // ধর্ম
   ),
   remark: (
     en: (us: "Remark", gb: "Remark"),
@@ -333,6 +348,7 @@
     pl: "Obserwacja",
     sv: "Anmärkning", // Kommentar,
     hr: "Primjedba",
+    bn: "মন্তব্য",
   ),
   solution: (
     en: (us: "Solution", gb: "Solution"),
@@ -352,6 +368,7 @@
     pl: "Rozwiązanie",
     sv: "Lösning",
     hr: "Rješenje",
+    bn: "সমাধান",
   ),
   proof: (
     en: (us: "Proof", gb: "Proof"),
@@ -371,6 +388,7 @@
     pl: "Dowód",
     sv: "Bevis",
     hr: "Dokaz",
+    bn: "প্রমাণ",
   ),
   tip: (
     en: (us: "Tip", gb: "Tip"),
@@ -390,6 +408,7 @@
     pl: "Wskazówka",
     sv: "Tips",
     hr: "Uputa",
+    bn: "পরামর্শ",
   ),
   important: (
     en: (us: "Important", gb: "Important"),
@@ -409,6 +428,7 @@
     pl: "Ważne",
     sv: "Viktigt",
     hr: "Važno",
+    bn: "গুরুত্বপূর্ণ",
   ),
   conjecture: (
     en: (us: "Conjecture", gb: "Conjecture"),
@@ -428,6 +448,7 @@
     pl: "Przypuszczenie",
     sv: "Förmodan", // Konjektur,
     hr: "Hipoteza",
+    bn: "অনুমিত সিদ্ধান্ত", // অনুমিতি
   ),
   caution: (
     en: (us: "Caution", gb: "Caution"),
@@ -447,5 +468,6 @@
     pl: "Uwaga",
     sv: "Försiktigt", // Varning, Försiktighet,
     hr: "Oprez",
+    bn: "সতর্কতা",
   ),
 )
